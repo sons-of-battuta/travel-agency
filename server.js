@@ -37,7 +37,7 @@ server.get('/', (req, res)=>{
 });
 
 server.get('/images', getImages);
-server.post('/w', getTranslation);
+server.post('/sentences', getTranslation);
 
 function getImages(req, res){
   // let cityName = req.query.city;
@@ -76,17 +76,20 @@ function getTranslation(req, res){
   // let value="Hello";
   sentences.forEach(value =>{
     URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-    superagent.post(URL)
+    return superagent.post(URL)
     .then(result => {
       console.log(result.body.translatedText);
-      arrOfTranslations.push({value: result.body.translatedText });
+      // return result.body.translatedText
+      arrOfTranslations.push({en: value, target:result.body.translatedText });
+      if(arrOfTranslations.length  === sentences.length)
+        res.render('./pages/translations', {translations:arrOfTranslations})
     })
     .catch(error=>{
       console.log("Error in getting translation data: ", error.message);
       res.send("Error in getting translation data: "+ error.message);
     })
   })
-  res.render('./pages/translations', {translations:arrOfTranslations})
+  console.log("this goes first");
 }
 
 
