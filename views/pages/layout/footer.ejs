@@ -1,0 +1,71 @@
+<footer>
+    <div class="imgContainer">
+        <img src="../../../img/logo1.png" alt="">
+        <p class="footerP"> "Life is short and the world is wide"</p>
+    </div>
+    <div class="gallerycontainer">
+        <h2>Gallery</h2>
+        <div class="grid-container">
+            <img class="gallery" id="myImg" src="../../../img/italy.jpg" alt="Italy">
+            <img class="gallery" id="myImg1" src="../../../img/amestrdam.jpg" alt="Amsterdam">
+            <img class="gallery" id="myImg2" src="../../../img/barcelona.jpg" alt="Barcelona">
+            <img class="gallery" id="myImg3" src="../../../img/italy1.jpg" alt="Italy">
+            <img class="gallery" id="myImg4" src="../../../img/maldives.jpg" alt="Maldives">
+            <img class="gallery" id="myImg5" src="../../../img/turkey.jpg" alt="Turkey">
+        </div>
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="img01">
+            <div id="caption"></div>
+        </div>
+    </div>
+    <div class="contact">
+        <h2> Contact Info</h2>
+        <ul>
+            <li><i class="fas fa-mobile-alt"> </i> 0790948508 </li>
+            <li> <i class="far fa-clock"></i> Sat - Thu - 8.00am - 7pm</li>
+        </ul>
+        <div class="socialMedia">
+            <ul>
+                <li><a href="https://facebook.com"><i class="fab fa-facebook"> </i></li>
+                <li><a href="https://twitter.com"><i class="fab fa-twitter"> </i></li>
+                <li><a href="https://instagram.com"><i class="fab fa-instagram"> </i></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var img1 = document.getElementById("myImg1");
+        var img2 = document.getElementById("myImg2");
+        var img3 = document.getElementById("myImg3");
+        var img4 = document.getElementById("myImg4");
+        var img5 = document.getElementById("myImg5");
+        var modalImg = document.getElementById("img01");
+        var captionText = document.getElementById("caption");
+        img.addEventListener('click', imgHandler);
+        img1.addEventListener('click', imgHandler);
+        img2.addEventListener('click', imgHandler);
+        img3.addEventListener('click', imgHandler);
+        img4.addEventListener('click', imgHandler);
+        img5.addEventListener('click', imgHandler);
+        function imgHandler(event) {
+            event.preventDefault();
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            //   alert(this);
+            captionText.innerHTML = this.alt;
+        }
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        span.addEventListener('click', closeHandler);
+        // When the user clicks on <span> (x), close the modal
+        function closeHandler(event) {
+            event.preventDefault();
+            modal.style.display = "none";
+        }
+    </script>
+</footer>
