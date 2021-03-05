@@ -35,8 +35,6 @@ server.get('/', (req, res)=>{
 })
 
 
-
-
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
   // res.status(404).send('<img style="background-size:cover;" src="">');
