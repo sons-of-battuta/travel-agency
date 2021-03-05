@@ -1,0 +1,31 @@
+<header>
+    <div class="menu-bar">
+        <nav>
+            <img src="../../../img/logo1.png" alt="">
+            <ul>
+                <li><a href=""> <i ></i>Home </a></li>
+                <li><a href=""><i ></i>Booking</a> </li>
+                <li><a href=""><i ></i>About us</a>
+                <li><a href=""><i > </i>Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- JS for navbar movement -->
+<script>
+window.addEventListener('scroll', function () {
+  var div = document.querySelector('div');
+  div.classList.toggle('sticky', window.scrollY > 0);
+});
+
+//JS for slideshow images (main page)
+var counter = 1;
+setInterval(function () {
+  document.getElementById('r' + counter).checked = true;
+  counter++;
+  if (counter > 3) {
+    counter = 1;
+  }
+}, 7000);
+</script>
