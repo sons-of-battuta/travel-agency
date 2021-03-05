@@ -73,21 +73,20 @@ function getTranslation(req, res){
   let arrOfTranslations = [];
   //this is for test the api. we must get the two letter for the language of the city that the user will searh for
   let target = 'fr';
-  let value="Hello";
-  // sentences.forEach(value =>{
-  //   console.log(value);
+  // let value="Hello";
+  sentences.forEach(value =>{
     URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-    superagent.get(URL)
-    .set({ "Content-Type": "application/json"})
+    superagent.post(URL)
     .then(result => {
-      console.log(result);
-      res.send(results);
+      console.log(result.body.translatedText);
+      arrOfTranslations.push({value: result.body.translatedText });
     })
     .catch(error=>{
       console.log("Error in getting translation data: ", error.message);
       res.send("Error in getting translation data: "+ error.message);
     })
-  // })
+  })
+  res.render('./pages/translations', {translations:arrOfTranslations})
 }
 
 
