@@ -7,7 +7,7 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-const client = pg.Client(process.env.DATABASE_URL);
+// const client = pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
 // const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
@@ -30,6 +30,10 @@ server.set("view engine", "ejs");
 server.use(methodOverride('_method'));
 
 
+server.get('/', (req, res)=>{
+  res.render("./pages/index");
+})
+
 
 
 
@@ -43,10 +47,10 @@ server.get("*", (req, res) => {
 
 
 //connection with postgress and express servers
-client.connect().then(() => {
+// client.connect().then(() => {
   server.listen(PORT, (req, res) => {
     console.log(`Listening on  PORT ${PORT} ...`);
   });
-});
+// });
 
 
