@@ -1,4 +1,4 @@
-# travel-agency
+# Portmanteau
 
 ### Team Name
 > Sons of Battuta
@@ -36,3 +36,10 @@
  * The leader 
  * At the end of each day
  * through the zoom meeting or the team slack channel.
+
+
+# Wireframes :
+# ![](/images/home.JPG) 
+# ![](/images/details.JPG) 
+# ![](/images/booked.JPG) 
+# ![](/images/aboutus.JPG) 
