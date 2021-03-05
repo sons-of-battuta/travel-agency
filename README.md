@@ -7,7 +7,7 @@
 2. Zaid Alasfar
 3. Ruba Banat
 4. Esraa Abu Hanaa
-5. AbdalRahman Albdahat 
+5. AbdalRahman Albdahat (member)
 
 ### Conflict Plan 
 
