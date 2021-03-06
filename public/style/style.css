@@ -25,7 +25,7 @@ div img {
 }
 div.sticky{
     padding: 0px 10px;
-    background: rgba(9, 4, 4, 0.837);
+    background: rgba(9, 4, 4, 0.904);
     height: 70px;
 }
 .menu-bar
@@ -327,25 +327,14 @@ footer{
         margin-left: 370px;
         width: 2000px;
         position: absolute;
-        /* background-color: white; */
         color: rgb(255, 255, 255);
         z-index: 5;
         margin-top: -330px;
         font-size: 60px;
         font-family: 'Libre Baskerville', serif;
-        text-shadow: 5px 4px #61565694;
+        text-shadow: 5px 4px #181515ea;
     }
-    /* .formSection h5 {
-        margin-left: 450px;
-        width: 2000px;
-        position: absolute;
-        /* background-color: white; */
-        /* color: rgb(255, 255, 255);
-        z-index: 5;
-        margin-top: -250px;
-        font-size: 30px;
-        font-family: 'Libre Baskerville', serif;
-    } */
+
     #search-button{
       position: absolute;
       background-color: #f1363fd5;
@@ -360,7 +349,6 @@ footer{
   #search_input{
     position: absolute;
     background-color: rgba(255, 255, 255, 0.419);
-    /* opacity: 0.6; */
     z-index: 20;
     margin-top: -180px;
     margin-left: 500px;
@@ -398,7 +386,7 @@ margin-top: 100px;
     transition: 0.3s ;
 }
 .cityImg img:hover {
-    /* -ms-transform: scale(1.5);  */
+    -ms-transform: scale(1.5); 
     -webkit-transform: scale(1); 
     transform: scale(1.2); 
   }
@@ -423,9 +411,8 @@ margin-top: 100px;
     border-right: 4px solid #f1363f;
     box-sizing: border-box;
     margin-left: 450px;
-    /* width: 2000px; */
+
     position: absolute;
-    /* background-color: white; */
     color: rgb(255, 255, 255);
     z-index: 5;
     margin-top: -250px;
@@ -451,3 +438,17 @@ margin-top: 100px;
     }
 }
  
+.popDes{
+    width: 100%;
+    margin-top: 12%;
+    text-align: center;
+}
+.popDes h1 {
+    color: #000;
+    font-size: 43px;
+    font-weight: bolder;
+}
+.popDes p{
+    margin-top:1%;
+    font-size: 20px;
+}
