@@ -1,24 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <% arrOfImages.forEach(value=>{%>
+<%- include('./layout/head') %>
 
-    <img style="width:400px" src=<%=value %> alt="">
- <% }) %> 
+  <body>
+
+    <%- include('./layout/header') %>
+
+      <section class="CitySection">
+        <div class="cityImg">
+
+          <% arrOfImages.forEach(value=>{%>
+
+            <img src=<%=value %> alt="">
+            <% }) %>
+
+        </div>
+      </section>
 
 
- <!-- DO NOT TOUCH THIS COMMENTED CODE -->
- 
- <!-- <form action="/sentences" method="post">
+      <!-- DO NOT TOUCH THIS COMMENTED CODE -->
+
+      <!-- <form action="/sentences" method="post">
   <input type="text" name="testInput" value="Hello">
   <button>Test APi</button>
 </form> -->
+      <%- include('./layout/footer') %>
+  </body>
 
-</body>
-</html>
+  </html>
