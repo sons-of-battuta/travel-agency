@@ -1,7 +1,8 @@
 <%- include('./layout/head') %>
 
-    <body>
-        <%- include('./layout/homeHeader') %>
+    <body
+    <%- include('./layout/header') %>>
+    <%- include('./layout/homeHeader') %>
             <main>
                 <section class="fisrtSection">
                     <div class="slidershow">
@@ -40,7 +41,7 @@
                     <h2>Where do you want to go ?</h2>
                     <!-- <h5>Trips, experiences, and places. All in one service.</h5> -->
                     <form action="/search" method="GET">
-                        <input type="text" placeholder="Search City" id="search_input" name="cityName">
+                        <input type="text" placeholder="Destination ... " id="search_input" name="cityName">
                         <button id="search-button">Search</button>
                     </form>
                 </section>

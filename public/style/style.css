@@ -348,25 +348,33 @@ footer{
     } */
     #search-button{
       position: absolute;
-      background-color: #f1363f;
+      background-color: #f1363fd5;
       z-index: 20;
       color: white;
-      margin-top: -180px;
-      margin-left: 800px;
+      margin-top: -115px;
+      margin-left: 660px;
       border-radius: 8px;
       width: 150px;
       height: 40px;
     }
   #search_input{
     position: absolute;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.419);
+    /* opacity: 0.6; */
     z-index: 20;
     margin-top: -180px;
     margin-left: 500px;
     border-radius: 8px;
-    width: 240px;
-    height: 40px;
+    width: 440px;
+    height: 50px;
     text-align: center;
+    color: rgb(0, 0, 0);
+    font-size: 19px;
+  }
+  #search_input::placeholder{
+      color: rgba(0, 0, 0, 0.767);
+      font-size: 16px;
+      font-weight: bolder;
   }
 /* Styling details Page  */
 .cityImg{
@@ -436,122 +444,4 @@ margin-top: 100px;
     }
 }
   /* -------- */
-  body{
-
-    margin:0px;
-    padding:0px;
-    
-   }
-    .fillers{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    color:white;
-    text-align:center;
-    z-index: 30;
-   }
-   .overlay{
-    position:absolute;
-    background-image: url(https://bonvoyage.qodeinteractive.com/wp-content/uploads/2018/02/h6-slide-1.jpg);
-    
-    height:100%;
-    width:100%;
-    text-align: center;
-     width:0px;
-     overflow:hidden;
-     transition:all 0.4s ease;
-     z-index: 30;
-  }
-  .overlay nav a{
-    text-decoration:none;
-    color:#000000f3;
-    font-size: 30px;
-    height:70px;
-    display:block;
-    font-weight:bold;
-    transition: all 0.4s ease;
-    z-index: 30;
-  }
-  .overlay nav a:hover{
-    color:#ddd0d0;
-    font-weight: bolder;
-    font-size:35px;
-    z-index: 30;
-  }
-  nav{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform: translate(-50%, -50%);
-    z-index: 30;
-  }
-  .ham-menu div{
-    width: 30px;
-    height: 5px;
-    margin-bottom: 4px; 
-    background: rgb(235, 231, 231);
-    border-radius: 3px;
-    z-index: 30;
-  }
-  .ham-menu{
-    cursor: pointer;
-    z-index: 30;
-  }
-  .ham-menu{
-    background-color: rgb(14, 11, 11);
-    z-index: 30;
-  }
-  .container{
-    padding:6px;
-    padding-bottom: 1px;
-    width:50px;
-    height:40px;
-    background-color:#030304c5;
-    border-radius:15%;
-    box-shadow: 2px 2px 4px 2px #4e4d50; 
-    cursor: pointer;
-    position:relative;
-    /* left:50%; */
-    transform: translateX(-50%);
-    /* float: right; */
-    margin-top: -678%;
-    margin-left: 1480%;
-    z-index: 50;
-   
-  }
-  .container:hover{
-    background-color: #080707;
-  }
-  .container:hover >.ham-menu>div{
-    background-color:white;
-  }
-  #radio1:checked ~ .overlay{
-    width:100%;
-  }
-  .cross{
-    font-family: 'Chilanka', cursive;
-    font-size: 30px;
-    font-weight:bold;
-    float:right;
-    margin:50px 150px;
-    cursor:pointer;
-    transition:all 0.3s ease;
-    color: rgb(239, 240, 240);
-    margin-right: 5%;
-    z-index: 50;
-  }
-  .cross:hover{
-    font-size:40px;
-    z-index: 30;
-    
-    
-  }
-  input[type="radio"]{
-    display:none;
-  }
-  
-  .hamburger{
-      overflow-y: hidden;
-  }
-  
+ 
