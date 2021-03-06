@@ -39,7 +39,8 @@ server.get('/', (req, res) => {
 server.get('/about', (req, res)=>{
   res.render("./pages/about");
 });
-
+server.get('/login',logIn);
+server.get('signup', signUp);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 
@@ -96,6 +97,9 @@ function getTranslation(req, res) {
   console.log("this goes first");
 }
 
+function signUp(req, res){
+  
+}
 
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
