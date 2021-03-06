@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="style/reset.css">
-    <link rel="stylesheet" href="style/about.css">
+  <link rel="stylesheet" href="/style/style.css">
+  <link rel="stylesheet" href="/style/about.css">
 
+
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+  <title>Document</title>
 </head>
+
 <body>
-   
-</body>
-</html>  <main>
+  <%- include('./layout/header')  %>
+<main>
     <section class="Team">
-        <h1>Our Team</h1>
+        <h1>The Founders</h1>
         <div class="container">
             <div class="team-member">
                 <div class="team-image">
-                    <img src="../images/TeamPicture/abdalrhman.jpg" alt="Abdelrahman">
+                    <img src="../../img/TeamPicture/abdalrhman.jpg" alt="Abdelrahman">
                 </div>
                 <h3>Abdelrahman</h3>
                 <p> Civil engineer and Student in ASAC as software developer, have good idea in coding.<br><br>
@@ -30,7 +33,7 @@
             </div>
             <div class="team-member">
                 <div class="team-image">
-                    <img src="../images/TeamPicture/ruba.jpg" alt="Ruba">
+                    <img src="../../img/TeamPicture/ruba.jpg" alt="Ruba">
                 </div>
                 <h3>Ruba</h3>
                 <p>Former Economist and a new Software developer. </p> <br>
@@ -39,7 +42,7 @@
             </div>
             <div class="team-member">
                 <div class="team-image">
-                    <img src="../images/TeamPicture/Abdalqader.jpg" alt="Abdalqader">
+                    <img src="../../img/TeamPicture/Abdalqader.jpg" alt="Abdalqader">
                 </div>
                 <h3>AbdalQader</h3>
                 <p>Communications and Computer Engineer | Programmer</p> <br>
@@ -50,7 +53,7 @@
         <div class="container">
             <div class="team-member">
                 <div class="team-image">
-                    <img src="../images/TeamPicture/esraa.jpg" alt="esraa">
+                    <img src="../../img/TeamPicture/esraa.jpg" alt="esraa">
                 </div>
                 <h3>Esraa</h3>
                 <p>Civil engineer and Student in ASAC as a software developer.</p><br>
@@ -59,7 +62,7 @@
             </div>
             <div class="team-member">
                 <div class="team-image">
-                    <img src="../images/TeamPicture/zaid.jpg" alt="zaid">
+                    <img src="../../img/TeamPicture/zaid.jpg" alt="zaid">
                 </div>
                 <h3>Zaid</h3>
                 <p>studied E-business in the Petra University  and Student in ASAC as a software developer.</p><br>
@@ -67,9 +70,15 @@
                 <a href="https://github.com/zaidalasfar97"><i class="fa fa-github fa-lg"></i></a>
             </div>
         </div>
-
+            <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=paris&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+      
+ 
 
     </section>
 
-    
+  
 </main>
+<!-- footer -->
+<%- include('./layout/footer')  %>
+</body>
+</html>
