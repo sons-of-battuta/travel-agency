@@ -15,7 +15,7 @@
 >3. create a weather navigator.
 
 
-># Acceptance Tests
+># Acceptance Tests 
 > 1. Ensure that the services are displayed in the correct currency rates.
 > 2. Ensure that the user's reservation process does not conflict with prior reservations.
 > 3. Ensure that the tables have been successfully saved in the database.

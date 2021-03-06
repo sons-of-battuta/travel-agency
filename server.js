@@ -35,6 +35,9 @@ server.get('/', (req, res)=>{
 })
 
 
+server.get('/aboutus2', (req, res)=>{
+  res.render("./pages/aboutus2");
+})
 
 
 // show not found page when trying to access unfound route.
@@ -44,6 +47,20 @@ server.get("*", (req, res) => {
     "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
   res.render("pages/error", { err: imgUrl });
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Added by esraa check hotels API
+//first API
+
+// rapidapi-key=${Hotel_key}
+// https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=01a8aff1d7msh1f0d2d85c237f29p1a75bcjsn06f796ce0b6e&query=amman
+
+//second API
+
+// test.api.amadeus.com
+
+
+
 
 
 //connection with postgress and express servers
