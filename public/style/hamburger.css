@@ -29,13 +29,15 @@ body{
   }
   .overlay  .log-sign a{
     text-decoration:none;
-    color:#000000f3;
-    font-size: 30px;
+    color:#fffdfdf3;
+    font-size: 40px;
+    text-shadow: 5px 4px #000000e3;
     height:70px;
     display:block;
     font-weight:bold;
     transition: all 0.4s ease;
     z-index: 100;
+    font-weight: bolder;
   }
   .overlay  .log-sign a:hover{
     color:#ddd0d0;
@@ -69,25 +71,18 @@ body{
   .container{
     padding:5px;
     padding-top: 7px;
-    /* padding-bottom: px; */
     width:40px;
     height:40px;
-    /* background-color:#030304c5; */
     border-radius:15%;
-    /* box-shadow: 2px 2px 4px 2px #4e4d50;  */
     cursor: pointer;
     position:relative;
-    /* left:50%; */
     transform: translateX(-50%);
-    /* float: right; */
     margin-top: -850%;
     margin-left: 1720%;
     z-index: 100;
    
   }
-  /* .container:hover{
-    background-color: #080707;
-  } */
+
   .container:hover >.ham-menu>div{
     background-color:white;
   }
