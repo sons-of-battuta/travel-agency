@@ -52,7 +52,7 @@ function getImages(req, res) {
     .then(results => {
       let arr = results.body.results.map(value => value.urls.raw);
       // res.send(arr);
-      res.render('./pages/details', { arrOfImages: arr.slice(0, 6) });
+      res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName});
     })
     .catch(error => {
       console.log("Error in getting data from Unsplash: ", error.message);
