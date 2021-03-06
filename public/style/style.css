@@ -446,3 +446,10 @@ margin-top: 100px;
     -webkit-transform: scale(1); 
     transform: scale(1.2); 
   }
+
+  iframe{
+      border-radius: 20px;
+      width: 100%;
+      height: 400px;
+      margin-left: 5px;
+  }
