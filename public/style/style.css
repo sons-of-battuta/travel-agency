@@ -402,7 +402,6 @@ margin-top: 100px;
     -webkit-transform: scale(1); 
     transform: scale(1.2); 
   }
-<<<<<<< HEAD
 
   iframe{
       border-radius: 20px;
@@ -410,7 +409,6 @@ margin-top: 100px;
       height: 400px;
       margin-left: 5px;
   }
-=======
   .typewriter {
     font-family: Courier, monospace;
 	display: inline-block;
@@ -453,7 +451,6 @@ margin-top: 100px;
     }
 }
   /* -------- */
-<<<<<<< HEAD
   body{
 
     margin:0px;
@@ -573,7 +570,3 @@ margin-top: 100px;
       overflow-y: hidden;
   }
   
->>>>>>> 038e47a6c2f0771146077786c9333bf95e62b3d8
-=======
- 
->>>>>>> f81f0f3d23f11b6ef928052679ffe02fc73d5bbe
