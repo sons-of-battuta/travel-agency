@@ -35,6 +35,10 @@ server.set("view engine", "ejs");
 server.get('/', (req, res)=>{
   res.render("./pages/index");
 });
+// to render aboutus 
+server.get('/about', (req, res)=>{
+  res.render("./pages/about");
+});
 
 server.get('/images', getImages);
 server.post('/sentences', getTranslation);
