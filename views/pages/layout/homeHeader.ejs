@@ -1,0 +1,30 @@
+<body>
+
+    <input type="radio" name="toggle" id="radio1">
+    <div class="fillers">
+      <div class="container">
+        <label for="radio1" class="ham-menu">
+            <div></div>
+            <div></div>
+            <div></div>
+         </label>
+     </div>
+    </div>
+    
+    <div class="overlay">
+      <input type="radio" name="toggle" id="radio2">
+      <label for="radio2" class="cross">x</label>
+      <nav>
+        <a href="/login">Log in</a>
+        <a href="/signup">Sign up</a>
+      </nav>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> -->
+  <script>
+      $('.ham-menu , .cross').on('click', function(){
+          $('body').toggleClass('hamburger')
+      })
+   
+  </script>
+  </body>
+  </html>

@@ -1,31 +1,27 @@
 @import "reset.css";
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap');
-
 *{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
 }
 body
 {
 background-color: white;
-font-family: sans-serif;
+/* font-family: sans-serif; */
 font-size: 14px;
 width: 100%;
 height: 100%;
-
+overflow-x: hidden;
 }
 a {
     cursor: pointer;
 }
-
 div img {
     float: left;
     width: 230px;
     margin-right: 13%;
     transition: 0.6s;
-
 }
 div.sticky{
     padding: 0px 10px;
@@ -34,18 +30,15 @@ div.sticky{
 }
 .menu-bar
 {
- 
   position: fixed;
   width: 100%;
   left: 0;
   top: 0;
   transition: .6s;
   align-items: center;
-  z-index: 2;
+  z-index: 90;
   padding: 10px 30px;
-
 }
-
 .menu-bar ul
 {
     position: relative;
@@ -53,7 +46,6 @@ div.sticky{
     color: cornsilk;
     justify-content: center;
     margin-left: 60%;
-      
 }
 .menu-bar ul li
 {
@@ -62,10 +54,7 @@ div.sticky{
     margin-top: 15px;
     position: relative;
     list-style: none;
-    
 }
-
-
 .menu-bar ul li a
 {
   text-decoration: none ;  
@@ -75,9 +64,7 @@ div.sticky{
   transition: 0.5s;
   margin: 10px 0;
   font-weight: bolder;
-  
 }
-
 .menu-bar ul li a:before{
     content: '';
     position: absolute;
@@ -94,20 +81,14 @@ div.sticky{
 .menu-bar ul li a:hover:before {
     transform: scaleY(1.7);
     opacity: 1;
-    
 }
-
 .menu-bar ul li a:hover{
     transition: .2s;
 font-weight: bolder;
-
 }
-
-
 nav.sticky ul li a{
     color: #000;
 }
-
 .fisrtSection {
     padding: 0;
     margin: 0;
@@ -118,7 +99,7 @@ nav.sticky ul li a{
 .slidershow {
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 110%;
     overflow: hidden;
     position: absolute;
     top: 45%;
@@ -126,10 +107,9 @@ nav.sticky ul li a{
     transform: translate(-50% ,-50%);
     z-index: 1;
 }
-
 .navigation{
     position: absolute;
-    top: 90%;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -142,23 +122,19 @@ nav.sticky ul li a{
     cursor: pointer;
     transition: 0.4s;
     border-radius: 30px;
-
 }
 .bar:hover{
     background: rgba(2, 2, 2, 0.919);
 }
-
 input[name="r"]{
     position: absolute;
     visibility: hidden;
 }
-
 .slides{
     width: 500%;
     height: 100%;
     display: flex
 }
-
 .slide{
     width: 20%;
     transition: 0.6s;
@@ -176,7 +152,6 @@ input[name="r"]{
 #r3:checked ~ .s1{
     margin-left: -40%;
 }
-
 .navigation-auto{
     position: absolute;
     display: flex;
@@ -190,11 +165,9 @@ input[name="r"]{
     border: 10px;
     transition: 1s;
 }
-
 .navigation-auto div:not(:last-child){
     margin-right: 40px;
 }
-
 #r1:checked ~ .navigation-auto .auto-btn1{
     background: white;
 }
@@ -204,9 +177,7 @@ input[name="r"]{
 #r3:checked ~ .navigation-auto .auto-btn3{
     background: white;
 }
-
 /* footer part */
-
 footer{
     background:#000;
     background-size: cover;
@@ -217,20 +188,16 @@ footer{
     color: #fff;
     padding: 2px;
     height: 350px;
-    
   }
-
   footer .socialMedia ul{
       display: inline-flex;
       list-style: none;
       margin-top: 28px;
       text-align: center;
-      
   }
   footer .socialMedia ul li {
       margin : 9px 1px 1px;
       padding: 10px;
-      
   }
   footer .socialMedia ul li a {
       color: white;
@@ -246,23 +213,27 @@ footer{
   }
  .footerP{
       font-family: cursive;
-     
   }
-  .imgContainer img {
+  .imgContainer .footerLogo {
       width: 300px;
       height: 100px;
-      margin-top: 30px;
-      margin-bottom: 10px;
+      margin-top: 15px;
+      /* margin-bottom: 10px; */
+  }
+  .imgContainer .ibnBattouta  {
+    width: 250px;
+    height: 230px;
+    margin-left: 25px;
+    margin-top: -15px;
   }
   .gallerycontainer{
       float: right;
   }
   h2 {
-    margin-top: 30px;
+    margin-top: 40px;
     margin-bottom: 30px;
 }
   .grid-container {
-   
     display: grid;
     grid-template-columns: auto auto auto;
     width: 30%;
@@ -276,14 +247,8 @@ footer{
     height: 110px;
     border-radius: 5px;
     transition: 0.3s ;
-    /* transition-timing-function: ease-in; */
-    
   }
 
-  /* .gallery:hover {
-      opacity: 0.3;
-} */
-  
   /* The Modal (background) */
   .modal {
     display: none; /* Hidden by default */
@@ -298,7 +263,6 @@ footer{
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
   }
-  
   /* Modal Content (image) */
   .modal-content {
     margin: auto;
@@ -307,7 +271,6 @@ footer{
     max-width: 700px;
     margin-left: 24%;
   }
-  
   /* Caption of Modal Image */
   #caption {
     margin: auto;
@@ -319,7 +282,6 @@ footer{
     padding: 10px 0;
     height: 150px;
   }
-  
   /* Add Animation */
   .modal-content, #caption {  
     -webkit-animation-name: zoom;
@@ -327,17 +289,14 @@ footer{
     animation-name: zoom;
     animation-duration: 0.6s;
   }
-  
   @-webkit-keyframes zoom {
     from {-webkit-transform:scale(0)} 
     to {-webkit-transform:scale(1)}
   }
-  
   @keyframes zoom {
     from {transform:scale(0)} 
     to {transform:scale(1)}
   }
-  
   /* The Close Button */
   .close {
     position: absolute;
@@ -348,25 +307,19 @@ footer{
     font-weight: bold;
     transition: 0.3s;
   }
-  
   .close:hover,
   .close:focus {
     color: #bbb;
     text-decoration: none;
     cursor: pointer;
   }
-  
   /* 100% Image Width on Smaller Screens */
   @media only screen and (max-width: 700px){
     .modal-content {
       width: 100%;
     }
   }
-
-
   /* Form in Home page  */
-  
-  
   .formSection{
       position: absolute;
     }
@@ -378,61 +331,56 @@ footer{
         color: rgb(255, 255, 255);
         z-index: 5;
         margin-top: -330px;
-        font-size: 65px;
+        font-size: 60px;
         font-family: 'Libre Baskerville', serif;
+        text-shadow: 5px 4px #61565694;
     }
-    .formSection h5 {
+    /* .formSection h5 {
         margin-left: 450px;
         width: 2000px;
         position: absolute;
         /* background-color: white; */
-        color: rgb(255, 255, 255);
+        /* color: rgb(255, 255, 255);
         z-index: 5;
         margin-top: -250px;
         font-size: 30px;
         font-family: 'Libre Baskerville', serif;
-    }
+    } */
     #search-button{
       position: absolute;
       background-color: #f1363f;
-      z-index: 100;
+      z-index: 20;
       color: white;
       margin-top: -180px;
       margin-left: 800px;
       border-radius: 8px;
-      width: 200px;
-      height: 45px;
+      width: 150px;
+      height: 40px;
     }
   #search_input{
     position: absolute;
     background-color: white;
-    z-index: 100;
+    z-index: 20;
     margin-top: -180px;
     margin-left: 500px;
     border-radius: 8px;
-    width: 250px;
-    height: 45px;
+    width: 240px;
+    height: 40px;
     text-align: center;
   }
-
 /* Styling details Page  */
-
 .cityImg{
-      
     display: grid;
     grid-template-columns: auto auto auto;
     width: 30%;
     row-gap: 10px;
     column-gap: 10px;
 }
-
 .CitySection{
 width: 70%;
 margin: auto;
 margin-top: 100px;
-
 }
-
 .cityImg img {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
@@ -446,3 +394,164 @@ margin-top: 100px;
     -webkit-transform: scale(1); 
     transform: scale(1.2); 
   }
+  .typewriter {
+    font-family: Courier, monospace;
+	display: inline-block;
+}
+
+.typewriter-text {
+    display: inline-block;
+  	overflow: hidden;
+  	letter-spacing: 2px;
+ 	animation: typing 5s steps(30, end), blink .75s step-end infinite;
+    white-space: nowrap;
+    border-right: 4px solid #f1363f;
+    box-sizing: border-box;
+    margin-left: 450px;
+    /* width: 2000px; */
+    position: absolute;
+    /* background-color: white; */
+    color: rgb(255, 255, 255);
+    z-index: 5;
+    margin-top: -250px;
+    font-size: 20px;
+    font-family: 'Libre Baskerville', serif;
+}
+
+@keyframes typing {
+    from { 
+        width: 0% 
+    }
+    to { 
+        width: 40% 
+    }
+}
+
+@keyframes blink {
+    from, to { 
+        border-color: transparent 
+    }
+    50% { 
+        border-color: #f1363f; 
+    }
+}
+  /* -------- */
+  body{
+
+    margin:0px;
+    padding:0px;
+    
+   }
+    .fillers{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    color:white;
+    text-align:center;
+    z-index: 30;
+   }
+   .overlay{
+    position:absolute;
+    background-image: url(https://bonvoyage.qodeinteractive.com/wp-content/uploads/2018/02/h6-slide-1.jpg);
+    
+    height:100%;
+    width:100%;
+    text-align: center;
+     width:0px;
+     overflow:hidden;
+     transition:all 0.4s ease;
+     z-index: 30;
+  }
+  .overlay nav a{
+    text-decoration:none;
+    color:#000000f3;
+    font-size: 30px;
+    height:70px;
+    display:block;
+    font-weight:bold;
+    transition: all 0.4s ease;
+    z-index: 30;
+  }
+  .overlay nav a:hover{
+    color:#ddd0d0;
+    font-weight: bolder;
+    font-size:35px;
+    z-index: 30;
+  }
+  nav{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+  }
+  .ham-menu div{
+    width: 30px;
+    height: 5px;
+    margin-bottom: 4px; 
+    background: rgb(235, 231, 231);
+    border-radius: 3px;
+    z-index: 30;
+  }
+  .ham-menu{
+    cursor: pointer;
+    z-index: 30;
+  }
+  .ham-menu{
+    background-color: rgb(14, 11, 11);
+    z-index: 30;
+  }
+  .container{
+    padding:6px;
+    padding-bottom: 1px;
+    width:50px;
+    height:40px;
+    background-color:#030304c5;
+    border-radius:15%;
+    box-shadow: 2px 2px 4px 2px #4e4d50; 
+    cursor: pointer;
+    position:relative;
+    /* left:50%; */
+    transform: translateX(-50%);
+    /* float: right; */
+    margin-top: -678%;
+    margin-left: 1480%;
+    z-index: 50;
+   
+  }
+  .container:hover{
+    background-color: #080707;
+  }
+  .container:hover >.ham-menu>div{
+    background-color:white;
+  }
+  #radio1:checked ~ .overlay{
+    width:100%;
+  }
+  .cross{
+    font-family: 'Chilanka', cursive;
+    font-size: 30px;
+    font-weight:bold;
+    float:right;
+    margin:50px 150px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    color: rgb(239, 240, 240);
+    margin-right: 5%;
+    z-index: 50;
+  }
+  .cross:hover{
+    font-size:40px;
+    z-index: 30;
+    
+    
+  }
+  input[type="radio"]{
+    display:none;
+  }
+  
+  .hamburger{
+      overflow-y: hidden;
+  }
+  
