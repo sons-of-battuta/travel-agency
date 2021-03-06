@@ -39,7 +39,7 @@ div.sticky{
   top: 0;
   transition: .6s;
   align-items: center;
-  z-index: 100000;
+  z-index: 2;
   padding: 10px 30px;
 
 }
@@ -358,5 +358,22 @@ footer{
     .modal-content {
       width: 100%;
     }
+  }
+
+
+  /* search button styling */
+  #search-button{
+      width: 200px;
+      height: 40px;
+      background-color: red;
+      z-index:100 ;
+  }
+
+  /* input search  */
+  #search_input{
+      background-color: blue;
+      width: 350px;
+      height: 100px;
+      z-index:100 ;
   }
   

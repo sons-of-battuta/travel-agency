@@ -13,7 +13,6 @@
   <%- include('./layout/header')  %>
 <main>
   <section class="fisrtSection">
-
     <div class="slidershow">
         <div class="slides">
             <input type="radio" name="r" id="r1" checked>
@@ -45,9 +44,15 @@
     </div>
 
 </section>
+<!-- main -->
 <section>
+    <form action="/search" method="post">
+        <input type="text" placeholder="search city" id="search_input">
+        <button id="search-button">Search</button>
+    </form>
 </section>
 </main>
+<!-- footer -->
 <%- include('./layout/footer')  %>
 </body>
 </html>
