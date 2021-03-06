@@ -7,14 +7,15 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-// const client = pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
 // const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
 
 
 //using port from .env file or 3001 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+const PORT = 3008;
 
 //use public folder
 server.use(express.static("./public"));
@@ -30,6 +31,8 @@ server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 // server.use(methodOverride('_method'));
 
+//this module for hashing 
+const md5 = require('md5');
 
 
 server.get('/', (req, res) => {
@@ -39,7 +42,9 @@ server.get('/', (req, res) => {
 server.get('/about', (req, res)=>{
   res.render("./pages/about");
 });
-
+// server.get('/login',logIn);
+server.get('/signup', signUp);
+server.post('/addUserToDatabase', addUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 
@@ -96,6 +101,23 @@ function getTranslation(req, res) {
   console.log("this goes first");
 }
 
+function signUp(req, res){
+  res.render('./pages/signup-page');
+}
+
+function addUser(req, res){
+  // console.log(req.body);
+  let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
+  let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
+  // console.log(values);
+  client.query(sql,values)
+  .then(results=>{
+    console.log('row inserted Successfully...');
+    res.render('./pages/index');
+  });
+  
+
+}
 
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
@@ -108,8 +130,8 @@ server.get("*", (req, res) => {
 
 
 //connection with postgress and express servers
-// client.connect().then(() => {
-server.listen(PORT, (req, res) => {
-  console.log(`Listening on  PORT ${PORT} ...`);
+client.connect().then(() => {
+  server.listen(PORT, (req, res) => {
+    console.log(`Listening on  PORT ${PORT} ...`);
+  });
 });
-// });
