@@ -114,6 +114,7 @@ nav.sticky ul li a{
     width: 100%;
 }
 .slidershow {
+    position: relative;
     width: 100%;
     height: 90%;
     overflow: hidden;
@@ -362,18 +363,39 @@ footer{
 
 
   /* search button styling */
+  
   #search-button{
+      position: absolute;
       width: 200px;
       height: 40px;
       background-color: red;
       z-index:100 ;
+      margin-left: 400px;
   }
 
-  /* input search  */
+  .formSection{
+      position: absolute;
+  }
+  .formSection h2 {
+      position: absolute;
+      background-color: yellow;
+      color: blue;
+      z-index: 5;
+  }
   #search_input{
-      background-color: blue;
+      position: absolute;
+      background-color: yellow;
       width: 350px;
       height: 100px;
       z-index:100 ;
+      margin-left: 200px;
+  }
+
+  .first-label{
+      position: absolute;
+      background-color: yellow;
+      width: 200px;
+      font-size: x-large;
+      color: red;
   }
   
