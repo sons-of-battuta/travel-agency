@@ -36,19 +36,19 @@ server.get('/', (req, res)=>{
   res.render("./pages/index");
 });
 
-server.get('/images', getImages);
-server.post('/w', getTranslation);
+server.get('/search', getImages);
+server.post('/sentences', getTranslation);
 
 function getImages(req, res){
-  // let cityName = req.query.city;
-  let cityName = 'paris';
+  let cityName = req.query.cityName;
+  // let cityName = 'paris';
   let key = process.env.CLIENT_ID;
   let URL = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${key}`;
   superagent.get(URL)
   .then(results=>{
     let arr = results.body.results.map(value => value.urls.raw);
     // res.send(arr);
-    res.render('./pages/images',{arrOfImages: arr});
+    res.render('./pages/details',{arrOfImages: arr});
   })
   .catch(error=>{
     console.log("Error in getting data from Unsplash: ", error.message);
@@ -73,21 +73,23 @@ function getTranslation(req, res){
   let arrOfTranslations = [];
   //this is for test the api. we must get the two letter for the language of the city that the user will searh for
   let target = 'fr';
-  let value="Hello";
-  // sentences.forEach(value =>{
-  //   console.log(value);
+  // let value="Hello";
+  sentences.forEach(value =>{
     URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-    superagent.get(URL)
-    .set({ "Content-Type": "application/json"})
+    return superagent.post(URL)
     .then(result => {
-      console.log(result);
-      res.send(results);
+      console.log(result.body.translatedText);
+      // return result.body.translatedText
+      arrOfTranslations.push({en: value, target:result.body.translatedText });
+      if(arrOfTranslations.length  === sentences.length)
+        res.render('./pages/translations', {translations:arrOfTranslations})
     })
     .catch(error=>{
       console.log("Error in getting translation data: ", error.message);
       res.send("Error in getting translation data: "+ error.message);
     })
-  // })
+  })
+  console.log("this goes first");
 }
 
 
