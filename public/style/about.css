@@ -1,7 +1,11 @@
 .Team{
-    margin: 75px 0;
+    margin-top: 150px ;
 }
+body{
+    /* background-image: url('https://indiacityblog.com/wp-content/uploads/2020/03/185289.jpg'); */
+    background-repeat: cover;
 
+}
 .container{
    display: flex;
    margin: 70px;
@@ -12,21 +16,23 @@
 }
 
 .container .team-member{
-    background-color: #f8f1f1;
-    margin: 5px;
+    background-color: black;
+    margin: 10px;
     margin-bottom: 50px;
     width: 300px;
     padding: 20px;
     line-height: 20px;
-    color:#11698e;
+    color:#f4f6f7;
     position: relative;
+    border-radius: 10px;
+
 }
 
 .container .team-member h3{
    font-family: 'Lora', serif;;
     font-weight: bold;
     font-size: 22px;
-    color:#142843;
+    color:#a2a5a8;
     margin-top: 10px;
 }
 
@@ -43,14 +49,14 @@ border-radius: 50%;
 
 .container a{
     margin:10px;
-    color:#142843;
-    border: 2px solid #142843 ;
+    color:#a2a5a8;
+    border: 2px solid #a2a5a8 ;
     border-radius: 100%;
     padding: 5px;
 }
 
 .container a:hover{
-    background-color:#142843 ;
+    background-color:#a2a5a8 ;
     color:#f8f1f1;
 }
 
@@ -58,7 +64,7 @@ border-radius: 50%;
     height: 150px;
     width:150px;
     border-radius: 100%;
-    border: 10px solid #f8f1f1;
+    border: 10px solid black;
     position: absolute;
     top:-50px;
     left: 50%;
@@ -70,7 +76,7 @@ main h1{
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    color: #142843;
+    color: black;
     font-family: 'Lora', serif;
     font-size: 40px;
     
@@ -79,7 +85,7 @@ h1::after{
     content: "";
     height: 3px;
     width: 150px;
-    background-color: #142843;
+    background-color: black;
     margin: 10px auto;
     display: block;
 }
@@ -91,5 +97,5 @@ bottom:130px;
 left:20%;
 }
 #doc :hover{
-    color:#05795c ;
+    color:#a2a5a8 ;
 }
