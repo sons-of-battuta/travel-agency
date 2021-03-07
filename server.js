@@ -107,23 +107,54 @@ function signUp(req, res){
 }
 
 function addUser(req, res){
-  // console.log(req.body);
+  let phoneNumber = req.body.phoneNumber;
+  // console.log(phoneNumber);
+  //this query to get the full name of the user if it is already has an account.
+  let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
+
   let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
   let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
-  // console.log(values);
-  client.query(sql,values)
-  .then(results=>{
-    console.log('row inserted Successfully...');
-    res.render('./pages/index');
-  });
+
+  //checke whether phone number is already signed up(has an account)
+  client.query(SQL)
+  .then(data=>{
+    console.log(data.rows);
+    if(data.rows.length === 0){
+      client.query(sql,values)
+      .then(results=>{
+        console.log('row inserted Successfully...');
+        res.render('./pages/index');
+      }).catch(error=> console.log("Error in inserting user: ", error.message))
+    }
+    else{
+      res.render('./pages/error-signup',{message: "there is an account already ",fullname:`${data.rows[0].fname} ${data.rows[0].lname}`});
+    }
+
+  }).catch(error=> console.log('Error in checking whether number is already has an account: ', error.message));
 }
 
 function logIn(req, res){
-  res.render('./pages/login-page');
+  res.render('./pages/login-page',{message: ''});
 }
 
 function checkUser(req, res){
-  console.log(req.query);
+  let phoneNumber = req.query.phoneNumber;
+  // console.log(phoneNumber);
+  let sql = `select password from user1 where phone = '${phoneNumber}';`;
+  let password = req.query.password;
+  client.query(sql)
+  .then(results=>{
+    // console.log(results.rows);
+    let passwordDB = results.rows[0].password;
+    if(md5(password) === passwordDB){
+      res.send("Correct Password")
+    }
+    else
+      res.render('./pages/login-page',{message:"Wrong password"})
+  })
+  .catch(error=>{
+    console.log('Error in getting user info from database: ', error.message);
+  })
 }
 
 // show not found page when trying to access unfound route.
