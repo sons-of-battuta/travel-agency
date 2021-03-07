@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/style/signup.css">
+    <title>Document</title>
 </head>
+
 <body>
-  <form action="/addUserToDatabase" method="post">
-    <input type="text" placeholder="first name" name="firstName" required>
-    <input type="text" placeholder="last name" name="lastName" required>
-    <input type="text" placeholder="phone number" name="phoneNumber" required>
-    <input type="password" placeholder="password" name="password" required>
-    <button>Sign Up</button>
-  </form>
+    <%- include( './layout/header' ) %>
+        <div class="signupFrom">
+            <!-- <img src="../../img/123.png" alt=""> -->
+            <h1>Sign Up Now</h1>
+            <form action="/addUserToDatabase" method="post">
+                <input type="text" placeholder="First name" name="firstName" class="input-box" required>
+                <input type="text" placeholder="Last name" name="lastName" class="input-box" required>
+                <input type="text" placeholder="Phone number" name="phoneNumber" class="input-box" required>
+                <input type="password" placeholder="Password" name="password" class="input-box" required>
+                <button class="signBtn">Sign Up</button>
+            </form>
+        </div>
+        <%- include('./layout/footer') %>
 </body>
+
 </html>
