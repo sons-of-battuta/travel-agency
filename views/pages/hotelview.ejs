@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <header><h1>/h1></header> -->
+   
+        <!-- function HotelProertiesList(hotelData) {
+            this.id=hotelData[0].id;
+            this.name =hotelData[0].name;
+            this.starRating=hotelData[0].starRating;
+          } -->
+        <% hotelsPropertiesList.forEach(hotel=>{ %>
+                 <div style="background-color: rgb(245, 243, 241); border: 3px slategrey solid; margin: 5px;">
+<ul> <li><%= hotel.name%> </li>
+            <li>
+                <%= hotel.id %>
+            </li>
+            <li>
+                <%= hotel.name  %>
+            </li>
+            <li><%= hotel.starRating %> </li>
+          </ul> </div>
+           <% }) %> 
+    
+    <br><br><br>
+    <!-- select type of details to view :each option has a deferent URL  -->
+     <!--option -photos contain : 1.hotels photos 2.room photos -->
+    <!-- <form name="hotelInformation" action="" >
+        <select name="properties/list" id="">
+    <option  value="details">Details</option>
+    <option value="hotel-photos">Hotel Photos
+      </option>
+    <option value="reviews">Reviews</option>
+        </select>
+        <button type="submit"></button>
+    </form>  -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+</body>
+
+</html>

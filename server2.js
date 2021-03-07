@@ -7,14 +7,15 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-// const client = pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
 // const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
 
 
 //using port from .env file or 3001 
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+const PORT = 3008;
 
 //use public folder
 server.use(express.static("./public"));
@@ -30,6 +31,9 @@ server.use(express.urlencoded({ extended: true }));
 server.set("view engine", "ejs");
 // server.use(methodOverride('_method'));
 
+//this module for hashing 
+const md5 = require('md5');
+
 
 
 server.get('/', (req, res) => {
@@ -40,71 +44,7 @@ server.get('/about', (req, res)=>{
   res.render("./pages/about");
 });
 
-// server.get('/search', getImages);
-// server.post('/sentences', getTranslation);
 
-// function getImages(req, res) {
-//   let cityName = req.query.cityName;
-//   // let cityName = 'paris';
-//   let key = process.env.CLIENT_ID;
-//   let URL = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${key}`;
-//   superagent.get(URL)
-//     .then(results => {
-//       let arr = results.body.results.map(value => value.urls.raw);
-//       // res.send(arr);
-//       res.render('./pages/details', { arrOfImages: arr.slice(0, 6) });
-//     })
-//     .catch(error => {
-//       console.log("Error in getting data from Unsplash: ", error.message);
-//     })
-// }
-
-// //sentences to be translated to other languages
-// const sentences = [
-//   'Hello',
-//   'How are you',
-//   'how to go to',
-//   'where is the nearest restaurant',
-//   'my name is',
-//   'what is your name',
-//   'I am lost'
-// ];
-
-// // https://libretranslate.com/translate?q=hello my name is AbdalQader&source=en&target=fr
-// function getTranslation(req, res) {
-//   console.log('Im inside the function');
-//   let URL;
-//   let arrOfTranslations = [];
-//   //this is for test the api. we must get the two letter for the language of the city that the user will searh for
-//   let target = 'fr';
-//   // let value="Hello";
-//   sentences.forEach(value => {
-//     URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-//     return superagent.post(URL)
-//       .then(result => {
-//         console.log(result.body.translatedText);
-//         // return result.body.translatedText
-//         arrOfTranslations.push({ en: value, target: result.body.translatedText });
-//         if (arrOfTranslations.length === sentences.length)
-//           res.render('./pages/translations', { translations: arrOfTranslations })
-//       })
-//       .catch(error => {
-//         console.log("Error in getting translation data: ", error.message);
-//         res.send("Error in getting translation data: " + error.message);
-//       })
-//   })
-//   console.log("this goes first");
-// }
-
-
-// // show not found page when trying to access unfound route.
-// server.get("*", (req, res) => {
-//   // res.status(404).send('<img style="background-size:cover;" src="">');
-//   // let imgUrl =
-//   //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
-//   // res.render("pages/error", { err: imgUrl });
-//   res.status(404).send("Page Not Found");
-// });
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //try hotels API
 
@@ -114,7 +54,7 @@ server.get('/about', (req, res)=>{
     <button id="search-button">Search</button>
 </form>
 </section> */}
-
+//search by city name get destinationId *from index=>cityhotels
 server.get('/search',(req,res) =>{
   let key=process.env.Hotel_key;
   let cityName=req.query.cityName;
@@ -136,32 +76,47 @@ server.get('/search',(req,res) =>{
     console.log("Error in getting hotels data",error.message);
   })
   })
+
+  //button<a> /hotels
+  // form action="/viewDetails"
+
+//search by city name get destinationId *from index=>cityhotels
+  server.post('/hotels/:hotel_destinationId ',(req,res) =>{
+    let hotel_destinationId=req.params;
+    console.log(hotel_destinationId);
+    let key=process.env.Hotel_key;
+    let url=`https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&pageNumber=1&pageSize=25&adults1=1&currency=USD&locale=en_US&sortOrder=PRICE&destinationId=${hotel_destinationId}`;
+    console.log(url)
+    
+    superagent.get (url)
+    .then (hotelsResult =>{
+ 
+    let hotelsArr=hotelsResult.body.data.body.searchResults.results.map(element => new HotelProertiesList (element));
+    // console.log(hotelsArr);
+    res.render('pages/hotelview',{hotelsPropertiesList:hotelsArr});
+    })
+    .catch(error=>{
+      console.log("Error in getting hotels data",error.message);
+    })
+    })
+
+    function HotelProertiesList(hotelData) {
+      this.id=hotelData[0].id;
+      this.name =hotelData[0].name;
+      this.starRating=hotelData[0].starRating;
+    }
+
+
+
+
+
 function hotel(hotelData) {
-  // this.name =hotelData.group.name;
-  // this.geoId =hotelData.group.entities[0].geoId;
-  // this.destinationId =hotelData.group.entities[0].destinationId;
-  // this.caption =hotelData.group.entities[0].caption;
-  // this.latitude =hotelData.group.entities[0].latitude;
-  // this.longitude =hotelData.group.entities[0].longitude;
   this.name =hotelData.name;
   this.geoId =hotelData.geoId;
   this.destinationId =hotelData.destinationId;
   this.caption =hotelData.caption;
   this.latitude =hotelData.latitude;
-  this.longitude =hotelData.longitude;
-
-  
-//   "geoId": "6269089",
-// "destinationId": "1771423",
-// "landmarkCityDestinationId": null,
-// "type": "CITY",
-// "redirectPage": "DEFAULT_PAGE",
-// "latitude": 31.965116,
-// "longitude": 35.899227,
-// "caption": "<span class='highlighted'>Amman</span>, Amman Governorate, Jordan",
-// "name": "Amman
-  
-  
+  this.longitude =hotelData.longitude;  
 }
 
 

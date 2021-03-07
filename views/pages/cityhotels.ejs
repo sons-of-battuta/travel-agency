@@ -10,23 +10,45 @@
 
 <body>
     <!-- <header><h1>/h1></header> -->
-   
-        <% hotelsList.forEach(hotel=>{ %>
-                 <div style="background-color: rgb(245, 243, 241); border: 3px slategrey solid; margin: 5px;">
-<ul> <li><%= hotel.name%> </li>
-            <li>
-                <%= hotel.geoId %>
-            </li>
-            <li>
-                <%= hotel.destinationId  %>
-            </li>
-            <li><%= hotel.caption %> </li>
-          </ul> </div>
-           <% }) %> 
-    
-    <br><br><br>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+    <% hotelsList.forEach(hotel=>{ %>
+        <form action="/viewDetails" method="POST">
+            <div style="background-color: rgb(245, 243, 241); border: 3px slategrey solid; margin: 5px;">
+                <ul>
+                    <li>
+                        <%= hotel.name%>
+                    </li>
+                    <li>
+                        <%= hotel.geoId %>
+                    </li>
+                    <li>
+                        <%= hotel.destinationId %>
+                    </li>
+                    <li>
+                        <%= hotel.caption %>
+                    </li>
+                </ul>
+                <button ><a href="/hotels/<%= hotel.destinationId %>">Show Me The Details</a></button>
+            </div>
+            <% }) %>
+
+                
+        </form>
+
+
+        <!-- choose your fav hotels group from : suggestions[{"group"={},entities"=[]}]
+
+<form name="Categories" action="">
+    <select name="hotelsCategories" id="">
+<option value="CITY_GROUP">CITY GROUP</option>
+<option value="HOTEL_GROUP">HOTEL GROUP</option>
+<option value="LANDMARK_GROUP">LANDMARK GROUP</option>
+<option value="TRANSPORT_GROUP">TRANSPORT GROUP</option>
+    </select>
+</form> -->
+        <br><br><br>
+
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 </body>
 
 </html>
