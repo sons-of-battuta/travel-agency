@@ -42,9 +42,10 @@ server.get('/', (req, res) => {
 server.get('/about', (req, res)=>{
   res.render("./pages/about");
 });
-// server.get('/login',logIn);
+server.get('/login',logIn);
 server.get('/signup', signUp);
 server.post('/addUserToDatabase', addUser);
+server.get('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 
@@ -115,8 +116,14 @@ function addUser(req, res){
     console.log('row inserted Successfully...');
     res.render('./pages/index');
   });
-  
+}
 
+function logIn(req, res){
+  res.render('./pages/login-page');
+}
+
+function checkUser(req, res){
+  console.log(req.query);
 }
 
 // show not found page when trying to access unfound route.

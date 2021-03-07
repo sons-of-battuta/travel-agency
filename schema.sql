@@ -1,6 +1,9 @@
 -- use this comman to create the table from within the terminal 
 --  psql -f schema.sql -d travel
 
+-- add the following line to your .env file with the appropriate changes
+-- DATABASE_URL=postgresql://yourname:yourpassword@localhost:5432/travel
+
 drop table if exists user1;
 
 -- user table 
