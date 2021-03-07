@@ -94,3 +94,13 @@ transition-delay: 0.2s;
     font-weight: 300;
    
 }
+.videoeContainer .box .contentBx .content #button{
+    width: 130px;
+    height: 35px;
+    float: right;
+    background-color: #f1363fd5;
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
