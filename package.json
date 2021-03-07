@@ -2,10 +2,10 @@
   "name": "travel-agency",
   "version": "1.0.0",
   "description": "### Team Name > Sons of Battuta ### Team members 1. AbdalQader Mhemed (leader) 2. Zaid Alasfar 3. Ruba Banat 4. Esraa Abu Hanaa 5. AbdalRahman Albdahat",
-  "main": "server2.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server2.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,10 +22,10 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
     "superagent": "^6.1.0"
-  },
-  "devDependencies": {}
+  }
 }
