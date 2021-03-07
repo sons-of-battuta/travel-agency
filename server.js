@@ -148,7 +148,8 @@ function checkUser(req, res){
     if(results.rows.length >0){
       let passwordDB = results.rows[0].password;
       if(md5(password) === passwordDB){
-        res.send("Correct Password")
+        res.render('./pages/index');
+        // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
       }
       else
         res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'});
