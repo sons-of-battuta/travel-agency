@@ -552,7 +552,7 @@ margin-top: 100px;
     border-radius: 10px;
     /* background-color: white; */
     height: 350px;
-    background: radial-gradient(at 0% 10%, #d2ae84 5px, #d5ad9ccc 20%, rgba(252, 250, 243, 0.966) 25%);
+    background: radial-gradient(at 0% 100%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(252, 250, 243, 0.966) 25%);
     
   }
 
