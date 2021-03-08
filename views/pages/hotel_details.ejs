@@ -13,15 +13,16 @@
                 <% let hotelImages=details.hotel_images.split(','); %>
                     <% let roomImages=details.room_images.split('#'); %>
                     <% let hotelContentArr=details.content.split(','); %>
-                        <div class="hotelContiner">
+                        <div class="hotelContinuer">
                             <div>
                                 <h1>
                                     <%= details.hotel_name %>
                                 </h1>
-                                <h3>
-                                    
-                                   <span>RATE:</span>  <%= details.star_rating %>
-                                </h3>
+                                 <br><br>
+                                <h2>  
+                                   RATE:  <%= details.star_rating %>
+                                </h2>
+                               
                                 <h4>
                                     <span> Address: </span> <%= details.address %>
                                 </h4>
@@ -39,8 +40,8 @@
                                 <p>
                                   <span> Time To Arrive : </span> <%= details.time_to_arrive%>
                                 </p>
-                                
-                                  <p> <span> Hotel Content :</span></p>
+                                <br><br>
+                                  <h2>  Hotel Content :</h2>
                                  
                                   <ul>
                                     <% for (let index=0; index < hotelContentArr.length; index++) { %>
