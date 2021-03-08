@@ -15,7 +15,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 //using port from .env file or 3001 
 // const PORT = process.env.PORT || 3001;
-const PORT = 3008;
+const PORT = 3000;
 
 //use public folder
 server.use(express.static("./public"));
