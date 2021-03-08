@@ -12,7 +12,7 @@
     </section>
     
       <section class="CitySection">
-        <h1>Some pictures for  <%=cityName %>  </h1>
+        <h1>Take a Look at this beauty </h1>
         <div class="cityImg">
 
           <% arrOfImages.forEach(value=>{%>
@@ -23,7 +23,7 @@
           </div>
           </section>
           <section class="mapSec">
-            <h1> MAP </h1>
+            <h1>Let us guide you to <%=cityName %> </h1>
           <iframe id="gmap_canvas"
           src="https://maps.google.com/maps?q=<%=cityName %> &t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
           scrolling="no" marginheight="0" marginwidth="0"></iframe>
@@ -53,7 +53,7 @@
               </div>
               <div class="content3">
                 <p>
-                  <%= value.star_rating %>
+                 Rate : <%= value.star_rating %>
                 </p>
                 <p>
                   Price : <%= value.price%>

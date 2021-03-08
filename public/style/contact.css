@@ -13,8 +13,7 @@ body {
     object-fit: cover;
 }
 .videoSection h1{
-    margin-left: 580px;
-    /* width: 2000px; */
+    margin-left: 510px;
     position: absolute;
     color: rgb(255, 255, 255);
     z-index: 5;
@@ -28,57 +27,36 @@ body {
     padding: 0;
     margin: 0;
     background: white;
-    height: 901px;
     width: 100%;
-    /* background-image: url(https://bonvoyage.qodeinteractive.com/wp-content/uploads/2018/02/h6-slide-1.jpg); */
-    /* margin-bottom: 20%; */
-  
+    margin-bottom: 5%;
+
 }
 
-.title{
-    /* position: relative; */
-    width: 100%;
-    height: 80%;
-    overflow: hidden;
-    /* position: absolute; */
-    top: 0;
-    /* left: 50%; */
-    /* z-index: 1; */
-}
-.title h1 {
-    color: #fff;
-    font-size: 43px;
-    font-weight: bolder;
-    margin-top: 15%;
-    text-align: center;
-    font-family: 'Libre Baskerville', serif;
-    text-shadow: 5px 4px #181515ea;
-    /* margin-bottom: 4%; */
-    
-}
 
 button {
-    color: #fff;
+    color: #000;
     padding: 10px;
     border-radius: 15px;
     border: none;
     outline: none;
     cursor: pointer;
-    background-color: #f1363fd5;
+    background-color: #ddbead;
     width: 100px;
+    height: 40px;
     margin: 20px 20px 20px 80%;
 }
 
 .planFormDiv {
     margin: 25px 50px;
-    background-color: #ffffff5c;
-    /* background-image: linear-gradient(to bottom, #ffffff31, #ffffff5c, #ffffff5c, #d2ae84c4, #d2ae84b4); */
+    background: radial-gradient(at 0% 10%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(252, 250, 243, 0.966) 25%);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    width: 50%;
-    /* margin-bottom: 10%; */
-    margin-left: 25%;
-    margin-top: -25%;
-    /* text-align: center; */
+    width: 40%;
+    height: 560px;
+    margin-left: 30%;
+    margin-top: 10%;
+    padding: 30px;
+
 }
 
 input {
@@ -91,10 +69,10 @@ input {
     font-size: 15px;
 }
 
-label {
+.planFormDiv label {
     margin: 10px 20px;
     font-size: 20px;
-    /* text-align: center; */
+    margin-top: 20%;
 }
 
 textarea {
@@ -107,14 +85,14 @@ textarea {
     padding: 12px 20px;
 }
 .plans{
-    margin-top: 20%;
+    margin-top: 9%;
 }
 .plans h1{
     color: rgb(5, 3, 3);
     font-size: 43px;
     font-weight: bolder;
-    margin-top: 5%;
+    /* margin-top: 4%; */
     text-align: center;
     font-family: 'Libre Baskerville', serif;
-    /* text-shadow: 5px 4px #181515ea; */
+    margin-bottom: 3%;
 }
