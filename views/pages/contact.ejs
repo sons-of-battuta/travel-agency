@@ -1,0 +1,105 @@
+<%- include('./layout/head') %>
+    <link rel="stylesheet" href="/style/Contact.css">
+
+    <body>
+
+        <%- include('./layout/header') %>
+
+            <section class="titles">
+                <div>
+                    <h1> Plan your vacation </h1>
+                </div>
+            </section>
+
+            <div class="planFormDiv">
+
+                <form action="/contact" method="post">
+                    <label for="name">Name</label><br>
+                    <input name="name" type="text" placeholder="Your Name" required><br>
+                    <label for="phone">Phone Number</label><br>
+                    <input name="phone" type="number" placeholder="Your Phone Number" required><br>
+                    <label for="description">What Travel Adventure can we help you plan?</label><br>
+                    <textarea name="description" placeholder="description" required></textarea><br>
+                    <button type="submit">Submit</button>
+
+                </form>
+
+
+            </div>
+            <section class="titles">
+                <div>
+                    <h1> Customer Plans </h1>
+                </div>
+            </section>
+
+
+
+
+            <section class="reviews">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="testimonialBox">
+                                <img src="../../img/quote.png" class="quote">
+                                <div class="content1">
+                                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum blanditiis ad laudantium tempora nulla, quisquam, fuga rerum dolorem cum facere architecto non culpa similique! Sint iure quas fuga aliquid voluptatum!
+                                    </p>
+                                    <div class="details1">
+                                        <div class="imgBx">
+                                            <img src="../../img/avatar.png" alt="">
+                                        </div>
+                                        <h3> Someone <br> <span> Ruba Banat</span></h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <% plansArr.forEach(element => { %>
+                            <div class="swiper-slide">
+
+                                <div class="testimonialBox">
+                                    <img src="../../img/quote.png" class="quote">
+                                    <div class="content1">
+                                        <p>
+                                            <%= element.description %>
+                                        </p>
+                                        <div class="details1">
+                                            <div class="imgBx">
+                                                <img src="../../img/avatar.png" alt="">
+                                            </div>
+                                            <h3> By <br> <span> <%= element.name %> </span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <%  }); %>
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+            <%- include('./layout/footer') %>
+    </body>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 0,
+                stretch: 0,
+                depth: 100,
+                modifier: 2,
+                slideShadows: true,
+            },
+            loop: true,
+
+        });
+    </script>

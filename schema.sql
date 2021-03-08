@@ -37,3 +37,13 @@ create table hotels(
 );
 
 
+drop table if exists plans;
+
+-- contact table 
+create table plans(
+id serial primary key,
+name varchar(255),
+phone varchar(13),
+description varchar(500)
+);
+

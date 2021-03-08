@@ -36,19 +36,23 @@ const md5 = require('md5');
 
 
 server.get('/', (req, res) => {
-  res.render("./pages/index");
+    res.render("./pages/index");
 });
 // to render aboutus 
-server.get('/about', (req, res)=>{
-  res.render("./pages/about");
+server.get('/about', (req, res) => {
+    res.render("./pages/about");
 });
-server.get('/login',logIn);
+// to render contact 
+server.get('/contact', getContact);
+server.post('/contact', postContact);
+
+server.get('/login', logIn);
 server.get('/signup', signUp);
 server.post('/addUserToDatabase', addUser);
 server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
-server.get('/hotelDetails/:hotel_id', getHotelDetails);
+// server.get('/hotelDetails/:hotel_id', getHotelDetails);
 //Hotels API
 // server.get('/hotels', getHotels);
 
@@ -81,43 +85,69 @@ function getImages(req, res) {
 
 //sentences to be translated to other languages
 const sentences = [
-  'Hello',
-  'How are you',
-  'how to go to',
-  'where is the nearest restaurant',
-  'my name is',
-  'what is your name',
-  'I am lost'
+    'Hello',
+    'How are you',
+    'how to go to',
+    'where is the nearest restaurant',
+    'my name is',
+    'what is your name',
+    'I am lost'
 ];
 
 // https://libretranslate.com/translate?q=hello my name is AbdalQader&source=en&target=fr
 function getTranslation(req, res) {
-  console.log('Im inside the function');
-  let URL;
-  let arrOfTranslations = [];
-  //this is for test the api. we must get the two letter for the language of the city that the user will searh for
-  let target = 'fr';
-  // let value="Hello";
-  sentences.forEach(value => {
-    URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-    return superagent.post(URL)
-      .then(result => {
-        console.log(result.body.translatedText);
-        // return result.body.translatedText
-        arrOfTranslations.push({ en: value, target: result.body.translatedText });
-        if (arrOfTranslations.length === sentences.length)
-          res.render('./pages/translations', { translations: arrOfTranslations })
-      })
-      .catch(error => {
-        console.log("Error in getting translation data: ", error.message);
-        res.send("Error in getting translation data: " + error.message);
-      })
-  })
-  console.log("this goes first");
+    console.log('Im inside the function');
+    let URL;
+    let arrOfTranslations = [];
+    //this is for test the api. we must get the two letter for the language of the city that the user will searh for
+    let target = 'fr';
+    // let value="Hello";
+    sentences.forEach(value => {
+        URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
+        return superagent.post(URL)
+            .then(result => {
+                console.log(result.body.translatedText);
+                // return result.body.translatedText
+                arrOfTranslations.push({ en: value, target: result.body.translatedText });
+                if (arrOfTranslations.length === sentences.length)
+                    res.render('./pages/translations', { translations: arrOfTranslations })
+            })
+            .catch(error => {
+                console.log("Error in getting translation data: ", error.message);
+                res.send("Error in getting translation data: " + error.message);
+            })
+    })
+    console.log("this goes first");
 }
 
-function signUp(req, res){
-  res.render('./pages/signup-page');
+function signUp(req, res) {
+    res.render('./pages/signup-page');
+}
+
+function addUser(req, res) {
+    let phoneNumber = req.body.phoneNumber;
+    // console.log(phoneNumber);
+    //this query to get the full name of the user if it is already has an account.
+    let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
+
+    let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
+    let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
+
+    //checke whether phone number is already signed up(has an account)
+    client.query(SQL)
+        .then(data => {
+            console.log(data.rows);
+            if (data.rows.length === 0) {
+                client.query(sql, values)
+                    .then(results => {
+                        console.log('row inserted Successfully...');
+                        res.render('./pages/index');
+                    }).catch(error => console.log("Error in inserting user: ", error.message))
+            } else {
+                res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
+            }
+
+        }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
 }
 
 function addUser(req, res){
@@ -146,33 +176,41 @@ function addUser(req, res){
 
   }).catch(error=> console.log('Error in checking whether number is already has an account: ', error.message));
 }
-
-function logIn(req, res){
-  res.render('./pages/login-page',{message: '', needToSignUp:'false'});
+function logIn(req, res) {
+    res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
 }
 
-function checkUser(req, res){
-  let phoneNumber = req.body.phoneNumber;
-  console.log(phoneNumber);
-  let sql = `select password from user1 where phone = '${phoneNumber}';`;
-  let password = req.body.password;
-  client.query(sql)
-  .then(results=>{
-    console.log(results.rows);
-    if(results.rows.length >0){
-      let passwordDB = results.rows[0].password;
-      if(md5(password) === passwordDB){
-        res.render('./pages/index');
-        // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
-      }
-      else
-        res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'});
-    }else
-      res.render('./pages/login-page',{message:"you need to sign up first",needToSignUp:'true'});
-  })
-  .catch(error=>{
-    console.log('Error in getting user info from database: ', error.message);
-  })
+function checkUser(req, res) {
+    let phoneNumber = req.body.phoneNumber;
+    console.log(phoneNumber);
+    let sql = `select password from user1 where phone = '${phoneNumber}';`;
+    let password = req.body.password;
+    client.query(sql)
+        .then(results => {
+            console.log(results.rows);
+            if (results.rows.length > 0) {
+                let passwordDB = results.rows[0].password;
+                if (md5(password) === passwordDB) {
+                    res.render('./pages/index');
+                    // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
+                } else
+                    res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
+            } else
+                res.render('./pages/login-page', { message: "you need to sign up first", needToSignUp: 'true' });
+        })
+        .catch(error => {
+            console.log('Error in getting user info from database: ', error.message);
+        })
+}
+
+//getContact Function
+function getContact(req, res) {
+    let SQL = 'SELECT * FROM plans;';
+    client.query(SQL)
+        .then(result => {
+            res.render("./pages/contact", { plansArr: result.rows })
+
+        })
 }
 
 
@@ -313,13 +351,24 @@ function getHotels(req, res){
   return arrayOfHotels;
 }//end of getHotels()
 
+function postContact(req, res) {
+    let { name, phone, description } = req.body;
+    let SQL = "INSERT INTO plans (name, phone, description) VALUES ($1,$2,$3);";
+    let values = [name, phone, description]
+    client.query(SQL, values)
+        .then(() => res.redirect('/contact')
+
+        ).catch(error => {
+            console.log('Error in setting plans into database ', error.message);
+        })
+}
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
-  // res.status(404).send('<img style="background-size:cover;" src="">');
-  // let imgUrl =
-  //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
-  // res.render("pages/error", { err: imgUrl });
-  res.status(404).send("Page Not Found");
+    // res.status(404).send('<img style="background-size:cover;" src="">');
+    // let imgUrl =
+    //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
+    // res.render("pages/error", { err: imgUrl });
+    res.status(404).send("Page Not Found");
 });
 
 
@@ -329,6 +378,7 @@ client.connect().then(() => {
     console.log(`Listening on  PORT ${PORT} ...`);
   });
 });
+
 
 
 
