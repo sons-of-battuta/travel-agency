@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../img/background1.jpg);
+}
+
+.loginFrom {
+    width:300px;
+    box-shadow: 0 0 3px 0 rgba(0, 0,0, 0.3);
+    background: rgba(255, 255, 255, 0.952);
+    padding: 20px;
+    margin: 8% auto 0 ;
+    text-align:center;
+    margin-top: 200px;
+
+}
+
+.loginFrom p {
+    font-size: 15px;
+}
+
+body h1 {
+    color: #241213d5 ;
+    margin-bottom:30px;
+    margin-top:20px;
+    font-size: 30px;
+}
+
+.input-boxes{
+    border-radius: 20px;
+    padding: 10px;
+    margin:10px 0;
+    width:90%;
+    border:1px solid #999;
+    outline:none;
+}
+
+button{
+    color:#fff;
+    width: 100%;
+    padding:10px;
+    border-radius: 15px;
+    margin:10px 0;
+    border:none;
+    outline:none;
+    cursor: pointer;
+    background-color:#f1363fd5;
+}
+
+.signupFrom img {
+    width: 70px;
+    margin-top: -57px;
+    margin-left: 92px;
+    
+}
