@@ -3,7 +3,9 @@
 }
 body{
     /* background-image: url('https://indiacityblog.com/wp-content/uploads/2020/03/185289.jpg'); */
-    background-repeat: cover;
+    background-size: cover;
+    background-position: center;
+    background-image: url(../img/background1.jpg);
 
 }
 .container{
@@ -16,13 +18,13 @@ body{
 }
 
 .container .team-member{
-    background-color: black;
-    margin: 10px;
+    background-color: #ffffff9a;
+        margin: 10px;
     margin-bottom: 50px;
     width: 300px;
     padding: 20px;
     line-height: 20px;
-    color:#f4f6f7;
+    color:black;
     position: relative;
     border-radius: 10px;
 
@@ -32,7 +34,7 @@ body{
    font-family: 'Lora', serif;;
     font-weight: bold;
     font-size: 22px;
-    color:#a2a5a8;
+    color:#f16666;
     margin-top: 10px;
 }
 
@@ -49,14 +51,14 @@ border-radius: 50%;
 
 .container a{
     margin:10px;
-    color:#a2a5a8;
-    border: 2px solid #a2a5a8 ;
+    color:#f16666;
+    border: 2px solid #f16666 ;
     border-radius: 100%;
     padding: 5px;
 }
 
 .container a:hover{
-    background-color:#a2a5a8 ;
+    background-color:#f16666 ;
     color:#f8f1f1;
 }
 
@@ -64,11 +66,12 @@ border-radius: 50%;
     height: 150px;
     width:150px;
     border-radius: 100%;
-    border: 10px solid black;
+    border: 2px solid  #ffffff5c;
     position: absolute;
     top:-50px;
     left: 50%;
     transform: translateX(-50%);
+
     
 }
 
@@ -76,7 +79,7 @@ main h1{
     text-align: center;
     font-weight: bold;
     letter-spacing: 2px;
-    color: black;
+    color:  black;
     font-family: 'Lora', serif;
     font-size: 40px;
     
@@ -85,7 +88,7 @@ h1::after{
     content: "";
     height: 3px;
     width: 150px;
-    background-color: black;
+    background-color: #f16666;
     margin: 10px auto;
     display: block;
 }
