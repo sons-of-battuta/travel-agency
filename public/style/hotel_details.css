@@ -1,0 +1,61 @@
+body{background-image: url('https://www.lopesan.com/img/hotels/2646/Recepcion-lobby-hotel-abora-continental-lopesan.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+display: flex;
+flex-direction: column;
+justify-content: center;}
+
+    .hotelContiner{
+        margin-top: 170px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+    }
+
+
+    .hotelImgBut , .roomImgBut{
+        color: #fff;
+        /* padding: 10px; */
+        border-radius: 15px;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        background-color: #353f42d5;
+        width: 300px;
+        height: 40px;
+        margin: 30px 0px 30px 0%;
+    }
+.buts{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.images{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+h1{
+color: rgb(59, 58, 58);
+font-size: 43px;
+font-weight: bolder;
+}
+span{
+    font-size: 20px;
+    color: black;
+}
+img{
+    height: 50px;
+    width: 50px;
+}
+.hotelImgDiv img ,.roomImgDiv img{
+    height: 200px;
+    float: left;
+    width: 280px;
+    margin-right: 9%;
+    transition: 0.6s;
+    margin: 10px;
+}

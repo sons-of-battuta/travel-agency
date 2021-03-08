@@ -52,7 +52,7 @@ server.post('/addUserToDatabase', addUser);
 server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
-// server.get('/hotelDetails/:hotel_id', getHotelDetails);
+server.get('/hotel_details/:hotel_id', getHotelDetails);
 //Hotels API
 // server.get('/hotels', getHotels);
 
@@ -272,6 +272,7 @@ function getHotels(req, res){
       console.log('getting data from hotel API');
       let key = process.env.HOTEL_KEY;
     let url=`https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
+    console.log("this is url ",url);
    //send the first request using the city name inorder to get the destination ids for all the hotels in that city
     superagent.get(url)
     .then(result=>{
@@ -279,6 +280,8 @@ function getHotels(req, res){
       let desId = result.body.suggestions[0].entities.map(value => value.destinationId);
       
       let url2 = `https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&destinationId=${desId[0]}`;
+      console.log("this is url2 ",url2);
+
       //send the second request using the destination id to get the id for each hotel so that we can get the details of that hotel.
       superagent.get(url2)
       .then(result2=>{
@@ -287,6 +290,7 @@ function getHotels(req, res){
 
         for(let i=0; i<5; i++){
           let url3 = `https://hotels4.p.rapidapi.com/properties/get-details?rapidapi-key=${key}&id=${arrOfId[i]}`;
+          console.log("this is url3 ",url3);
           superagent.get(url3)
           .then(result3 =>{
             let hotelName = result3.body.data.body.propertyDescription.name; //hotel name
@@ -306,7 +310,7 @@ function getHotels(req, res){
             
             let url4 = `https://hotels4.p.rapidapi.com/properties/get-hotel-photos?rapidapi-key=${key}&id=${arrOfId[i]}`;
             // console.log(url4);
-            
+            console.log("this is url4 ",url4);
             //send the fourth request to get the images of the hotel
             superagent.get(url4)
             .then(result4=>{
@@ -350,6 +354,26 @@ function getHotels(req, res){
 //  res.render('Hello it is working');
   return arrayOfHotels;
 }//end of getHotels()
+
+
+//start of getHotelDetails :get hotel details based on hotel_id>>render data on hotel_details.ejs
+function getHotelDetails(req,res) {
+  
+  let sql = `select * from hotels where hotel_id = $1;`;
+  let hotelDetails = [req.params.hotel_id];
+console.log(hotelDetails);
+
+  client.query(sql, hotelDetails)
+    .then(result =>{
+      console.log(result.rows);
+      res.render('./pages/hotel_details',{details:result.rows[0]})
+    }).catch(error => console.log('Error in getting all hotelDetails of  hotel_id',error.message));
+  
+    // return hotelDetails;
+}//end of getHotelDetails
+
+
+
 
 function postContact(req, res) {
     let { name, phone, description } = req.body;

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('./layout/head') %>
+    <link rel="stylesheet" href="/style/hotel_details.css">
+
+    <body>
+        <%- include('./layout/header') %>
+
+
+
+            <main>
+                <% let hotelImages=details.hotel_images.split(','); %>
+                    <% let roomImages=details.room_images.split('#'); %>
+                    <% let hotelContentArr=details.content.split(','); %>
+                        <div class="hotelContiner">
+                            <div>
+                                <h1>
+                                    <%= details.hotel_name %>
+                                </h1>
+                                <h3>
+                                    
+                                   <span>RATE:</span>  <%= details.star_rating %>
+                                </h3>
+                                <h4>
+                                    <span> Address: </span> <%= details.address %>
+                                </h4>
+                            </div>
+                            <div>
+                                <p>
+                                    <span>Neighborhood:</span> <%= details.neighborhood%>
+                                </p>
+                                <p>
+                             <span>  Average Nightly Price :  </span>  <%= details.price%>
+                                </p>
+                                 <p>
+                                   <span>Nearest Airport :</span>  <%= details.airport%>
+                                </p>
+                                <p>
+                                  <span> Time To Arrive : </span> <%= details.time_to_arrive%>
+                                </p>
+                                
+                                  <p> <span> Hotel Content :</span></p>
+                                 
+                                  <ul>
+                                    <% for (let index=0; index < hotelContentArr.length; index++) { %>
+
+                                        <li><%=hotelContentArr[index] %> </li>
+                                        <% } %>
+                                </ul>
+                               
+                               
+                            </div>
+                            <div class="buts">
+
+                            </div>
+<div class="images"> 
+    <div>
+                            <h1>Hotel Images</h1>
+                            <button class="hotelImgBut">Show Hotel Images</button>
+                            <div class="hotelImgDiv">
+
+                                <ul>
+                                    <% for (let index=0; index < 5; index++) { %>
+
+                                        <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                        <% } %>
+                                </ul>
+                            </div></div>
+                            <div>
+                            <h1>Room Images</h1>
+                            <button class="roomImgBut">Show Room Images</button>
+                            <div class="roomImgDiv">
+
+                                <ul>
+                                    <% for (let index=0; index < 5; index++) { %>
+
+                                        <li><img src=<%=roomImages[index] %> alt=""></li>
+                                        <% } %>
+                                </ul>
+                            </div></div>
+</div>
+                        </div>
+
+
+
+            </main>
+            <%- include('./layout/footer') %>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                <script>
+                    $(document).ready(function () {
+                        $(".hotelImgBut").click(function () {
+                            $(".hotelImgDiv").toggle();
+                        });
+                    });
+                </script>
+                <script>
+                    $(document).ready(function () {
+                        $(".roomImgBut").click(function () {
+                            $(".roomImgDiv").toggle();
+                        });
+                    });
+                </script>
+
+
+    </body>
+
+</html>
