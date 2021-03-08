@@ -1,12 +1,15 @@
 
 <%- include('./layout/head') %>
 
+
    
 
 
+
+    <link rel="stylesheet" href="/style/modules.css">
+
     <body <%- include('./layout/header') %>>
         <%- include('./layout/homeHeader') %>
-
             <main>
                 <section class="fisrtSection">
                     <div class="slidershow">
@@ -14,7 +17,6 @@
                             <input type="radio" name="r" id="r1" checked>
                             <input type="radio" name="r" id="r2">
                             <input type="radio" name="r" id="r3">
-
                             <div class="slide s1">
                                 <img src="../../img/img12.png">
                             </div>
@@ -35,10 +37,8 @@
                         <div class="auto-btn1"></div>
                         <div class="auto-btn2"></div>
                         <div class="auto-btn3"></div>
-
                     </div>
                     </div>
-
                 </section>
                 <section class="formSection">
                     <h2>Where do you want to go ?</h2>
@@ -63,7 +63,7 @@
                             <div class="contentBx">
                                 <div class="content">
                                     <h2> Tokyo </h2>
-                                    <p>Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from
+                                    <p>Tokyo, Japan's busy capital, mixes the ultramodern and the traditional, from
                                         neon-lit skyscrapers to historic temples</p>
                                     <form action="/search" method="GET">
                                         <input hidden type="text" value="Tokyo" name="cityName">
@@ -214,13 +214,13 @@
                                             <h3> Someone <br> <span></span></h3>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-
             <!-- footer -->
             <%- include('./layout/footer') %>
                 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -242,5 +242,4 @@
                     });
                 </script>
     </body>
-
     </html>
