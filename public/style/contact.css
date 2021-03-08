@@ -1,20 +1,60 @@
 body {
     background-size: cover;
     background-position: center;
-    background-image: url(../img/background1.jpg);
 }
-
-.titles {
+.videoSection{
     width: 100%;
-    margin-top: 10%;
-    margin-bottom: 10%;
+}
+.videoSection video{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+.videoSection h1{
+    margin-left: 580px;
+    /* width: 2000px; */
+    position: absolute;
+    color: rgb(255, 255, 255);
+    z-index: 5;
+    margin-top: -270px;
+    font-size: 50px;
+    font-family: 'Libre Baskerville', serif;
+    text-shadow: 5px 4px #181515ea;
     text-align: center;
 }
+.titles {
+    padding: 0;
+    margin: 0;
+    background: white;
+    height: 901px;
+    width: 100%;
+    /* background-image: url(https://bonvoyage.qodeinteractive.com/wp-content/uploads/2018/02/h6-slide-1.jpg); */
+    /* margin-bottom: 20%; */
+  
+}
 
-.titles h1 {
-    color: white;
+.title{
+    /* position: relative; */
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+    /* position: absolute; */
+    top: 0;
+    /* left: 50%; */
+    /* z-index: 1; */
+}
+.title h1 {
+    color: #fff;
     font-size: 43px;
     font-weight: bolder;
+    margin-top: 15%;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    text-shadow: 5px 4px #181515ea;
+    /* margin-bottom: 4%; */
+    
 }
 
 button {
@@ -32,8 +72,13 @@ button {
 .planFormDiv {
     margin: 25px 50px;
     background-color: #ffffff5c;
+    /* background-image: linear-gradient(to bottom, #ffffff31, #ffffff5c, #ffffff5c, #d2ae84c4, #d2ae84b4); */
     border-radius: 10px;
     width: 50%;
+    /* margin-bottom: 10%; */
+    margin-left: 25%;
+    margin-top: -25%;
+    /* text-align: center; */
 }
 
 input {
@@ -49,6 +94,7 @@ input {
 label {
     margin: 10px 20px;
     font-size: 20px;
+    /* text-align: center; */
 }
 
 textarea {
@@ -59,4 +105,16 @@ textarea {
     border-radius: 10px;
     text-overflow: ellipsis;
     padding: 12px 20px;
+}
+.plans{
+    margin-top: 20%;
+}
+.plans h1{
+    color: rgb(5, 3, 3);
+    font-size: 43px;
+    font-weight: bolder;
+    margin-top: 5%;
+    text-align: center;
+    font-family: 'Libre Baskerville', serif;
+    /* text-shadow: 5px 4px #181515ea; */
 }
