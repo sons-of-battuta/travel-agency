@@ -1,0 +1,62 @@
+body {
+    background-size: cover;
+    background-position: center;
+    background-image: url(../img/background1.jpg);
+}
+
+.titles {
+    width: 100%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    text-align: center;
+}
+
+.titles h1 {
+    color: white;
+    font-size: 43px;
+    font-weight: bolder;
+}
+
+button {
+    color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #f1363fd5;
+    width: 100px;
+    margin: 20px 20px 20px 80%;
+}
+
+.planFormDiv {
+    margin: 25px 50px;
+    background-color: #ffffff5c;
+    border-radius: 10px;
+    width: 50%;
+}
+
+input {
+    width: 40%;
+    margin: 10px 20px;
+    height: 35px;
+    border-radius: 8px;
+    border: 2px solid #1110106e;
+    padding: 12px 20px;
+    font-size: 15px;
+}
+
+label {
+    margin: 10px 20px;
+    font-size: 20px;
+}
+
+textarea {
+    width: 75%;
+    height: 250px;
+    margin: 10px 0 20px 20px;
+    border: 2px solid #1110106e;
+    border-radius: 10px;
+    text-overflow: ellipsis;
+    padding: 12px 20px;
+}
