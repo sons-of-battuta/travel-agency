@@ -16,6 +16,27 @@ password varchar(255)
 );
 
 
+drop table if exists hotels;
+
+-- create table hotels
+create table hotels(
+  id serial primary key,
+  -- this id (hotel_id) for the hotel to get its details
+  city_name varchar(255),
+  hotel_name varchar(255),
+  content text,
+  address text,
+  star_rating varchar(3),
+  neighborhood varchar(255),
+  airport varchar(255),
+  time_to_arrive varchar(255),
+  price  varchar(255),
+  hotel_images text,
+  room_images  text,
+  hotel_id varchar(255)
+);
+
+
 drop table if exists plans;
 
 -- contact table 
