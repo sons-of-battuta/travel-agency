@@ -45,7 +45,7 @@ server.get('/about', (req, res)=>{
 server.get('/login',logIn);
 server.get('/signup', signUp);
 server.post('/addUserToDatabase', addUser);
-server.get('/checkUser', checkUser);
+server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 
@@ -134,23 +134,27 @@ function addUser(req, res){
 }
 
 function logIn(req, res){
-  res.render('./pages/login-page',{message: ''});
+  res.render('./pages/login-page',{message: '', needToSignUp:'false'});
 }
 
 function checkUser(req, res){
-  let phoneNumber = req.query.phoneNumber;
-  // console.log(phoneNumber);
+  let phoneNumber = req.body.phoneNumber;
+  console.log(phoneNumber);
   let sql = `select password from user1 where phone = '${phoneNumber}';`;
-  let password = req.query.password;
+  let password = req.body.password;
   client.query(sql)
   .then(results=>{
-    // console.log(results.rows);
-    let passwordDB = results.rows[0].password;
-    if(md5(password) === passwordDB){
-      res.send("Correct Password")
-    }
-    else
-      res.render('./pages/login-page',{message:"Wrong password"})
+    console.log(results.rows);
+    if(results.rows.length >0){
+      let passwordDB = results.rows[0].password;
+      if(md5(password) === passwordDB){
+        res.render('./pages/index');
+        // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
+      }
+      else
+        res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'});
+    }else
+      res.render('./pages/login-page',{message:"you need to sign up first",needToSignUp:'true'});
   })
   .catch(error=>{
     console.log('Error in getting user info from database: ', error.message);
