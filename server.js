@@ -15,7 +15,7 @@ const client = new pg.Client(process.env.DATABASE_URL);
 
 //using port from .env file or 3001 
 // const PORT = process.env.PORT || 3001;
-const PORT = 3008;
+const PORT = 5555;
 
 //use public folder
 server.use(express.static("./public"));
@@ -48,9 +48,12 @@ server.post('/addUserToDatabase', addUser);
 server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
+//Hotels API
+// server.get('/hotels', getHotels);
 
+let cityName='';
 function getImages(req, res) {
-  let cityName = req.query.cityName;
+  cityName = req.query.cityName;
   // let cityName = 'paris';
   let key = process.env.CLIENT_ID;
   let URL = `https://api.unsplash.com/search/photos?query=${cityName}&client_id=${key}`;
@@ -59,6 +62,8 @@ function getImages(req, res) {
       let arr = results.body.results.map(value => value.urls.raw);
       // res.send(arr);
       res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName});
+      getHotels();
+      
     })
     .catch(error => {
       console.log("Error in getting data from Unsplash: ", error.message);
@@ -161,6 +166,55 @@ function checkUser(req, res){
   })
 }
 
+//get hotels details from API
+function getHotels(req, res){
+  let key = process.env.HOTEL_KEY;
+  let url=`https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
+  // console.log(url)
+  superagent.get(url)
+  .then(result=>{
+    // console.log(result.body.suggestions[0].entities);
+    let desId = result.body.suggestions[0].entities.map(value => value.destinationId);
+    // console.log(desId);
+    let url2 = `https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&destinationId=${desId[0]}`
+    superagent.get(url2)
+    .then(result2=>{
+
+      // console.log(result2.body.data.body.searchResults.results);
+      let arrOfId = result2.body.data.body.searchResults.results.map(value => value.id);
+      // console.log(arrOfId);
+      let url3 = `https://hotels4.p.rapidapi.com/properties/get-details?rapidapi-key=${key}&id=${arrOfId[0]}`;
+
+      superagent.get(url3)
+      .then(result3 =>{
+        let hotelName = result3.body.data.body.propertyDescription.name;
+        // console.log(result3.body.data.body.propertyDescription.name);
+        // console.log(result3.body.data.body.overview.overviewSections[0].content);
+        let content = result3.body.data.body.overview.overviewSections[0].content.join(',')
+        // console.log('Content: ', content);
+        let address = result3.body.data.body.propertyDescription.address.fullAddress;
+        // console.log(address);
+        let startRating = result3.body.data.body.propertyDescription.starRating;
+        // console.log("rating: ", startRating);
+
+        let neighborhood = result3.body.neighborhood.neighborhoodName;
+        // console.log(neighborhood);
+
+        let transportationName = result3.body.transportation.transportLocations[0].locations[0].name;
+        let transportationTime = result3.body.transportation.transportLocations[0].locations[0].distanceInTime;
+        // console.log(`neaest airport is: ${transportationName} and it is far from ${hotelName}: ${transportationTime}`);
+        let price = result3.body.data.body.propertyDescription.featuredPrice.currentPrice.formatted;
+        console.log('price: ',price );
+
+
+      }).catch(error => console.log('Error in getting properties of hotels: ', error.message));
+
+    }).catch(error => console.log('Error in getting data using des id: ', error.message))
+
+  })
+  .catch(error => console.log("Error in getting hotels data: ",error.message));
+}
+
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
   // res.status(404).send('<img style="background-size:cover;" src="">');
@@ -177,3 +231,15 @@ client.connect().then(() => {
     console.log(`Listening on  PORT ${PORT} ...`);
   });
 });
+
+
+
+//this function return the difference between two dates in days.
+function getData(dateIn, dateOut){
+  const date1 = new Date(dateIn);
+  const date2 = new Date(dateOut);
+  const diffTime = Math.abs(date2 - date1);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  // console.log(diffDays + " days");
+  return diffDays;
+}
