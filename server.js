@@ -7,10 +7,10 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
-const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
+// const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
 
 
 //using port from .env file or 3001 
@@ -73,7 +73,7 @@ function getImages(req, res) {
       getWeather(cityName);
       getRestaurant(cityName);
 
-      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4) }) }, 6000);
+      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 6000);
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
 
@@ -438,7 +438,7 @@ let arrayOfWeather = [];
 
 function getWeather(cityName) {
   let key = process.env.WEATHER_KEY;
-  let url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${key}&days=5`;
+  let url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${key}&days=7`;
   // console.log(url);
 
   superagent.get(url)
@@ -447,6 +447,10 @@ function getWeather(cityName) {
       arrayOfWeather = result.body.data.map(value => new Weather(value));
 
     }).catch(error => console.log('Error in getting weather data: ', error.message));
+
+
+
+
 
 }
 
