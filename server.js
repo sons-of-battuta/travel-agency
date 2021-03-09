@@ -6,16 +6,18 @@ const pg = require('pg');
 
 
 const server = express();
-// comment this line when deploy to heroku
-const client = new pg.Client(process.env.DATABASE_URL);
-
-//uncomment this line when deploy to heroku
-// const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
-
-
+let client;
 //using port from .env file or 3001 
 const PORT = process.env.PORT || 3001;
 // const PORT = 5555;
+if(PORT === '3000'){
+    console.log('Local');
+     client = new pg.Client(process.env.DATABASE_URL);
+}else{
+  console.log('Heroku');
+   client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
+}
+
 
 //use public folder
 server.use(express.static("./public"));
@@ -36,6 +38,7 @@ const md5 = require('md5');
 
 
 server.get('/', (req, res) => {
+
   res.render("./pages/index");
 });
 // to render aboutus 
@@ -45,7 +48,7 @@ server.get('/about', (req, res) => {
 // to render contact 
 server.get('/contact', getContact);
 server.post('/contact', postContact);
-
+server.get('/booked', booked)
 server.get('/login', logIn);
 server.get('/signup', signUp);
 server.post('/addUserToDatabase', addUser);
@@ -53,11 +56,14 @@ server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 server.get('/hotel_details/:hotel_id', getHotelDetails);
+server.get('/book-hotel/:hotel_id/', bookHotel)
+// server.get('/show-booked-hotels', getBookedHotels)
+
 //Hotels API
 // server.get('/hotels', getHotels);
 
 let cityName = 'Dubai';
-
+let phone_num = 0;
 
 
 function getImages(req, res) {
@@ -68,8 +74,18 @@ function getImages(req, res) {
   superagent.get(URL)
     .then(results => {
       let arr = results.body.results.map(value => value.urls.raw);
-      // res.send(arr);
+
+      //get the booked hotels once the user login
+      console.log('phone_num: ', phone_num);
+      if(phone_num !== 0){
+        console.log('Call getBookedHotels() inside getImages()');
+        getBookedHotels();
+      // setTimeout(() => { console.log('Waiting for getting booked hotels'); }, 4000);
+
+      }
+
       getHotels();
+      // res.send(arr);
       getWeather(cityName);
       getRestaurant(cityName);
 
@@ -77,15 +93,18 @@ function getImages(req, res) {
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
 
-      console.log(arrayOfRestaurants);
+      // console.log(arrayOfRestaurants);
       // console.log('Data inside getImages', hotels);
       // console.log(hotels);
       // res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName, hotels:arrayOfHotels});
+
 
     })
     .catch(error => {
       console.log("Error in getting data from Unsplash: ", error.message);
     })
+    //empty the booked hotels array so we don' get repeated data
+    // arrOfbookedHotels =[];
 }
 
 //sentences to be translated to other languages
@@ -126,33 +145,7 @@ function getTranslation(req, res) {
 }
 
 function signUp(req, res) {
-  res.render('./pages/signup-page');
-}
-
-function addUser(req, res) {
-  let phoneNumber = req.body.phoneNumber;
-  // console.log(phoneNumber);
-  //this query to get the full name of the user if it is already has an account.
-  let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
-
-  let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
-  let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
-
-  //checke whether phone number is already signed up(has an account)
-  client.query(SQL)
-    .then(data => {
-      console.log(data.rows);
-      if (data.rows.length === 0) {
-        client.query(sql, values)
-          .then(results => {
-            console.log('row inserted Successfully...');
-            res.render('./pages/index');
-          }).catch(error => console.log("Error in inserting user: ", error.message))
-      } else {
-        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
-      }
-
-    }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
+  res.render('./pages/signup-page', {message:"", haveAccount:false});
 }
 
 function addUser(req, res) {
@@ -171,35 +164,42 @@ function addUser(req, res) {
       if (data.rows.length === 0) {
         client.query(sql, values)
           .then(results => {
-            console.log('user registered Successfully...');
+            console.log('row inserted Successfully...');
             res.render('./pages/index');
           }).catch(error => console.log("Error in inserting user: ", error.message))
-      }
-      else {
-        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
+      } else {
+        res.render('./pages/signup-page', { message: "you have an account already",haveAccount:true});
       }
 
     }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
 }
+
 function logIn(req, res) {
   res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
 }
 
 function checkUser(req, res) {
   let phoneNumber = req.body.phoneNumber;
-  console.log(phoneNumber);
+  // console.log(phoneNumber);
   let sql = `select password from user1 where phone = '${phoneNumber}';`;
   let password = req.body.password;
   client.query(sql)
     .then(results => {
-      console.log(results.rows);
+      // console.log(results.rows);
       if (results.rows.length > 0) {
         let passwordDB = results.rows[0].password;
         if (md5(password) === passwordDB) {
-          res.render('./pages/index');
+          phone_num = phoneNumber;
+          getBookedHotels();
+          setTimeout(() => {res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); ; }, 3000);
+
+          // res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels});
           // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
         } else
           res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
+        //empty the arrayOfBooked hotels so we don't get repeated data
+        // arrOfbookedHotels =[];
+        
       } else
         res.render('./pages/login-page', { message: "you need to sign up first", needToSignUp: 'true' });
     })
@@ -278,7 +278,7 @@ function getHotels(req, res) {
         console.log('getting data from hotel API');
         // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
         let key = process.env.HOTEL_KEY;
-        console.log('hotel key', key);
+        // console.log('hotel key', key);
         let url = `https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
 
         //send the first request using the city name inorder to get the destination ids for all the hotels in that city
@@ -288,7 +288,7 @@ function getHotels(req, res) {
             let desId = result.body.suggestions[0].entities.map(value => value.destinationId);
 
             let url2 = `https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&destinationId=${desId[0]}`;
-            console.log("this is url2 ", url2);
+            // console.log("this is url2 ", url2);
 
             //send the second request using the destination id to get the id for each hotel so that we can get the details of that hotel.
             superagent.get(url2)
@@ -298,7 +298,7 @@ function getHotels(req, res) {
 
                 for (let i = 0; i < 5; i++) {
                   let url3 = `https://hotels4.p.rapidapi.com/properties/get-details?rapidapi-key=${key}&id=${arrOfId[i]}`;
-                  console.log("this is url3 ", url3);
+                  // console.log("this is url3 ", url3);
                   superagent.get(url3)
                     .then(result3 => {
                       let hotelName = result3.body.data.body.propertyDescription.name; //hotel name
@@ -318,7 +318,7 @@ function getHotels(req, res) {
 
                       let url4 = `https://hotels4.p.rapidapi.com/properties/get-hotel-photos?rapidapi-key=${key}&id=${arrOfId[i]}`;
                       // console.log(url4);
-                      console.log("this is url4 ", url4);
+                      // console.log("this is url4 ", url4);
                       //send the fourth request to get the images of the hotel
                       superagent.get(url4)
                         .then(result4 => {
@@ -369,11 +369,11 @@ function getHotelDetails(req, res) {
 
   let sql = `select * from hotels where hotel_id = $1;`;
   let hotelDetails = [req.params.hotel_id];
-  console.log(hotelDetails);
+  // console.log(hotelDetails);
 
   client.query(sql, hotelDetails)
     .then(result => {
-      console.log(result.rows);
+      // console.log(result.rows);
       res.render('./pages/hotel_details', { details: result.rows[0] })
     }).catch(error => console.log('Error in getting all hotelDetails of  hotel_id', error.message));
 
@@ -464,8 +464,8 @@ function Weather(obj) {
 let arrayOfRestaurants = [];
 function getRestaurant(city) {
   let key = process.env.YELP_API_KEY;
-  let url = `https://api.yelp.com/v3/businesses/search?location=${city}`;
-  console.log(url);
+  let url = `https://api.yelp.com/v3/businesses/search?location=${city}&term=restaurant`;
+  // console.log(url);
 
   superagent.get(url)
     .set({ "Authorization": `Bearer ${key}` })
@@ -485,4 +485,74 @@ function Restaurant(data) {
   this.price = data.price ? data.price : '$';
   this.rating = data.rating ? data.rating : '1';
   this.phone = data.phone ? data.phone : 'no phone';
+}
+
+//if user booked an hotel
+function booked(req, res){
+  getBookedHotels();
+  setTimeout(() => { res.render('./pages/booking.ejs',{loggedIn: false, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); }, 3000);
+  // res.render('./pages/booking.ejs',{loggedIn: false, isBooked:true,arrOfbookedHotels:arrOfbookedHotels})
+  //you may need to empty the arrOfbookedHotels here 
+}
+
+//add the hotel that user booked to table
+function bookHotel(req, res){
+  console.log('Params: ',req.params);
+  let hotel_id = req.params.hotel_id;
+  //get the phone number from request params
+  // let p = req.params.p;
+
+  let sql = `insert into booked_hotels(hotel_id, phone) values($1,$2);`;
+  //if the user did not logged in
+  if(phone_num === 0){
+  res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
+  }else{
+    let values = [hotel_id, phone_num];
+    client.query(sql, values)
+    .then(result=>{
+      console.log('hotel booked sucessfully...');
+      getBookedHotels();
+      setTimeout(() => { res.render('./pages/booking.ejs',{loggedIn: false, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); }, 3000);
+    }).catch(error => console.log('Error in booking hotel', error.message));
+
+  }
+}
+
+
+
+let arrOfbookedHotels =[];
+function getBookedHotels(req, res){
+  console.log(phone_num);
+  let sql = `select hotel_id from booked_hotels where phone = $1`;
+  let sql2 = `select hotel_name from hotels where hotel_id = $1`
+  let values = [phone_num];
+  //get the ids of booked hotels
+  client.query(sql, values)
+  .then(result=>{
+    let rows = result.rows;
+    console.log('rows of ids: ', rows);
+    if(rows.length > 0){
+      rows.forEach(value =>{
+        client.query(sql2, [value.hotel_id])
+        .then(result2=>{
+          
+          // console.log('res = ', result2.rows);
+          //getting only the hotel name
+          arrOfbookedHotels.push(result2.rows[0].hotel_name);
+
+        }).catch(error => console.log('Error in getBookedHotels', error.message))
+
+
+
+      })
+      // res.render('./pages/booking.ejs',{loggedIn: false, arrOfbookedHotels:arrOfbookedHotels, isBooked:true})
+      
+    
+
+    }else{
+      //there is no booked hotels
+    }
+
+  })
+  .catch(error => console.log('Error in getting hotels ids from table booked_hotel', error.message));
 }

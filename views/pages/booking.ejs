@@ -1,0 +1,63 @@
+<%- include('./layout/head') %>
+<p id="message"></p>
+<button id='btn-log'><a id ="log_button">login</a></button>
+<p id="no-booked"></p>
+
+<% if(loggedIn) { %>
+  <script>
+    // alert('password added to local storage')
+    localStorage.setItem('acc',"<%=acc%>");
+  </script>
+<% } else { %>
+    <script>
+      // alert('no')
+    </script>
+<% } %> 
+
+<script>
+  //if the user did not logged in
+  if(localStorage.getItem('acc')=== null){
+
+    document.getElementById('message').textContent = 'you need to login to see your booked hotels';
+    document.getElementById('log_button').setAttribute('href','/login');
+
+
+  }else{
+  // alert(localStorage.getItem('acc'))
+
+    document.getElementById('message').style.visibility = 'hidden';
+    document.getElementById('btn-log').style.visibility = 'hidden';
+    
+  }
+</script>
+
+<!-- check if there are booked hotels -->
+<% if(isBooked){ %>
+  <script>
+    //hide the message that tells user that he did not have any booked hotels
+    document.getElementById('no-booked').style.visibility = 'hidden';
+  </script>
+  <!-- <button><a href="/show-booked-hotels">show booked hotels</a></button> -->
+  <% console.log('booked hotels: ', arrOfbookedHotels) %> 
+  <% arrOfbookedHotels.forEach(value => {%>
+    <p class="booked_hotel_name"><%= value %> </p>
+
+  <% }) %> 
+
+
+<%  } else{ %>
+  <script>
+    document.getElementById('no-booked').style.visibility = 'visible';
+    document.getElementById('no-booked').textContent = 'You do not have any booked hotels'
+
+
+  </script>
+
+<% }%> 
+
+
+
+
+
+
+<%- include('./layout/footer') %>
