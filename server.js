@@ -36,11 +36,11 @@ const md5 = require('md5');
 
 
 server.get('/', (req, res) => {
-    res.render("./pages/index");
+  res.render("./pages/index");
 });
 // to render aboutus 
 server.get('/about', (req, res) => {
-    res.render("./pages/about");
+  res.render("./pages/about");
 });
 // to render contact 
 server.get('/contact', getContact);
@@ -56,7 +56,7 @@ server.get('/hotel_details/:hotel_id', getHotelDetails);
 //Hotels API
 // server.get('/hotels', getHotels);
 
-let cityName='Dubai';
+let cityName = 'Dubai';
 
 
 
@@ -70,13 +70,18 @@ function getImages(req, res) {
       let arr = results.body.results.map(value => value.urls.raw);
       // res.send(arr);
       getHotels();
+      getWeather(cityName);
+      getRestaurant(cityName);
 
-      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName, hotels:arrayOfHotels})}, 4000);
-      
+      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels }) }, 4000);
+      // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
+      setTimeout(() => { console.log(arrayOfRestaurants); }, 4000);
+
+
       // console.log('Data inside getImages', hotels);
       // console.log(hotels);
       // res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName, hotels:arrayOfHotels});
-      
+
     })
     .catch(error => {
       console.log("Error in getting data from Unsplash: ", error.message);
@@ -85,72 +90,46 @@ function getImages(req, res) {
 
 //sentences to be translated to other languages
 const sentences = [
-    'Hello',
-    'How are you',
-    'how to go to',
-    'where is the nearest restaurant',
-    'my name is',
-    'what is your name',
-    'I am lost'
+  'Hello',
+  'How are you',
+  'how to go to',
+  'where is the nearest restaurant',
+  'my name is',
+  'what is your name',
+  'I am lost'
 ];
 
 // https://libretranslate.com/translate?q=hello my name is AbdalQader&source=en&target=fr
 function getTranslation(req, res) {
-    console.log('Im inside the function');
-    let URL;
-    let arrOfTranslations = [];
-    //this is for test the api. we must get the two letter for the language of the city that the user will searh for
-    let target = 'fr';
-    // let value="Hello";
-    sentences.forEach(value => {
-        URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
-        return superagent.post(URL)
-            .then(result => {
-                console.log(result.body.translatedText);
-                // return result.body.translatedText
-                arrOfTranslations.push({ en: value, target: result.body.translatedText });
-                if (arrOfTranslations.length === sentences.length)
-                    res.render('./pages/translations', { translations: arrOfTranslations })
-            })
-            .catch(error => {
-                console.log("Error in getting translation data: ", error.message);
-                res.send("Error in getting translation data: " + error.message);
-            })
-    })
-    console.log("this goes first");
+  console.log('Im inside the function');
+  let URL;
+  let arrOfTranslations = [];
+  //this is for test the api. we must get the two letter for the language of the city that the user will searh for
+  let target = 'fr';
+  // let value="Hello";
+  sentences.forEach(value => {
+    URL = `https://libretranslate.com/translate?q=${value}&source=en&target=${target}`;
+    return superagent.post(URL)
+      .then(result => {
+        console.log(result.body.translatedText);
+        // return result.body.translatedText
+        arrOfTranslations.push({ en: value, target: result.body.translatedText });
+        if (arrOfTranslations.length === sentences.length)
+          res.render('./pages/translations', { translations: arrOfTranslations })
+      })
+      .catch(error => {
+        console.log("Error in getting translation data: ", error.message);
+        res.send("Error in getting translation data: " + error.message);
+      })
+  })
+  console.log("this goes first");
 }
 
 function signUp(req, res) {
-    res.render('./pages/signup-page');
+  res.render('./pages/signup-page');
 }
 
 function addUser(req, res) {
-    let phoneNumber = req.body.phoneNumber;
-    // console.log(phoneNumber);
-    //this query to get the full name of the user if it is already has an account.
-    let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
-
-    let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
-    let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
-
-    //checke whether phone number is already signed up(has an account)
-    client.query(SQL)
-        .then(data => {
-            console.log(data.rows);
-            if (data.rows.length === 0) {
-                client.query(sql, values)
-                    .then(results => {
-                        console.log('row inserted Successfully...');
-                        res.render('./pages/index');
-                    }).catch(error => console.log("Error in inserting user: ", error.message))
-            } else {
-                res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
-            }
-
-        }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
-}
-
-function addUser(req, res){
   let phoneNumber = req.body.phoneNumber;
   // console.log(phoneNumber);
   //this query to get the full name of the user if it is already has an account.
@@ -161,70 +140,97 @@ function addUser(req, res){
 
   //checke whether phone number is already signed up(has an account)
   client.query(SQL)
-  .then(data=>{
-    // console.log(data.rows);
-    if(data.rows.length === 0){
-      client.query(sql,values)
-      .then(results=>{
-        console.log('user registered Successfully...');
-        res.render('./pages/index');
-      }).catch(error=> console.log("Error in inserting user: ", error.message))
-    }
-    else{
-      res.render('./pages/error-signup',{message: "there is an account already ",fullname:`${data.rows[0].fname} ${data.rows[0].lname}`});
-    }
+    .then(data => {
+      console.log(data.rows);
+      if (data.rows.length === 0) {
+        client.query(sql, values)
+          .then(results => {
+            console.log('row inserted Successfully...');
+            res.render('./pages/index');
+          }).catch(error => console.log("Error in inserting user: ", error.message))
+      } else {
+        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
+      }
 
-  }).catch(error=> console.log('Error in checking whether number is already has an account: ', error.message));
+    }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
+}
+
+function addUser(req, res) {
+  let phoneNumber = req.body.phoneNumber;
+  // console.log(phoneNumber);
+  //this query to get the full name of the user if it is already has an account.
+  let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
+
+  let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
+  let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
+
+  //checke whether phone number is already signed up(has an account)
+  client.query(SQL)
+    .then(data => {
+      // console.log(data.rows);
+      if (data.rows.length === 0) {
+        client.query(sql, values)
+          .then(results => {
+            console.log('user registered Successfully...');
+            res.render('./pages/index');
+          }).catch(error => console.log("Error in inserting user: ", error.message))
+      }
+      else {
+        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
+      }
+
+    }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
 }
 function logIn(req, res) {
-    res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
+  res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
 }
 
 function checkUser(req, res) {
-    let phoneNumber = req.body.phoneNumber;
-    console.log(phoneNumber);
-    let sql = `select password from user1 where phone = '${phoneNumber}';`;
-    let password = req.body.password;
-    client.query(sql)
-        .then(results => {
-            console.log(results.rows);
-            if (results.rows.length > 0) {
-                let passwordDB = results.rows[0].password;
-                if (md5(password) === passwordDB) {
-                    res.render('./pages/index');
-                    // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
-                } else
-                    res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
-            } else
-                res.render('./pages/login-page', { message: "you need to sign up first", needToSignUp: 'true' });
-        })
-        .catch(error => {
-            console.log('Error in getting user info from database: ', error.message);
-        })
+  let phoneNumber = req.body.phoneNumber;
+  console.log(phoneNumber);
+  let sql = `select password from user1 where phone = '${phoneNumber}';`;
+  let password = req.body.password;
+  client.query(sql)
+    .then(results => {
+      console.log(results.rows);
+      if (results.rows.length > 0) {
+        let passwordDB = results.rows[0].password;
+        if (md5(password) === passwordDB) {
+          res.render('./pages/index');
+          // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
+        } else
+          res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
+      } else
+        res.render('./pages/login-page', { message: "you need to sign up first", needToSignUp: 'true' });
+    })
+    .catch(error => {
+      console.log('Error in getting user info from database: ', error.message);
+    })
 }
 
 //getContact Function
 function getContact(req, res) {
-    let SQL = 'SELECT * FROM plans;';
-    client.query(SQL)
-        .then(result => {
-            res.render("./pages/contact", { plansArr: result.rows })
+  let SQL = 'SELECT * FROM plans;';
+  client.query(SQL)
+    .then(result => {
+      res.render("./pages/contact", { plansArr: result.rows })
 
-        })
+    })
 }
 
 
 
 
-let arrayOfHotels=[];
+let arrayOfHotels = [];
 //get hotels details from API
-function getHotels(req, res){
+function getHotels(req, res) {
   //array of objects for hotels
   //send sql to check if the city is already exists in the database. So we don't need to call the API
   let sql = `select city_name from hotels where city_name = $1;`;
   let values = [cityName];
-  let city='';
+  let city = '';
   client.query(sql, values)
+
   .then(resultDB=>{
     // console.log(resultDB.rows);
 
@@ -351,9 +357,20 @@ function getHotels(req, res){
     }
     
 
-  }).catch(error => console.log("Error in getting city name from database: ", error.message));
+                //send the third request with the id of each hotel so that we get all the detials about each hotel
 
-//  res.render('Hello it is working');
+
+
+              }).catch(error => console.log('Error in getting data using des id: ', error.message))
+
+          })
+          .catch(error => console.log("Error in getting hotels data: ", error.message));
+      }
+
+
+    }).catch(error => console.log("Error in getting city name from database: ", error.message));
+
+  //  res.render('Hello it is working');
   return arrayOfHotels;
 }//end of getHotels()
 
@@ -378,23 +395,23 @@ console.log(hotelDetails);
 
 
 function postContact(req, res) {
-    let { name, phone, description } = req.body;
-    let SQL = "INSERT INTO plans (name, phone, description) VALUES ($1,$2,$3);";
-    let values = [name, phone, description]
-    client.query(SQL, values)
-        .then(() => res.redirect('/contact')
+  let { name, phone, description } = req.body;
+  let SQL = "INSERT INTO plans (name, phone, description) VALUES ($1,$2,$3);";
+  let values = [name, phone, description]
+  client.query(SQL, values)
+    .then(() => res.redirect('/contact')
 
-        ).catch(error => {
-            console.log('Error in setting plans into database ', error.message);
-        })
+    ).catch(error => {
+      console.log('Error in setting plans into database ', error.message);
+    })
 }
 // show not found page when trying to access unfound route.
 server.get("*", (req, res) => {
-    // res.status(404).send('<img style="background-size:cover;" src="">');
-    // let imgUrl =
-    //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
-    // res.render("pages/error", { err: imgUrl });
-    res.status(404).send("Page Not Found");
+  // res.status(404).send('<img style="background-size:cover;" src="">');
+  // let imgUrl =
+  //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
+  // res.render("pages/error", { err: imgUrl });
+  res.status(404).send("Page Not Found");
 });
 
 
@@ -409,11 +426,68 @@ client.connect().then(() => {
 
 
 //this function return the difference between two dates in days.
-function getData(dateIn, dateOut){
+function getData(dateIn, dateOut) {
   const date1 = new Date(dateIn);
   const date2 = new Date(dateOut);
   const diffTime = Math.abs(date2 - date1);
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   // console.log(diffDays + " days");
   return diffDays;
+}
+
+
+
+
+
+
+
+
+
+
+
+let arrayOfWeather = [];
+
+function getWeather(cityName) {
+  let key = process.env.WEATHER_KEY;
+  let url = `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${key}&days=5`;
+  // console.log(url);
+
+  superagent.get(url)
+    .then(result => {
+      // console.log(result.body);
+      arrayOfWeather = result.body.data.map(value => new Weather(value));
+
+    }).catch(error => console.log('Error in getting weather data: ', error.message));
+
+}
+
+function Weather(obj) {
+  this.forecast = obj.weather.description;
+  this.icon = obj.weather.icon;
+  this.time = obj.datetime;
+}
+
+
+let arrayOfRestaurants = [];
+function getRestaurant(city) {
+  let key = process.env.YELP_API_KEY;
+  let url = `https://api.yelp.com/v3/businesses/search?location=${city}`;
+  console.log(url);
+
+  superagent.get(url)
+    .set({ "Authorization": `Bearer ${key}` })
+    .then(result => {
+      // console.log(result.body);
+
+      arrayOfRestaurants = result.body.businesses.map(value => new Restaurant(value));
+
+    }).catch(error => console.log('Error in getting restaurants data: ', error.message));
+}
+
+function Restaurant(data) {
+  this.name = data.name;
+  this.image_url = data.image_url;
+  this.price = data.price?data.price:'$';
+  this.rating = data.rating? data.rating: '1';
+  this.phone = data.phone? data.phone: 'no phone';
 }
