@@ -270,9 +270,11 @@ function getHotels(req, res){
     }
     else{
       console.log('getting data from hotel API');
-      let key = process.env.HOTEL_KEY;
+      // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
+      let key = process.env.Hotel_key;
+      console.log('hotel key' , key);
     let url=`https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
-    console.log("this is url ",url);
+
    //send the first request using the city name inorder to get the destination ids for all the hotels in that city
     superagent.get(url)
     .then(result=>{

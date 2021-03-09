@@ -1,84 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/style/style.css">
-  <link rel="stylesheet" href="/style/about.css">
+<%- include('./layout/head') %>
+<link rel="stylesheet" href="/style/about.css">
 
-
-  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-  <title>Document</title>
-</head>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <body>
-  <%- include('./layout/header')  %>
-<main>
-    <section class="Team">
-        <h1>The Founders</h1>
-        <div class="container">
-            <div class="team-member">
-                <div class="team-image">
-                    <img src="../../img/TeamPicture/abdalrhman.jpg" alt="Abdelrahman">
-                </div>
-                <h3>Abdelrahman</h3>
-                <p> Civil engineer and Student in ASAC as software developer, have good idea in coding.<br><br>
-                    <a href="https://www.linkedin.com/in/abdalrhman-albdahat/"><i class="fa fa-linkedin fa-lg"></i></a>
-                    <a href="https://github.com/boodah96"><i class="fa fa-github fa-lg"></i></a>
-                </p>
-            </div>
-            <div class="team-member">
-                <div class="team-image">
-                    <img src="../../img/TeamPicture/ruba.jpg" alt="Ruba">
-                </div>
-                <h3>Ruba</h3>
-                <p>Former Economist and a new Software developer. </p> <br>
-                <a href="https://www.linkedin.com/in/ruba-banat-964b04158/"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/RubaBanat"><i class="fa fa-github fa-lg"></i></a>
-            </div>
-            <div class="team-member">
-                <div class="team-image">
-                    <img src="../../img/TeamPicture/Abdalqader.jpg" alt="Abdalqader">
-                </div>
-                <h3>AbdalQader</h3>
-                <p>Communications and Computer Engineer | Programmer</p> <br>
-                <a href="https://www.linkedin.com/in/abdalqader-mhemed/"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/otator"><i class="fa fa-github fa-lg"></i></a>
-            </div>
-        </div>
-        <div class="container">
-            <div class="team-member">
-                <div class="team-image">
-                    <img src="../../img/TeamPicture/esraa.jpg" alt="esraa">
-                </div>
-                <h3>Esraa</h3>
-                <p>Civil engineer and Student in ASAC as a software developer.</p><br>
-                <a href="https://www.linkedin.com/in/esra-a-abu-hana-b8356a143/"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/EsraaAbuHana"><i class="fa fa-github fa-lg"></i></a>
-            </div>
-            <div class="team-member">
-                <div class="team-image">
-                    <img src="../../img/TeamPicture/zaid.jpg" alt="zaid">
-                </div>
-                <h3>Zaid</h3>
-                <p>studied E-business in the Petra University  and Student in ASAC as a software developer.</p><br>
-                <a href="https://www.linkedin.com/in/zaid-alasfar-7b84a8190/"><i class="fa fa-linkedin fa-lg"></i></a>
-                <a href="https://github.com/zaidalasfar97"><i class="fa fa-github fa-lg"></i></a>
-            </div>
-        </div>
-            
-      
- 
+    <%- include('./layout/header') %>
 
-    </section>
+        <section class="videoSection">
+            <video src="../../img/around  world.mp4" muted autoplay loop></video>
+            <h1>
+                The Founders
+            </h1>
+        </section>
+        <main>
+            <section class="Team">
 
-  
-</main>
-<!-- footer -->
-<%- include('./layout/footer')  %>
+                <div class="container">
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="../../img/TeamPicture/abdalrhman.jpg" alt="Abdelrahman">
+                        </div>
+                        <h3>Abdelrahman</h3>
+                        <p> Civil engineer and Student in ASAC as software developer, have good idea in coding.<br><br>
+                            <a href="https://www.linkedin.com/in/abdalrhman-albdahat/"><i
+                                    class="fa fa-linkedin fa-lg"></i></a>
+                            <a href="https://github.com/boodah96"><i class="fa fa-github fa-lg"></i></a>
+                        </p>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="../../img/TeamPicture/ruba.jpg" alt="Ruba">
+                        </div>
+                        <h3>Ruba</h3>
+                        <p>Former Economist and a new Software developer. </p> <br>
+                        <a href="https://www.linkedin.com/in/ruba-banat-964b04158/"><i
+                                class="fa fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/RubaBanat"><i class="fa fa-github fa-lg"></i></a>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="../../img/TeamPicture/Abdalqader.jpg" alt="Abdalqader">
+                        </div>
+                        <h3>AbdalQader</h3>
+                        <p>Communications and Computer Engineer | Programmer</p> <br>
+                        <a href="https://www.linkedin.com/in/abdalqader-mhemed/"><i
+                                class="fa fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/otator"><i class="fa fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="../../img/TeamPicture/esraa.jpg" alt="esraa">
+                        </div>
+                        <h3>Esraa</h3>
+                        <p>Civil engineer and Student in ASAC as a software developer.</p><br>
+                        <a href="https://www.linkedin.com/in/esra-a-abu-hana-b8356a143/"><i
+                                class="fa fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/EsraaAbuHana"><i class="fa fa-github fa-lg"></i></a>
+                    </div>
+                    <div class="team-member">
+                        <div class="team-image">
+                            <img src="../../img/TeamPicture/zaid.jpg" alt="zaid">
+                        </div>
+                        <h3>Zaid</h3>
+                        <p>studied E-business in the Petra University and Student in ASAC as a software developer.</p>
+                        <br>
+                        <a href="https://www.linkedin.com/in/zaid-alasfar-7b84a8190/"><i
+                                class="fa fa-linkedin fa-lg"></i></a>
+                        <a href="https://github.com/zaidalasfar97"><i class="fa fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+
+
+
+
+            </section>
+
+
+        </main>
+        <!-- footer -->
+        <%- include('./layout/footer') %>
 </body>
+
 </html>
