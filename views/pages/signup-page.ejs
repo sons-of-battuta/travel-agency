@@ -18,7 +18,7 @@
             <form action="/addUserToDatabase" method="post">
                 <input type="text" placeholder="First name" name="firstName" class="input-box" required>
                 <input type="text" placeholder="Last name" name="lastName" class="input-box" required>
-                <input type="text" placeholder="Phone number" name="phoneNumber" class="input-box" required>
+                <input type="text" placeholder="Phone number" name="phoneNumber" class="input-box" required pattern="[0-9]{10}">
                 <input type="password" placeholder="Password" name="password" class="input-box" required>
                 <button class="signBtn">Sign Up</button>
             </form>
