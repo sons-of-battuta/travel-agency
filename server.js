@@ -56,6 +56,8 @@ server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 server.get('/hotel_details/:hotel_id', getHotelDetails);
 server.get('/book-hotel/:hotel_id', bookHotel)
+// server.get('/show-booked-hotels', getBookedHotels)
+
 //Hotels API
 // server.get('/hotels', getHotels);
 
@@ -72,6 +74,11 @@ function getImages(req, res) {
     .then(results => {
       let arr = results.body.results.map(value => value.urls.raw);
 
+      //get the booked hotels once the user login
+      if(phone_num !== 0){
+        getBookedHotels();
+      }
+
       getHotels();
       // res.send(arr);
       getWeather(cityName);
@@ -86,10 +93,13 @@ function getImages(req, res) {
       // console.log(hotels);
       // res.render('./pages/details', { arrOfImages: arr.slice(0, 6) , cityName: cityName, hotels:arrayOfHotels});
 
+
     })
     .catch(error => {
       console.log("Error in getting data from Unsplash: ", error.message);
     })
+    //empty the booked hotels array so we don' get repeated data
+    // arrOfbookedHotels =[];
 }
 
 //sentences to be translated to other languages
@@ -175,10 +185,15 @@ function checkUser(req, res) {
         let passwordDB = results.rows[0].password;
         if (md5(password) === passwordDB) {
           phone_num = phoneNumber;
-          res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true});
+          setTimeout(() => { getBookedHotels(); }, 3000);
+
+          res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels});
           // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
         } else
           res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
+        //empty the arrayOfBooked hotels so we don't get repeated data
+        // arrOfbookedHotels =[];
+        
       } else
         res.render('./pages/login-page', { message: "you need to sign up first", needToSignUp: 'true' });
     })
@@ -466,10 +481,11 @@ function Restaurant(data) {
   this.phone = data.phone ? data.phone : 'no phone';
 }
 
-
+//if user booked an hotel
 function booked(req, res){
-
-  res.render('./pages/booking.ejs',{loggedIn: false})
+  setTimeout(() => { getBookedHotels(); }, 3000);
+  res.render('./pages/booking.ejs',{loggedIn: false, isBooked:true,arrOfbookedHotels:arrOfbookedHotels})
+  //you may need to empty the arrOfbookedHotels here 
 }
 
 //add the hotel that user booked to table
@@ -486,4 +502,42 @@ function bookHotel(req, res){
     }).catch(error => console.log('Error in booking hotel', error.message));
 
   }
+}
+
+
+
+let arrOfbookedHotels =[];
+function getBookedHotels(req, res){
+  let sql = `select hotel_id from booked_hotels where phone = $1`;
+  let sql2 = `select hotel_name from hotels where hotel_id = $1`
+  let values = [phone_num];
+  //get the ids of booked hotels
+  client.query(sql, values)
+  .then(result=>{
+    let rows = result.rows;
+    console.log('rows of ids: ', rows);
+    if(rows.length > 0){
+      rows.forEach(value =>{
+        client.query(sql2, [value.hotel_id])
+        .then(result2=>{
+          
+          console.log('res = ', result2.rows);
+          //getting only the hotel name
+          arrOfbookedHotels.push(result2.rows[0].hotel_name);
+
+        }).catch(error => console.log('Error in getBookedHotels', error.message))
+
+
+
+      })
+      // res.render('./pages/booking.ejs',{loggedIn: false, arrOfbookedHotels:arrOfbookedHotels, isBooked:true})
+      
+    
+
+    }else{
+      //there is no booked hotels
+    }
+
+  })
+  .catch(error => console.log('Error in getting hotels ids from table booked_hotel', error.message));
 }

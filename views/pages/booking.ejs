@@ -18,7 +18,7 @@
   //if the user did not logged in
   if(localStorage.getItem('acc')=== null){
 
-    document.getElementById('message').textContent = 'you need to login to see your booked vacations';
+    document.getElementById('message').textContent = 'you need to login to see your booked hotels';
     document.getElementById('log_button').setAttribute('href','/login');
 
 
@@ -34,14 +34,22 @@
 <!-- check if there are booked hotels -->
 <% if(isBooked){ %>
   <script>
-    //hide the message that tells user that he did not have any bokked hotels
+    //hide the message that tells user that he did not have any booked hotels
     document.getElementById('no-booked').style.visibility = 'hidden';
   </script>
-  
+  <!-- <button><a href="/show-booked-hotels">show booked hotels</a></button> -->
+  <% console.log('booked hotels: ', arrOfbookedHotels) %> 
+  <% arrOfbookedHotels.forEach(value => {%>
+    <p class="booked_hotel_name"><%= value %> </p>
+
+  <% }) %> 
+
 
 <%  } else{ %>
   <script>
     document.getElementById('no-booked').style.visibility = 'visible';
+    document.getElementById('no-booked').textContent = 'You do not have any booked hotels'
+
 
   </script>
 
