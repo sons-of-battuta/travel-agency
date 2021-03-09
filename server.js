@@ -7,10 +7,10 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
-const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
+// const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
 
 
 //using port from .env file or 3001 
@@ -447,6 +447,10 @@ function getWeather(cityName) {
       arrayOfWeather = result.body.data.map(value => new Weather(value));
 
     }).catch(error => console.log('Error in getting weather data: ', error.message));
+
+
+
+
 
 }
 
