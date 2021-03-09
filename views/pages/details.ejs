@@ -4,16 +4,20 @@
 
     <%- include('./layout/header') %>
 
-    <section class="videoSection">
-      <video src="../../img/around  world.mp4" muted autoplay loop></video>
-      <h1>
-        <%=cityName %> Details
-      </h1>
-    </section>
+      <section class="videoSection">
+        <video src="../../img/around  world.mp4" muted autoplay loop></video>
+        <h1>
+          <%=cityName %> Details
+        </h1>
+      </section>
 
-    <section>
-      <a class="weatherwidget-io" href="https://forecast7.com/en/31d9535d93/<%= cityName %>/" data-label_1="<%= cityName.toUpperCase() %>"        data-font="Trebuchet MS" data-icons="Climacons Animated" data-theme="original"        data-basecolor="rgb(40 133 170)" data-cloudfill="#989898"><%= cityName %></a>
-    </section>
+      <section>
+        <a class="weatherwidget-io" href="https://forecast7.com/en/31d9535d93/<%= cityName %>/"
+          data-label_1="<%= cityName.toUpperCase() %>" data-font="Trebuchet MS" data-icons="Climacons Animated"
+          data-theme="original" data-basecolor="rgb(40 133 170)" data-cloudfill="#989898">
+          <%= cityName %>
+        </a>
+      </section>
       <section class="CitySection">
         <h1>Take a Look at this beauty </h1>
         <div class="cityImg">
@@ -23,14 +27,15 @@
             <img src=<%=value %> alt="">
             <% }) %>
 
-          </div>
-          </section>
-          <section class="mapSec">
-            <h1>Let us guide you to <%=cityName %> </h1>
-          <iframe id="gmap_canvas"
+        </div>
+      </section>
+      <section class="mapSec">
+        <h1>Let us guide you to <%=cityName %>
+        </h1>
+        <iframe id="gmap_canvas"
           src="https://maps.google.com/maps?q=<%=cityName %> &t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
           scrolling="no" marginheight="0" marginwidth="0"></iframe>
-        </section>
+      </section>
 
 
       <!-- DO NOT TOUCH THIS COMMENTED CODE -->
@@ -44,10 +49,10 @@
   <input type="date" name="checkout" required> -->
 
 
-  <section class="hotelsSec"> 
+      <section class="hotelsSec">
 
-    <h1> Best Hotels , Best Prices</h1>
-  </section>
+        <h1> Best Hotels , Best Prices</h1>
+      </section>
       <section class="hotelsDiv">
         <div class="container3">
           <% hotels.forEach(value=> { %>
@@ -57,7 +62,7 @@
               </div>
               <div class="content3">
                 <p>
-                 Rate : <%= value.star_rating %>
+                  Rate : <%= value.star_rating %>
                 </p>
                 <p>
                   Price : <%= value.price%>
@@ -73,7 +78,32 @@
         </div>
 
       </section>
+      <section class="restaurantSec">
+        <% arrayOfRestaurants.forEach(value=> {%>
+          <div class="imagesBox">
+            <img src="<%= value.image_url %> " alt="">
+          </div>
+          <div class="resContent">
+            <h2>
+              <%= value.name %>
+            </h2>
+            <p>
+              Phone number:<%= value.phone %>
+            </p>
+          </div>
+          <div class="card-stats">
 
+            <p>
+              Rate: <%= value.rating %>
+            </p>
+            <p>
+              Price: <%= value.price %>
+            </p>
+          </div>
+
+          <% }) %>
+
+      </section>
 
       </form>
       <%- include('./layout/footer') %>
