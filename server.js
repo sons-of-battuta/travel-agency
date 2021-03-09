@@ -6,16 +6,18 @@ const pg = require('pg');
 
 
 const server = express();
-// comment this line when deploy to heroku
-// const client = new pg.Client(process.env.DATABASE_URL);
-
-//uncomment this line when deploy to heroku
-const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
-
-
+let client;
 //using port from .env file or 3001 
 const PORT = process.env.PORT || 3001;
 // const PORT = 5555;
+if(PORT === '3000'){
+    console.log('Local');
+     client = new pg.Client(process.env.DATABASE_URL);
+}else{
+  console.log('Heroku');
+   client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
+}
+
 
 //use public folder
 server.use(express.static("./public"));
@@ -45,7 +47,7 @@ server.get('/about', (req, res) => {
 // to render contact 
 server.get('/contact', getContact);
 server.post('/contact', postContact);
-
+server.get('/booked', booked)
 server.get('/login', logIn);
 server.get('/signup', signUp);
 server.post('/addUserToDatabase', addUser);
@@ -68,8 +70,9 @@ function getImages(req, res) {
   superagent.get(URL)
     .then(results => {
       let arr = results.body.results.map(value => value.urls.raw);
+
+      getHotels(result2);
       // res.send(arr);
-      getHotels();
       getWeather(cityName);
       getRestaurant(cityName);
 
@@ -126,7 +129,7 @@ function getTranslation(req, res) {
 }
 
 function signUp(req, res) {
-  res.render('./pages/signup-page');
+  res.render('./pages/signup-page', {message:"", haveAccount:false});
 }
 
 function addUser(req, res) {
@@ -149,38 +152,12 @@ function addUser(req, res) {
             res.render('./pages/index');
           }).catch(error => console.log("Error in inserting user: ", error.message))
       } else {
-        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
+        res.render('./pages/signup-page', { message: "you have an account already",haveAccount:true});
       }
 
     }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
 }
 
-function addUser(req, res) {
-  let phoneNumber = req.body.phoneNumber;
-  // console.log(phoneNumber);
-  //this query to get the full name of the user if it is already has an account.
-  let SQL = `select fname, lname from user1 where phone = '${phoneNumber}';`;
-
-  let sql = `insert into user1 (fname, lname, phone, password) values($1,$2,$3,$4);`;
-  let values = [req.body.firstName, req.body.lastName, req.body.phoneNumber, md5(req.body.password)];
-
-  //checke whether phone number is already signed up(has an account)
-  client.query(SQL)
-    .then(data => {
-      // console.log(data.rows);
-      if (data.rows.length === 0) {
-        client.query(sql, values)
-          .then(results => {
-            console.log('user registered Successfully...');
-            res.render('./pages/index');
-          }).catch(error => console.log("Error in inserting user: ", error.message))
-      }
-      else {
-        res.render('./pages/error-signup', { message: "there is an account already ", fullname: `${data.rows[0].fname} ${data.rows[0].lname}` });
-      }
-
-    }).catch(error => console.log('Error in checking whether number is already has an account: ', error.message));
-}
 function logIn(req, res) {
   res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
 }
@@ -196,7 +173,7 @@ function checkUser(req, res) {
       if (results.rows.length > 0) {
         let passwordDB = results.rows[0].password;
         if (md5(password) === passwordDB) {
-          res.render('./pages/index');
+          res.render('./pages/booking.ejs',{acc:phoneNumber});
           // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
         } else
           res.render('./pages/login-page', { message: "Wrong password", needToSignUp: 'false' });
@@ -481,4 +458,10 @@ function Restaurant(data) {
   this.price = data.price?data.price:'$';
   this.rating = data.rating? data.rating: '1';
   this.phone = data.phone? data.phone: 'no phone';
+}
+
+
+function booked(req, res){
+
+  res.render('./pages/booking.ejs',{loggedIn: false})
 }

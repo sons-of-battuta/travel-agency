@@ -1,0 +1,27 @@
+<%- include('./layout/head') %>
+<p id="message">test</p>
+<button><a id ="log_button">login</a></button>
+<% if(<%=acc%>) { %>
+  <script>
+    localStorage.setItem('acc',acc);
+  </script>
+  <% } else { %>
+    <script>
+      alert('no')
+    </script>
+    <% } %> 
+<script>
+  //if the user did not logged in
+if(localStorage.getItem('acc')=== null){
+
+  document.getElementById('message').textContent = 'you need to login to see your booked vacations';
+  document.getElementById('log_button').setAttribute('href','/login');
+
+
+}else{
+alert(localStorage.getItem('acc'))
+}
+
+
+</script>
+<%- include('./layout/footer') %>
