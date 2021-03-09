@@ -7,10 +7,10 @@ const pg = require('pg');
 
 const server = express();
 // comment this line when deploy to heroku
-// const client = new pg.Client(process.env.DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 //uncomment this line when deploy to heroku
-const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
+// const client = new pg.Client({connectionString: process.env.DATABASE_URL,ssl: { rejectUnauthorized: false },});
 
 
 //using port from .env file or 3001 
@@ -73,7 +73,7 @@ function getImages(req, res) {
       getWeather(cityName);
       getRestaurant(cityName);
 
-      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4) }) }, 6000);
+      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels, arrayOfRestaurants: arrayOfRestaurants.slice(0, 4) }) }, 6000);
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
 
@@ -231,130 +231,130 @@ function getHotels(req, res) {
   let city = '';
   client.query(sql, values)
 
-  .then(resultDB=>{
-    // console.log(resultDB.rows);
+    .then(resultDB => {
+      // console.log(resultDB.rows);
 
-    //get the cityname from the data base
-    if(resultDB.rows.length !==0){
-      city = resultDB.rows[0].city_name;
-    }
-    // console.log('city = ', city);
-    // console.log('cityName = ', cityName);
+      //get the cityname from the data base
+      if (resultDB.rows.length !== 0) {
+        city = resultDB.rows[0].city_name;
+      }
+      // console.log('city = ', city);
+      // console.log('cityName = ', cityName);
 
-    
-    //this code MUST be after the then 
-    if(city.toLowerCase() === cityName.toLowerCase()){
-      console.log('city found in database');
-      let sql = `select * from hotels where city_name = $1`;
-      let values = [city];
-      client.query(sql, values)
-      .then(result =>{
-        // console.log(result.rows[0]);
-        //array of records/rows
-        let rows = result.rows;
-        // console.log(rows);
-        arrayOfHotels = rows;
-        // console.log(arrayOfHotels);
-        // return arrayOfHotels;
-        // rows.forEach(value=>{
-          
 
-          // let hotelName = value.hotel_name;
-          // let content = value.content;
-          // let address = value.address;
-          // let starRating = value.star_rating;
-          // let neighborhood = value.neighborhood;
-          // let transportationName = value.airport;
-          // let transportationTime = value.time_to_arrive;
-          // let price = value.price;
-          // let hotelImagesString = value.hotel_images.split(',');
-          // let roomsImagesString = value.room_images.split('#');
-          // let hotelId = value.hotel_id;
+      //this code MUST be after the then 
+      if (city.toLowerCase() === cityName.toLowerCase()) {
+        console.log('city found in database');
+        let sql = `select * from hotels where city_name = $1`;
+        let values = [city];
+        client.query(sql, values)
+          .then(result => {
+            // console.log(result.rows[0]);
+            //array of records/rows
+            let rows = result.rows;
+            // console.log(rows);
+            arrayOfHotels = rows;
+            // console.log(arrayOfHotels);
+            // return arrayOfHotels;
+            // rows.forEach(value=>{
 
-        // });//end of forEach
-      }).catch(error => console.log('Error in getting all the columns of the cityName',error.message));
-    }
-    else{
-      console.log('getting data from hotel API');
-      // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
-      let key = process.env.HOTEL_KEY;
-      console.log('hotel key' , key);
-    let url=`https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
 
-   //send the first request using the city name inorder to get the destination ids for all the hotels in that city
-    superagent.get(url)
-    .then(result=>{
-      // get the destination ids and save them in an array to use them in the second request
-      let desId = result.body.suggestions[0].entities.map(value => value.destinationId);
-      
-      let url2 = `https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&destinationId=${desId[0]}`;
-      console.log("this is url2 ",url2);
+            // let hotelName = value.hotel_name;
+            // let content = value.content;
+            // let address = value.address;
+            // let starRating = value.star_rating;
+            // let neighborhood = value.neighborhood;
+            // let transportationName = value.airport;
+            // let transportationTime = value.time_to_arrive;
+            // let price = value.price;
+            // let hotelImagesString = value.hotel_images.split(',');
+            // let roomsImagesString = value.room_images.split('#');
+            // let hotelId = value.hotel_id;
 
-      //send the second request using the destination id to get the id for each hotel so that we can get the details of that hotel.
-      superagent.get(url2)
-      .then(result2=>{
-        //get the ids of the hotels and save them in an array in order to use them in the third request
-        let arrOfId = result2.body.data.body.searchResults.results.map(value => value.id);
+            // });//end of forEach
+          }).catch(error => console.log('Error in getting all the columns of the cityName', error.message));
+      }
+      else {
+        console.log('getting data from hotel API');
+        // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
+        let key = process.env.HOTEL_KEY;
+        console.log('hotel key', key);
+        let url = `https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
 
-        for(let i=0; i<5; i++){
-          let url3 = `https://hotels4.p.rapidapi.com/properties/get-details?rapidapi-key=${key}&id=${arrOfId[i]}`;
-          console.log("this is url3 ",url3);
-          superagent.get(url3)
-          .then(result3 =>{
-            let hotelName = result3.body.data.body.propertyDescription.name; //hotel name
-            let content = result3.body.data.body.overview.overviewSections[0].content.join(','); //what the hotels offers such as wifi and parking
-            let address = result3.body.data.body.propertyDescription.address.fullAddress; // get the fill address of the hotel
-            let starRating = result3.body.data.body.propertyDescription.starRating; //the rating number of stars
-            
-            let neighborhood = result3.body.neighborhood.neighborhoodName; // the area that the hotel is near to or within
-            
-            let transportationName = result3.body.transportation.transportLocations[0].locations[0].name; // the nearest airport name
-            
-            // the times needed to get the hotel from the airport
-            let transportationTime = result3.body.transportation.transportLocations[0].locations[0].distanceInTime;
-            // console.log(`neaest airport is: ${transportationName} and it is far from ${hotelName}: ${transportationTime}`);
-            let price = result3.body.data.body.propertyDescription.featuredPrice.currentPrice.formatted;
-            // console.log('price: ',price );
-            
-            let url4 = `https://hotels4.p.rapidapi.com/properties/get-hotel-photos?rapidapi-key=${key}&id=${arrOfId[i]}`;
-            // console.log(url4);
-            console.log("this is url4 ",url4);
-            //send the fourth request to get the images of the hotel
-            superagent.get(url4)
-            .then(result4=>{
-              let arrOfHotelImages = result4.body.hotelImages.map(value => value.baseUrl.replace('{size}','z')); //hotel images
-              // console.log(arrOfHotelImages.join(','));
-              arrOfHotelImages = arrOfHotelImages.join(',');
-              
-              
-              let arrOfRoomImages = result4.body.roomImages[0].images.map(value => value.baseUrl.replace('{size}','y')); //room images
-              arrOfRoomImages = arrOfRoomImages.join('#');
+        //send the first request using the city name inorder to get the destination ids for all the hotels in that city
+        superagent.get(url)
+          .then(result => {
+            // get the destination ids and save them in an array to use them in the second request
+            let desId = result.body.suggestions[0].entities.map(value => value.destinationId);
 
-              let sql4 = `insert into hotels(city_name, hotel_name, content, address, star_rating, neighborhood, airport, time_to_arrive ,price, hotel_images, room_images,hotel_id) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)`;
-              let values = [cityName, hotelName, content, address, starRating, neighborhood, transportationName, transportationTime, price, arrOfHotelImages, arrOfRoomImages, arrOfId[i]];
+            let url2 = `https://hotels4.p.rapidapi.com/properties/list?rapidapi-key=${key}&destinationId=${desId[0]}`;
+            console.log("this is url2 ", url2);
 
-              client.query(sql4, values)
-              .then(result =>{
-                console.log("city inserted Successfully");
-              }).catch(error=> console.log("Error in inserting hotel from api into db: ", error.message));
-              
-            }).catch(error=> console.log('Error in getting hotel images: ', error.message));
-    
-            // setTimeout(() => {  console.log("Wait..."); }, 1000);
-            
-          }).catch(error => console.log('Error in getting properties of hotels: ', error.message));
+            //send the second request using the destination id to get the id for each hotel so that we can get the details of that hotel.
+            superagent.get(url2)
+              .then(result2 => {
+                //get the ids of the hotels and save them in an array in order to use them in the third request
+                let arrOfId = result2.body.data.body.searchResults.results.map(value => value.id);
 
-        }
-  
-        //send the third request with the id of each hotel so that we get all the detials about each hotel
-       
-  
-  
-      }).catch(error => console.log('Error in getting data using des id: ', error.message))
-  
-    })
-    .catch(error => console.log("Error in getting hotels data: ",error.message));
-    }
+                for (let i = 0; i < 5; i++) {
+                  let url3 = `https://hotels4.p.rapidapi.com/properties/get-details?rapidapi-key=${key}&id=${arrOfId[i]}`;
+                  console.log("this is url3 ", url3);
+                  superagent.get(url3)
+                    .then(result3 => {
+                      let hotelName = result3.body.data.body.propertyDescription.name; //hotel name
+                      let content = result3.body.data.body.overview.overviewSections[0].content.join(','); //what the hotels offers such as wifi and parking
+                      let address = result3.body.data.body.propertyDescription.address.fullAddress; // get the fill address of the hotel
+                      let starRating = result3.body.data.body.propertyDescription.starRating; //the rating number of stars
+
+                      let neighborhood = result3.body.neighborhood.neighborhoodName; // the area that the hotel is near to or within
+
+                      let transportationName = result3.body.transportation.transportLocations[0].locations[0].name; // the nearest airport name
+
+                      // the times needed to get the hotel from the airport
+                      let transportationTime = result3.body.transportation.transportLocations[0].locations[0].distanceInTime;
+                      // console.log(`neaest airport is: ${transportationName} and it is far from ${hotelName}: ${transportationTime}`);
+                      let price = result3.body.data.body.propertyDescription.featuredPrice.currentPrice.formatted;
+                      // console.log('price: ',price );
+
+                      let url4 = `https://hotels4.p.rapidapi.com/properties/get-hotel-photos?rapidapi-key=${key}&id=${arrOfId[i]}`;
+                      // console.log(url4);
+                      console.log("this is url4 ", url4);
+                      //send the fourth request to get the images of the hotel
+                      superagent.get(url4)
+                        .then(result4 => {
+                          let arrOfHotelImages = result4.body.hotelImages.map(value => value.baseUrl.replace('{size}', 'z')); //hotel images
+                          // console.log(arrOfHotelImages.join(','));
+                          arrOfHotelImages = arrOfHotelImages.join(',');
+
+
+                          let arrOfRoomImages = result4.body.roomImages[0].images.map(value => value.baseUrl.replace('{size}', 'y')); //room images
+                          arrOfRoomImages = arrOfRoomImages.join('#');
+
+                          let sql4 = `insert into hotels(city_name, hotel_name, content, address, star_rating, neighborhood, airport, time_to_arrive ,price, hotel_images, room_images,hotel_id) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)`;
+                          let values = [cityName, hotelName, content, address, starRating, neighborhood, transportationName, transportationTime, price, arrOfHotelImages, arrOfRoomImages, arrOfId[i]];
+
+                          client.query(sql4, values)
+                            .then(result => {
+                              console.log("city inserted Successfully");
+                            }).catch(error => console.log("Error in inserting hotel from api into db: ", error.message));
+
+                        }).catch(error => console.log('Error in getting hotel images: ', error.message));
+
+                      // setTimeout(() => {  console.log("Wait..."); }, 1000);
+
+                    }).catch(error => console.log('Error in getting properties of hotels: ', error.message));
+
+                }
+
+                //send the third request with the id of each hotel so that we get all the detials about each hotel
+
+
+
+              }).catch(error => console.log('Error in getting data using des id: ', error.message))
+
+          })
+          .catch(error => console.log("Error in getting hotels data: ", error.message));
+      }
 
 
     }).catch(error => console.log("Error in getting city name from database: ", error.message));
@@ -365,19 +365,19 @@ function getHotels(req, res) {
 
 
 //start of getHotelDetails :get hotel details based on hotel_id>>render data on hotel_details.ejs
-function getHotelDetails(req,res) {
-  
+function getHotelDetails(req, res) {
+
   let sql = `select * from hotels where hotel_id = $1;`;
   let hotelDetails = [req.params.hotel_id];
-console.log(hotelDetails);
+  console.log(hotelDetails);
 
   client.query(sql, hotelDetails)
-    .then(result =>{
+    .then(result => {
       console.log(result.rows);
-      res.render('./pages/hotel_details',{details:result.rows[0]})
-    }).catch(error => console.log('Error in getting all hotelDetails of  hotel_id',error.message));
-  
-    // return hotelDetails;
+      res.render('./pages/hotel_details', { details: result.rows[0] })
+    }).catch(error => console.log('Error in getting all hotelDetails of  hotel_id', error.message));
+
+  // return hotelDetails;
 }//end of getHotelDetails
 
 
@@ -470,7 +470,7 @@ function getRestaurant(city) {
 
       arrayOfRestaurants = result.body.businesses.map(value => new Restaurant(value));
 
-    }).catch(error =>{
+    }).catch(error => {
       console.log('Error in getting restaurants data: ', error.message);
     });
 }
@@ -478,7 +478,7 @@ function getRestaurant(city) {
 function Restaurant(data) {
   this.name = data.name;
   this.image_url = data.image_url;
-  this.price = data.price?data.price:'$';
-  this.rating = data.rating? data.rating: '1';
-  this.phone = data.phone? data.phone: 'no phone';
+  this.price = data.price ? data.price : '$';
+  this.rating = data.rating ? data.rating : '1';
+  this.phone = data.phone ? data.phone : 'no phone';
 }

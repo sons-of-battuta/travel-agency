@@ -51,7 +51,7 @@
 
       <section class="hotelsSec">
 
-        <h1> Best Hotels , Best Prices</h1>
+        <h1> Best Hotels <span style="color: #f1363fd5;">| </span>Best Prices</h1>
       </section>
       <section class="hotelsDiv">
         <div class="container3">
@@ -78,31 +78,41 @@
         </div>
 
       </section>
+
+      <section class="ressSec">
+
+        <h1> Restaurants</h1>
+      </section>
+
       <section class="restaurantSec">
         <% arrayOfRestaurants.forEach(value=> {%>
-          <div class="imagesBox">
-            <img src="<%= value.image_url %> " alt="">
-          </div>
-          <div class="resContent">
-            <h2>
-              <%= value.name %>
-            </h2>
-            <p>
-              Phone number:<%= value.phone %>
-            </p>
-          </div>
-          <div class="card-stats">
+          <div class="divOfAll">
+            <div class="imagesBox">
+              <img src="<%= value.image_url %> " alt="">
+            </div>
+            <div class="resContent">
+              <h2>
+                <%= value.name %>
+              </h2>
+              <p>
+                Phone number:
+                <br>
+                <%= value.phone %>
+              </p>
+            </div>
+            <div class="card-stats">
+              <div class="value">Rate:</div>
+              <div class="type">
+                <%= value.rating %>
+              </div>
+              <div class="value"> Price: </div>
+              <div class="type">
+                <%= value.price %>
+              </div>
+            </div>
 
-            <p>
-              Rate: <%= value.rating %>
-            </p>
-            <p>
-              Price: <%= value.price %>
-            </p>
           </div>
-
           <% }) %>
-
       </section>
 
       </form>
