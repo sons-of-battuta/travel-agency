@@ -124,7 +124,7 @@ nav.sticky ul li a{
     border-radius: 30px;
 }
 .bar:hover{
-    background: #f1363fd5;
+    background: #000000d5;
 }
 input[name="r"]{
     position: absolute;
@@ -183,7 +183,7 @@ footer{
     background-size: cover;
     background-position: center;
     text-align: center;  
-    margin-top: 20%; 
+    margin-top: 10%; 
     font-size: 15px;
     color: #fff;
     padding: 2px;

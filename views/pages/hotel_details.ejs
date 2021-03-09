@@ -1,91 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('./layout/head') %>
+    <%- include('./layout/head') %>
     <link rel="stylesheet" href="/style/hotel_details.css">
 
     <body>
         <%- include('./layout/header') %>
 
+            <section class="videoSection">
+                <video src="../../img/around  world.mp4" muted autoplay loop></video>
+                <h1>
+
+                </h1>
+            </section>
 
 
-            <main>
-                <% let hotelImages=details.hotel_images.split(','); %>
-                    <% let roomImages=details.room_images.split('#'); %>
-                    <% let hotelContentArr=details.content.split(','); %>
-                        <div class="hotelContinuer">
-                            <div>
-                                <h1>
-                                    <%= details.hotel_name %>
-                                </h1>
-                                 <br><br>
-                                <h2>  
-                                   RATE:  <%= details.star_rating %>
-                                </h2>
-                               
-                                <h4>
-                                    <span> Address: </span> <%= details.address %>
-                                </h4>
+                <section class="name">
+                    <h1>
+                        <%= details.hotel_name %>
+                    </h1>
+                </section>
+                <section>
+                    <% let hotelImages=details.hotel_images.split(','); %>
+                        <% let roomImages=details.room_images.split('#'); %>
+                            <% let hotelContentArr=details.content.split(','); %>
+                                <div class="hotelContinuer">
+                                    <div>
+                                    
+                                        <h2 class="starRate">
+                                            RATE: <%= details.star_rating %>
+                                        </h2>
+
+                                        <h4>
+                                            <span> Address: </span>
+                                            <%= details.address %>
+                                        </h4>
+                                    </div>
+                                    <div>
+                                        <h4>
+                                            <span>Neighborhood:</span>
+                                            <%= details.neighborhood%>
+                                        </h4>
+                                        <h4>
+                                            <span> Average Nightly Price : </span>
+                                            <%= details.price%>
+                                        </h4>
+                                        <h4>
+                                            <span>Nearest Airport :</span>
+                                            <%= details.airport%>
+                                        </h4>
+                                        <h4>
+                                            <span> Time To Arrive : </span>
+                                            <%= details.time_to_arrive%>
+                                        </h4>
+                                        <br><br>
+                                        <h2> Hotel Content :</h2>
+
+                                        <ul class="hotelContent"> 
+                                            <% for (let index=0; index < hotelContentArr.length; index++) { %>
+
+                                                <li class="listOfContent">
+                                                    <%=hotelContentArr[index] %>
+                                                </li>
+                                                <% } %>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="buts">
+
+                                </div>
+                </section>
+                <section class="fisrtSection1">
+                    <div class="hotel-img">
+                        <h1>Hotel Images</h1>
+                    </div>
+                    <div class="slidershow1">
+                        <div class="slides1">
+                            <input type="radio" name="r" id="r1" checked>
+                            <input type="radio" name="r" id="r2">
+                            <input type="radio" name="r" id="r3">
+                            <input type="radio" name="r" id="r4">
+                            <input type="radio" name="r" id="r5">
+                            <div class="slide1 s11">
+                                <% for (let index=0; index < 5; index++) { %>
+
+                                    <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                    <% } %>
                             </div>
-                            <div>
-                                <p>
-                                    <span>Neighborhood:</span> <%= details.neighborhood%>
-                                </p>
-                                <p>
-                             <span>  Average Nightly Price :  </span>  <%= details.price%>
-                                </p>
-                                 <p>
-                                   <span>Nearest Airport :</span>  <%= details.airport%>
-                                </p>
-                                <p>
-                                  <span> Time To Arrive : </span> <%= details.time_to_arrive%>
-                                </p>
-                                <br><br>
-                                  <h2>  Hotel Content :</h2>
-                                 
-                                  <ul>
-                                    <% for (let index=0; index < hotelContentArr.length; index++) { %>
+                            <div class="slide1">
+                                <% for (let index=1; index < 5; index++) { %>
 
-                                        <li><%=hotelContentArr[index] %> </li>
-                                        <% } %>
-                                </ul>
-                               
-                               
+                                    <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                    <% } %>
                             </div>
-                            <div class="buts">
+                            <div class="slide1">
+                                <% for (let index=2; index < 5; index++) { %>
 
+                                    <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                    <% } %>
                             </div>
-<div class="images"> 
-    <div>
-                            <h1>Hotel Images</h1>
-                            <button class="hotelImgBut">Show Hotel Images</button>
-                            <div class="hotelImgDiv">
+                            <div class="slide1">
+                                <% for (let index=3; index < 5; index++) { %>
 
-                                <ul>
-                                    <% for (let index=0; index < 5; index++) { %>
+                                    <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                    <% } %>
+                            </div>
+                            <div class="slide1">
+                                <% for (let index=4; index < 5; index++) { %>
 
-                                        <li><img src=<%=hotelImages[index] %> alt=""></li>
-                                        <% } %>
-                                </ul>
-                            </div></div>
-                            <div>
-                            <h1>Room Images</h1>
-                            <button class="roomImgBut">Show Room Images</button>
-                            <div class="roomImgDiv">
-
-                                <ul>
-                                    <% for (let index=0; index < 5; index++) { %>
-
-                                        <li><img src=<%=roomImages[index] %> alt=""></li>
-                                        <% } %>
-                                </ul>
-                            </div></div>
-</div>
+                                    <li><img src=<%=hotelImages[index] %> alt=""></li>
+                                    <% } %>
+                            </div>
                         </div>
+                    </div>
+                    <div class="navigation1">
+                        <label for="r1" class="bar"></label>
+                        <label for="r2" class="bar"></label>
+                        <label for="r3" class="bar"></label>
+                        <label for="r4" class="bar"></label>
+                        <label for="r5" class="bar"></label>
+                    </div>
+                    <div class="navigation-auto1">
+                        <div class="auto-btn1"></div>
+                        <div class="auto-btn2"></div>
+                        <div class="auto-btn3"></div>
+                        <div class="auto-btn4"></div>
+                        <div class="auto-btn5"></div>
+                    </div>
+
+                </section>
+                <section class="fisrtSection2">
+                    <div class="hotel">
+                        <h1>Room Images</h1>
+                    </div>
+                    <div class="slidershow2">
+                        <div class="slides1">
+                            <input  hidden type="radio" name="r1" id="r11" checked>
+                            <input hidden type="radio" name="r1" id="r21">
+                            <input hidden type="radio" name="r1" id="r31">
+                            <input hidden type="radio" name="r1" id="r41">
+                            <input hidden type="radio" name="r1" id="r51">
+                            <div class="slide1 s11">
+                                <% for (let index=0; index < 5; index++) { %>
+
+                                    <li><img src=<%=roomImages[index] %> alt=""></li>
+                                    <% } %>
+                            </div>
+                            <div class="slide1">
+                                <% for (let index=1; index < 5; index++) { %>
+
+                                    <li><img src=<%=roomImages[index] %> alt=""></li>
+                                    <% } %>
+                            </div>
+                            <div class="slide1">
+                                <% for (let index=2; index < 5; index++) { %>
+
+                                    <li><img src=<%=roomImages[index] %> alt=""></li>
+                                    <% } %>
+                                        <div class="slide1">
+                                            <% for (let index=3; index < 5; index++) { %>
+
+                                                <li><img src=<%=roomImages[index] %> alt=""></li>
+                                                <% } %>
+                                        </div>
+                                        <div class="slide1">
+                                            <% for (let index=4; index < 5; index++) { %>
+
+                                                <li><img src=<%=roomImages[index] %> alt=""></li>
+                                                <% } %>
+                                        </div>
+                            </div>
+                        </div>
+                        <div class="navigation2">
+                            <label for="r11" class="bar"></label>
+                            <label for="r21" class="bar"></label>
+                            <label for="r31" class="bar"></label>
+                            <label for="r41" class="bar"></label>
+                            <label for="r51" class="bar"></label>
+                        </div>
+                        <div class="navigation-auto1">
+                            <div  class="auto-btn1"></div>
+                            <div  class="auto-btn2"></div>
+                            <div class="auto-btn3"></div>
+                            <div class="auto-btn4"></div>
+                            <div class="auto-btn5"></div>
+                        </div>
+                    </div>
+                </section>
 
 
 
-            </main>
+           
             <%- include('./layout/footer') %>
 
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -97,11 +203,19 @@
                     });
                 </script>
                 <script>
-                    $(document).ready(function () {
-                        $(".roomImgBut").click(function () {
-                            $(".roomImgDiv").toggle();
-                        });
-                    });
+                    // $(document).ready(function () {
+                    //     $(".roomImgBut").click(function () {
+                    //         $(".roomImgDiv").toggle();
+                    //     });
+                    // });
+                    var counter = 1;
+                    setInterval(function () {
+                        document.getElementById('r1' + counter).checked = true;
+                        counter++;
+                        if (counter > 3) {
+                            counter = 1;
+                        }
+                    }, 7000);
                 </script>
 
 
