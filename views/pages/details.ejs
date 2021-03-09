@@ -4,7 +4,15 @@
 
     <%- include('./layout/header') %>
 
+    <section class="videoSection">
+      <video src="../../img/around  world.mp4" muted autoplay loop></video>
+      <h1>
+        <%=cityName %> Details
+      </h1>
+    </section>
+    
       <section class="CitySection">
+        <h1>Take a Look at this beauty </h1>
         <div class="cityImg">
 
           <% arrOfImages.forEach(value=>{%>
@@ -12,30 +20,64 @@
             <img src=<%=value %> alt="">
             <% }) %>
 
-        </div>
-        <iframe  id="gmap_canvas" src="https://maps.google.com/maps?q=<%=cityName %> &t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-      </section>
+          </div>
+          </section>
+          <section class="mapSec">
+            <h1>Let us guide you to <%=cityName %> </h1>
+          <iframe id="gmap_canvas"
+          src="https://maps.google.com/maps?q=<%=cityName %> &t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+          scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </section>
 
 
       <!-- DO NOT TOUCH THIS COMMENTED CODE -->
-<!-- 
+      <!-- 
       <form action="/sentences" method="post">
   <input type="text" name="testInput" value="Hello">
   <button>Test APi</button> -->
 
-  <!-- <button ><a>get Hotels</a></button> -->
-  <!-- <input type="date" name="checkIn" required>
+      <!-- <button ><a>get Hotels</a></button> -->
+      <!-- <input type="date" name="checkIn" required>
   <input type="date" name="checkout" required> -->
 
   <% hotels.forEach(value=> { 
     // console.log(value);
     %>
     <h4><%= value.hotel_name %> </h4>
-    <button><a href="/hotelDetails/<%value.hotel_id%>">Details</a></button>
+    <button><a href="/hotel_details/<%=value.hotel_id%>">Details</a></button>
   <% }) %> 
+  <section class="hotelsSec"> 
+
+    <h1> Best Hotels , Best Prices</h1>
+  </section>
+      <section class="hotelsDiv">
+        <div class="container3">
+          <% hotels.forEach(value=> { %>
+            <div class="card3">
+              <div class="imgBx3">
+                <img src="<%= value.hotel_images.split(',')[1] %> " alt="">
+              </div>
+              <div class="content3">
+                <p>
+                 Rate : <%= value.star_rating %>
+                </p>
+                <p>
+                  Price : <%= value.price%>
+                </p>
+                <button><a href="/hotelDetails/<%value.hotel_id%>" class="link">Details</a></button>
+              </div>
+              <h2 class="hotelName">
+                <%= value.hotel_name %>
+              </h2>
+            </div>
+
+            <% }) %>
+        </div>
+
+      </section>
 
 
-</form>
+      </form>
       <%- include('./layout/footer') %>
   </body>
 
