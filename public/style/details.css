@@ -218,3 +218,11 @@ button{
     margin-top: 7%;
     margin-bottom: 3%;
  }
+ .restaurantSec{
+     display: grid;
+     grid-template-columns: 300px;
+     grid-template-rows: 210px 210px 210px 80px;
+     grid-template-areas: 'image' 'text' 'status';
+     border-radius: 18px;
+     box-shadow: 5px 5px 15px #000;
+ }

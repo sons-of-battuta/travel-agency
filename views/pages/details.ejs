@@ -1,7 +1,7 @@
 <%- include('./layout/head') %>
 
   <body>
-
+   <%  console.log(arrayOfWeather); %> 
     <%- include('./layout/header') %>
 
       <section class="videoSection">
@@ -11,40 +11,28 @@
         </h1>
       </section>
 
-      <section style="background-color:  #177777; ">
-        <% let IconsImg ; %>
-          <h3>
-            <%=cityName%>
-          </h3>
+
+      <section style="background-color:  #177777a1;display: flex; flex-direction: row; justify-content: space-around;     padding: 20px;">
+      <div style="    width: 155px;
+      margin-right: 61px;"><p>Weather For The  Next 7 Days</p> 
+        <h2 style="margin-top: 62px;">
+          <%=cityName.toUpperCase()%>
+        </h2>
+        
+       </div> 
           <% arrayOfWeather.forEach(value=>{%>
-            <p>
+            <div class="weatherIcons" style="display: flex; flex-direction: column; justify-content: space-around;  width: 200px;">
+               <p>
               <%=value.time %>
             </p>
-            <img src=<%=value.IconsImg %> alt="">
+            <img style="width: fit-content;" src="https://www.weatherbit.io/static/img/icons/<%=value.icon %>.png" alt="">
             <p>
               <%=value.forecast %>
-            </p>
+          </p> 
+        </div> 
+           
             <% }) %>
-
-
-
-              <% if ( arrayOfWeather.icon=="t01d" || "t01n" ||"t02d" ||"t02n"|| "t02d" ||"t02n"||"t03d" ||"t03n"||"t04d"
-                ||"t04n"||"t05d" ||"t05n" )
-                {IconsImg="https://www.flaticon.com/svg/vstatic/svg/365/365235.svg?token=exp=1615292526~hmac=479d398e6e7e4691dfc8cd5262958fff"
-                ;}%>
-                <% else if(arrayOfWeather.icon=="d01d" || "d01n" ||"d02d" ||"d02n"|| "d02d" ||"d02n"||"d03d" ||"d03n")
-                  {IconsImg="https://www.flaticon.com/svg/vstatic/svg/365/365231.svg?token=exp=1615293392~hmac=b94c835d1528affb985f0e93a6069f4f"
-                  ; } %>
-                  <% else if(arrayOfWeather.icon=="r01d" || "r01n" ||"r02d" ||"r02n"|| "r02d" ||"r02n"||"r03d"
-                    ||"r03n")
-                    {IconsImg="https://www.flaticon.com/svg/vstatic/svg/365/365224.svg?token=exp=1615293392~hmac=9864bd038ec71d2898aa49425a69c6d1"
-                    ; } %>
-                    <% else if(arrayOfWeather.icon=="r01d" || "r01n" ||"r02d" ||"r02n"|| "r02d" ||"r02n"||"r03d"
-                      ||"r03n")
-                      {IconsImg="https://www.flaticon.com/svg/vstatic/svg/365/365224.svg?token=exp=1615293392~hmac=9864bd038ec71d2898aa49425a69c6d1"
-                      ; } %>
-
-
+       
 
       </section>
       <section class="CitySection">
@@ -105,6 +93,32 @@
 
             <% }) %>
         </div>
+
+      </section>
+      <section class="restaurantSec">
+        <% arrayOfRestaurants.forEach(value=> {%>
+          <div class="imagesBox">
+            <img src="<%= value.image_url %> " alt="">
+          </div>
+          <div class="resContent">
+            <h2>
+              <%= value.name %>
+            </h2>
+            <p>
+              Phone number:<%= value.phone %>
+            </p>
+          </div>
+          <div class="card-stats">
+
+            <p>
+              Rate: <%= value.rating %>
+            </p>
+            <p>
+              Price: <%= value.price %>
+            </p>
+          </div>
+
+          <% }) %>
 
       </section>
 
