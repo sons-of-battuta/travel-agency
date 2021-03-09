@@ -277,7 +277,7 @@ function getHotels(req, res) {
     else{
       console.log('getting data from hotel API');
       // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
-      let key = process.env.Hotel_key;
+      let key = process.env.HOTEL_KEY;
       console.log('hotel key' , key);
     let url=`https://hotels4.p.rapidapi.com/locations/search?rapidapi-key=${key}&query=${cityName}`;
 
@@ -355,17 +355,6 @@ function getHotels(req, res) {
     })
     .catch(error => console.log("Error in getting hotels data: ",error.message));
     }
-    
-
-                //send the third request with the id of each hotel so that we get all the detials about each hotel
-
-
-
-              }).catch(error => console.log('Error in getting data using des id: ', error.message))
-
-          })
-          .catch(error => console.log("Error in getting hotels data: ", error.message));
-      }
 
 
     }).catch(error => console.log("Error in getting city name from database: ", error.message));

@@ -10,7 +10,10 @@
         <%=cityName %> Details
       </h1>
     </section>
-    
+
+    <section>
+      <a class="weatherwidget-io" href="https://forecast7.com/en/31d9535d93/<%= cityName %>/" data-label_1="<%= cityName.toUpperCase() %>"        data-font="Trebuchet MS" data-icons="Climacons Animated" data-theme="original"        data-basecolor="rgb(40 133 170)" data-cloudfill="#989898"><%= cityName %></a>
+    </section>
       <section class="CitySection">
         <h1>Take a Look at this beauty </h1>
         <div class="cityImg">
@@ -40,12 +43,7 @@
       <!-- <input type="date" name="checkIn" required>
   <input type="date" name="checkout" required> -->
 
-  <% hotels.forEach(value=> { 
-    // console.log(value);
-    %>
-    <h4><%= value.hotel_name %> </h4>
-    <button><a href="/hotel_details/<%=value.hotel_id%>">Details</a></button>
-  <% }) %> 
+
   <section class="hotelsSec"> 
 
     <h1> Best Hotels , Best Prices</h1>
@@ -64,7 +62,7 @@
                 <p>
                   Price : <%= value.price%>
                 </p>
-                <button><a href="/hotelDetails/<%value.hotel_id%>" class="link">Details</a></button>
+                <button><a href="/hotel_details/<%= value.hotel_id%>" class="link">Details</a></button>
               </div>
               <h2 class="hotelName">
                 <%= value.hotel_name %>
