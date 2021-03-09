@@ -466,11 +466,13 @@ function getRestaurant(city) {
   superagent.get(url)
     .set({ "Authorization": `Bearer ${key}` })
     .then(result => {
-      // console.log(result.body);
+      // console.log(result);
 
       arrayOfRestaurants = result.body.businesses.map(value => new Restaurant(value));
 
-    }).catch(error => console.log('Error in getting restaurants data: ', error.message));
+    }).catch(error =>{
+      console.log('Error in getting restaurants data: ', error.message);
+    });
 }
 
 function Restaurant(data) {
