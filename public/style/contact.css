@@ -44,14 +44,15 @@ button {
     width: 100px;
     height: 40px;
     margin: 20px 20px 20px 80%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
 }
 
 .planFormDiv {
     margin: 25px 50px;
-    background: radial-gradient(at 0% 10%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(252, 250, 243, 0.966) 25%);
+    background: radial-gradient(at 0% 10%, #d2ae84c4 10px, #d5ad9ccc 40%, rgba(252, 250, 243, 0.966) 45%);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    width: 40%;
+    width: 37%;
     height: 560px;
     margin-left: 30%;
     margin-top: 7%;

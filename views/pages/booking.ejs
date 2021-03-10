@@ -1,80 +1,103 @@
 <%- include('./layout/head') %>
-<link rel="stylesheet" href="./style/contact.css">
-<%- include('./layout/header') %>
-<p id="message"></p>
-<button id='btn-log'><a id ="log_button">login</a></button>
-<p id="no-booked"></p>
+  <link rel="stylesheet" href="../../style/booking.css">
+  <link rel="stylesheet" href="../../style/contact.css">
+  <%- include('./layout/header') %>
+    <section class="videoSection">
+      <video src="../../img/around  world.mp4" muted autoplay loop></video>
+      <h1>
+        Your booked hotels
+      </h1>
+    </section>
+    <p id="message"></p>
+    <button id='btn-log'><a id="log_button">login</a></button>
+    <p id="no-booked"></p>
 
-<% if(loggedIn) { %>
-  <script>
-    // alert('password added to local storage')
-    localStorage.setItem('acc',"<%=acc%>");
-  </script>
-<% } else { %>
-    <script>
+    <% if(loggedIn) { %>
+      <script>
+        // alert('password added to local storage')
+        localStorage.setItem('acc', "<%=acc%>");
+      </script>
+      <% } else { %>
+        <script>
       // alert('no')
-    </script>
-<% } %> 
+        </script>
+        <% } %>
 
-<script>
-  //if the user did not logged in
-  if(localStorage.getItem('acc')=== null){
+          <script>
+            //if the user did not logged in
+            if (localStorage.getItem('acc') === null) {
 
-    document.getElementById('message').textContent = 'you need to login to see your booked hotels';
-    document.getElementById('log_button').setAttribute('href','/login');
-
-
-  }else{
-  // alert(localStorage.getItem('acc'))
-
-    document.getElementById('message').style.visibility = 'hidden';
-    document.getElementById('btn-log').style.visibility = 'hidden';
-    
-  }
-</script>
-
-<!-- check if there are booked hotels -->
-<% if(isBooked){ %>
-  <script>
-    //hide the message that tells user that he did not have any booked hotels
-    document.getElementById('no-booked').style.visibility = 'hidden';
-  </script>
-  <!-- <button><a href="/show-booked-hotels">show booked hotels</a></button> -->
-  <% console.log('booked hotels: ', arrOfbookedHotels) %> 
-  <% arrOfbookedHotels.forEach(value => {%>
-    <img src="<%= value.image %> " alt="">
-    <p class="booked_hotel_name"><%= value.name %> </p>
-
-  <% }) %> 
+              document.getElementById('message').textContent = 'you need to login to see your booked hotels';
+              document.getElementById('log_button').setAttribute('href', '/login');
 
 
-<%  } else{ %>
-  <script>
-    document.getElementById('no-booked').style.visibility = 'visible';
-    document.getElementById('no-booked').textContent = 'You do not have any booked hotels'
+            } else {
+              // alert(localStorage.getItem('acc'))
+
+              document.getElementById('message').style.visibility = 'hidden';
+              document.getElementById('btn-log').style.visibility = 'hidden';
+
+            }
+          </script>
+
+          <!-- check if there are booked hotels -->
+          <% if(isBooked){ %>
+            <script>
+              //hide the message that tells user that he did not have any booked hotels
+              document.getElementById('no-booked').style.visibility = 'hidden';
+            </script>
+            <!-- <button><a href="/show-booked-hotels">show booked hotels</a></button> -->
 
 
-  </script>
+            <section class="hotelsDiv">
+              <div class="container3">
+                <% arrOfbookedHotels.forEach(value=> {%>
+                  <div class="card3">
+                    <div class="imgBx3">
+                      <img src="<%= value.image %> " alt="">
+                    </div>
+                    <div class="content3">
+                     <p> The hotel will contact you soon to complete booking process </p>
+                    </div>
+                    <h2 class="hotelName">
+                      <%= value.name %>
+                    </h2>
+                  </div>
+                  <% }) %>
+              
+              </div>
 
-<% }%> 
-
-
-<section class="titles">
-  <div class="planFormDiv">
-
-      <form action="/sendFeedback" method="post">
-          <label for="name">Name</label><br>
-          <input name="name" type="text" placeholder="Your Name" required><br>
-          <label for="phone">Phone Number</label><br>
-          <input name="phone" type="number" placeholder="Your Phone Number" required><br>
-          <label for="description">What do you think about our website?</label><br>
-          <textarea name="description" placeholder="Your Feedback ..." required></textarea><br>
-          <button type="submit">Submit</button>
-
-      </form>
-  </div>
-</section>
-
+            </section>
 
 
-<%- include('./layout/footer') %>
+            <% } else{ %>
+              <script>
+                document.getElementById(' no-booked').style.visibility = 'visible';
+                document.getElementById('no-booked').textContent = 'You do not have any booked hotels'</script>
+
+              <% }%>
+
+              <section class="popDes">
+                <h1> What do you think about our website? </h1>
+
+            </section>
+
+                <section class="titles">
+                  <div class="planFormDiv">
+
+                    <form action="/sendFeedback" method="post">
+                      <label for="name">Name</label><br>
+                      <input name="name" type="text" placeholder="Your Name" required><br>
+                      <label for="phone">Phone Number</label><br>
+                      <input name="phone" type="number" placeholder="Your Phone Number" required><br>
+                      <label for="description">Leave your message</label><br>
+                      <textarea name="description" placeholder="Your Feedback ..." required></textarea><br>
+                      <button type="submit">Submit</button>
+
+                    </form>
+                  </div>
+                </section>
+
+
+
+                <%- include('./layout/footer') %>

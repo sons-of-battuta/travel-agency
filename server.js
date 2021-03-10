@@ -531,6 +531,7 @@ function bookHotel(req, res){
 
 let arrOfbookedHotels =[];
 function getBookedHotels(req, res){
+  arrOfbookedHotels =[];
   console.log(phone_num);
   let sql = `select hotel_id from booked_hotels where phone = $1`;
   let sql2 = `select hotel_name, hotel_images from hotels where hotel_id = $1`
