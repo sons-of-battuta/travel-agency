@@ -41,7 +41,7 @@ body{
 
 .container .team-member{
     background-color: #ffffff9a;
-    background: radial-gradient(at 0% 100%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(255, 252, 243, 0.966) 25%);
+    background: radial-gradient(at 0% 100%, #d2ae84c4 10px, #d5ad9ccc 40%, rgba(255, 252, 243, 0.966) 45%);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
     margin: 10px;
     margin-bottom: 50px;

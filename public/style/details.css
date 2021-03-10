@@ -190,7 +190,7 @@ transition: 0.3s ease-in-out;
     margin-top: -20px;
     transition-delay:0.2s ;
 }
-.hotBut{
+button{
     background-color: #f1363fd5;
     color: white;
     border-radius: 8px;
@@ -213,6 +213,15 @@ transition: 0.3s ease-in-out;
      text-align: center;
      margin-top: 5px;
      
+ }
+ .hotelsSec h1{
+    color: #000;
+    font-size: 43px;
+    font-weight: bolder;
+    text-align: center;
+    margin-top: 7%;
+    margin-bottom: 3%;
+    text-shadow: 3px 2px #f1363fa3;
  }
  .hotelsSec h1{
     color: #000;
