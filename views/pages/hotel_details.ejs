@@ -2,7 +2,7 @@
 <html lang="en">
 
 <%- include('./layout/head') %>
-    <link rel="stylesheet" href="/style/hotel_details.css">
+    <link rel="stylesheet" href="./style/hotel_details.css">
 
     <body>
         <%- include('./layout/header') %>
@@ -16,6 +16,7 @@
             <% let hotelImages=details.hotel_images.split(','); %>
                 <% let roomImages=details.room_images.split('#'); %>
                     <% let hotelContentArr=details.content.split(','); %>
+
 
 
                         <section>
@@ -35,6 +36,7 @@
                                 </h4>
 
                                 <br>
+
                                 <h4>
                                     <span>Neighborhood:</span>
                                     <%= details.neighborhood%>
@@ -54,7 +56,7 @@
                                     <span> Time To Arrive : </span>
                                     <%= details.time_to_arrive%>
                                 </h4>
-                                <button class="bookBtn"> Book The hotel</button>
+                                <button class="bookBtn"><a href="/book-hotel/<%= details.hotel_id %>">Book The hotel</a> </button>
                             </div>
                             <div class="slidershow1">
                                 <div class="slides1">
