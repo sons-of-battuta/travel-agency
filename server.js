@@ -108,7 +108,7 @@ function getImages(req, res) {
       getWeather(cityName);
       getRestaurant(cityName);
  
-        setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 10000);
+        setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 2000);
       
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
@@ -186,7 +186,8 @@ function addUser(req, res) {
         client.query(sql, values)
           .then(results => {
             console.log('row inserted Successfully...');
-            res.render('./pages/index');
+            res.render('./pages/login-page', { message: '', needToSignUp: 'false' });
+            
           }).catch(error => console.log("Error in inserting user: ", error.message))
       } else {
         res.render('./pages/signup-page', { message: "you have an account already",haveAccount:true});
