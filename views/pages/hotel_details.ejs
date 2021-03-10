@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%- include('./layout/head') %>
-    <link rel="stylesheet" href="./style/hotel_details.css">
+    <%- include('./layout/head') %>
+    <link rel="stylesheet" href="../../style/hotel_details.css">
 
     <body>
         <%- include('./layout/header') %>
@@ -135,21 +135,8 @@
 
 
                         <%- include('./layout/footer') %>
-
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
                             <script>
-                                $(document).ready(function () {
-                                    $(".hotelImgBut").click(function () {
-                                        $(".hotelImgDiv").toggle();
-                                    });
-                                });
-                            </script>
-                            <script>
-                                // $(document).ready(function () {
-                                //     $(".roomImgBut").click(function () {
-                                //         $(".roomImgDiv").toggle();
-                                //     });
-                                // });
+                        
                                 var counter = 1;
                                 setInterval(function () {
                                     document.getElementById('r1' + counter).checked = true;
@@ -167,7 +154,7 @@
                                         x.style.display = "none";
                                     }
                                 }
-                            </script>
+                            
                             </script>
 
 
