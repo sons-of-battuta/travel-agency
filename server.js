@@ -108,7 +108,7 @@ function getImages(req, res) {
       getWeather(cityName);
       getRestaurant(cityName);
  
-        setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 2000);
+        setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 4000);
       
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
