@@ -9,149 +9,164 @@
 
             <section class="videoSection">
                 <video src="../../img/around  world.mp4" muted autoplay loop></video>
-                <h1>
-                    <%= details.hotel_name %>
-                </h1>
+                <h1> Book your hotel</h1>
             </section>
 
-            
+
             <% let hotelImages=details.hotel_images.split(','); %>
                 <% let roomImages=details.room_images.split('#'); %>
                     <% let hotelContentArr=details.content.split(','); %>
-          
 
 
-            <section class="all">
-                <div class="contentDiv">
-                            <h2 class="starRate">
-                                RATE: <%= details.star_rating %>
-                            </h2>
-            
-                            <h4>
-                                <span> Address: </span>
-                                <%= details.address %>
-                            </h4>
-                          
-                            
+                        <section>
+                            <h1 class="hotelName">
+                                <%= details.hotel_name %>
+                            </h1>
+                        </section>
+                        <section class="all">
+                            <div class="contentDiv">
+                                <h2 class="starRate">
+                                    RATE: <%= details.star_rating %>
+                                </h2>
+
+                                <h4>
+                                    <span> Address: </span>
+                                    <%= details.address %>
+                                </h4>
+
+                                <br>
                                 <h4>
                                     <span>Neighborhood:</span>
                                     <%= details.neighborhood%>
                                 </h4>
+                                <br>
                                 <h4>
                                     <span> Average Nightly Price : </span>
                                     <%= details.price%>
                                 </h4>
+                                <br>
                                 <h4>
                                     <span>Nearest Airport :</span>
                                     <%= details.airport%>
                                 </h4>
+                                <br>
                                 <h4>
                                     <span> Time To Arrive : </span>
                                     <%= details.time_to_arrive%>
                                 </h4>
                                 <button class="bookBtn"> Book The hotel</button>
-                </div>
-                <div class="slidershow1">
-                    <div class="slides1">
-                        <input type="radio" name="r" id="r1" checked>
-                        <input type="radio" name="r" id="r2">
-                        <input type="radio" name="r" id="r3">
-                        <input type="radio" name="r" id="r4">
-                        <input type="radio" name="r" id="r5">
-                        <div class="slide1 s11">
-                            <% for (let index=0; index < 1; index++) { %>
+                            </div>
+                            <div class="slidershow1">
+                                <div class="slides1">
+                                    <input type="radio" name="r" id="r1" checked>
+                                    <input type="radio" name="r" id="r2">
+                                    <input type="radio" name="r" id="r3">
+                                    <input type="radio" name="r" id="r4">
+                                    <input type="radio" name="r" id="r5">
+                                    <div class="slide1 s11">
+                                        <% for (let index=0; index < 1; index++) { %>
 
-                                <img src=<%=hotelImages[index] %> alt="">
-                                <% } %>
-                        </div>
-                        <div class="slide1">
-                            <% for (let index=1; index < 2; index++) { %>
+                                            <img src=<%=hotelImages[index] %> alt="">
+                                            <% } %>
+                                    </div>
+                                    <div class="slide1">
+                                        <% for (let index=1; index < 2; index++) { %>
 
-                                <img src=<%=hotelImages[index] %> alt="">
-                                <% } %>
-                        </div>
-                        <div class="slide1">
-                            <% for (let index=2; index < 3; index++) { %>
+                                            <img src=<%=hotelImages[index] %> alt="">
+                                            <% } %>
+                                    </div>
+                                    <div class="slide1">
+                                        <% for (let index=2; index < 3; index++) { %>
 
-                                <img src=<%=hotelImages[index] %> alt="">
-                                <% } %>
-                        </div>
-                        <div class="slide1">
-                            <% for (let index=3; index < 4; index++) { %>
+                                            <img src=<%=hotelImages[index] %> alt="">
+                                            <% } %>
+                                    </div>
+                                    <div class="slide1">
+                                        <% for (let index=3; index < 4; index++) { %>
 
-                                <img src=<%=hotelImages[index] %> alt="">
-                                <% } %>
-                        </div>
-                        <div class="slide1">
-                            <% for (let index=4; index < 5; index++) { %>
+                                            <img src=<%=hotelImages[index] %> alt="">
+                                            <% } %>
+                                    </div>
+                                    <div class="slide1">
+                                        <% for (let index=4; index < 5; index++) { %>
 
-                                <img src=<%=hotelImages[index] %> alt="">
-                                <% } %>
-                        </div>
-                    </div>
-                </div>
-                <div class="navigation1">
-                    <label for="r1" class="bar"></label>
-                    <label for="r2" class="bar"></label>
-                    <label for="r3" class="bar"></label>
-                    <label for="r4" class="bar"></label>
-                    <label for="r5" class="bar"></label>
-                </div>
-                <div class="navigation-auto1">
-                    <div class="auto-btn1"></div>
-                    <div class="auto-btn2"></div>
-                    <div class="auto-btn3"></div>
-                    <div class="auto-btn4"></div>
-                    <div class="auto-btn5"></div>
-                    
-                </div>
+                                            <img src=<%=hotelImages[index] %> alt="">
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="navigation1">
+                                <label for="r1" class="bar"></label>
+                                <label for="r2" class="bar"></label>
+                                <label for="r3" class="bar"></label>
+                                <label for="r4" class="bar"></label>
+                                <label for="r5" class="bar"></label>
+                            </div>
+                            <div class="navigation-auto1">
+                                <div class="auto-btn1"></div>
+                                <div class="auto-btn2"></div>
+                                <div class="auto-btn3"></div>
+                                <div class="auto-btn4"></div>
+                                <div class="auto-btn5"></div>
 
-            </section>
-
-
-            <section class="secondContent">
-                <div class="contentItSelf">
-                      <h2> Hotel Content :</h2>
-  
-                      <ul class="hotelContent">
-                          <% for (let index=0; index < hotelContentArr.length; index++) { %>
-  
-                              <li class="listOfContent">
-                                  <%=hotelContentArr[index] %>
-                              </li>
-                              <% } %>
-                      </ul>
-                     
-                  </div>
-              </section>
-            
+                            </div>
+                            <button onclick="myFunction()" class="show-hide">See hotel Content </button>
+                        </section>
 
 
-            <%- include('./layout/footer') %>
+                        <section id="myDIV" class="secondContent">
+                            <div class="contentItSelf">
+                               
 
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                <script>
-                    $(document).ready(function () {
-                        $(".hotelImgBut").click(function () {
-                            $(".hotelImgDiv").toggle();
-                        });
-                    });
-                </script>
-                <script>
-                    // $(document).ready(function () {
-                    //     $(".roomImgBut").click(function () {
-                    //         $(".roomImgDiv").toggle();
-                    //     });
-                    // });
-                    var counter = 1;
-                    setInterval(function () {
-                        document.getElementById('r1' + counter).checked = true;
-                        counter++;
-                        if (counter > 3) {
-                            counter = 1;
-                        }
-                    }, 7000);
-                </script>
+                                <ul class="hotelContent">
+                                    <% for (let index=0; index < hotelContentArr.length; index++) { %>
+
+                                        <li class="listOfContent">
+                                            <%=hotelContentArr[index] %>
+                                        </li>
+                                        <% } %>
+                                </ul>
+
+                            </div>
+                        </section>
+
+
+
+                        <%- include('./layout/footer') %>
+
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $(".hotelImgBut").click(function () {
+                                        $(".hotelImgDiv").toggle();
+                                    });
+                                });
+                            </script>
+                            <script>
+                                // $(document).ready(function () {
+                                //     $(".roomImgBut").click(function () {
+                                //         $(".roomImgDiv").toggle();
+                                //     });
+                                // });
+                                var counter = 1;
+                                setInterval(function () {
+                                    document.getElementById('r1' + counter).checked = true;
+                                    counter++;
+                                    if (counter > 5) {
+                                        counter = 1;
+                                    }
+                                }, 7000);
+
+                                function myFunction() {
+                                    var x = document.getElementById("myDIV");
+                                    if (x.style.display === "none") {
+                                        x.style.display = "block";
+                                    } else {
+                                        x.style.display = "none";
+                                    }
+                                }
+                            </script>
+                            </script>
 
 
     </body>

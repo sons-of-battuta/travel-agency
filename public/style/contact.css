@@ -54,7 +54,7 @@ button {
     width: 40%;
     height: 560px;
     margin-left: 30%;
-    margin-top: 10%;
+    margin-top: 7%;
     padding: 30px;
 
 }
@@ -95,4 +95,5 @@ textarea {
     text-align: center;
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 3%;
+    text-shadow: 2px 3px #f1363f80;
 }
