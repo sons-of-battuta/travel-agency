@@ -12,7 +12,8 @@ id serial primary key,
 fname varchar(255),
 lname varchar(255),
 phone varchar(10),
-password varchar(255)
+password varchar(255),
+feedback text
 );
 
 
@@ -45,5 +46,13 @@ id serial primary key,
 name varchar(255),
 phone varchar(13),
 description varchar(500)
+);
+
+drop table if exists booked_hotels;
+-- booked hotels table
+create table booked_hotels(
+  id serial primary key,
+  hotel_id varchar(255),
+  phone varchar(10)
 );
 

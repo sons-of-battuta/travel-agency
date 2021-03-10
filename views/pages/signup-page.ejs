@@ -21,9 +21,13 @@
                 <input type="text" placeholder="Phone number" name="phoneNumber" class="input-box" required pattern="[0-9]{10}">
                 <input type="password" placeholder="Password" name="password" class="input-box" required>
                 <button class="signBtn">Sign Up</button>
+                <p>have an account already? <a href="/login">Login</a></p>
+                <% if(haveAccount) %> 
+                    <p><%= message %> </p>
+                
             </form>
         </div>
-        <%- include('./layout/footer') %>
+    
 </body>
 
 </html>

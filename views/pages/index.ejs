@@ -1,4 +1,3 @@
-
 <%- include('./layout/head') %>
 
     <link rel="stylesheet" href="/style/modules.css">
@@ -38,7 +37,7 @@
                 <section class="formSection">
                     <h2>Where do you want to go ?</h2>
                     <form action="/search" method="GET">
-                        <input type="text" placeholder="Destination ... " id="search_input" name="cityName">
+                        <input type="text" placeholder="Destination ... " id="search_input" name="cityName" required>
                         <button id="search-button">Search</button>
                     </form>
                 </section>
@@ -105,7 +104,7 @@
                     <h1> Who we are </h1>
                     <p>we make dreams come true</p>
                     <div class="mission">
-                        <img src="../../img/portma.png" alt="">
+                        <img class="bigLogo" src="../../img/portma.png" alt="">
                         <div class="vision">
                             <h2>
                                 OUR MISSION
@@ -132,12 +131,64 @@
                     </div>
                 </section>
                 <section class="chooseUs">
-                    <h1> Why Choose Us </h1>
-                    <p> you should plan trip with us</p>
+
+
+                    <div>
+                        <h1> Why Choose Us </h1>
+                        <p> you should plan trip with us</p>
+                    </div>
+                    <div class="chooseContent">
+                        <div>
+                            <h2 class="chooseMe">
+                               1- Experience and Trustworthiness.
+                            </h2>
+
+                            <p class="choose">
+                                Our company has been providing tour services since August 20, 2003 and we have gained a
+                                good
+                                reputation. More than 50 000 of tourist from all over the world have already travel with
+                                us
+                                and highly appreciated the level of service.
+                            </p>
+                            <h2 class="chooseMe">
+
+                               2- Friendly and Qualified Stuff.
+                            </h2>
+                            <p class="choose">
+                                All the members of our team are passionate about their work and always ready to help. We
+                                all
+                                enjoy travelling . Just get in touch with us and we will assist you with planning a
+                                trip.
+
+                            </p>
+                            <h2 class="chooseMe">
+                               3- Best Price, no Hidden Fees.
+
+                            </h2>
+                            <p class="choose">
+                                We are glad to offer our clients the best rates on our tours, transfers and other
+                                services.
+                                Due to direct contracts with all our suppliers, our prices are always relevant and
+                                affordable.
+
+                            </p>
+                            <h2 class="chooseMe">
+                               4- The High Level of Service.
+
+                            </h2>
+                            <p class="choose">
+
+                                Our clients’ satisfaction is our priority. That is why we work only with the best
+                                transport
+                                companies, qualified tour-guides, hotels and restaurants.
+                            </p>
+
+                        </div>
+                    </div>
                 </section>
                 <section class="review">
                     <div>
-                        <h1> Customers reviews </h1>
+                        <h1> Testimonials </h1>
                     </div>
                 </section>
                 <section class="reviews">
@@ -147,15 +198,12 @@
                                 <div class="testimonialBox">
                                     <img src="../../img/quote.png" class="quote">
                                     <div class="content1">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-                                            blanditiis ad laudantium tempora nulla, quisquam, fuga rerum dolorem cum
-                                            facere architecto non culpa similique! Sint iure quas fuga aliquid
-                                            voluptatum!</p>
+                                        <p>" Everything was perfect, and I would have to say it was the vacation of a life time (...) I will do all I can to promote your company and your services. (...) Thank you so very much for having arranged the magnificent trip we took!! "</p>
                                         <div class="details1">
                                             <div class="imgBx">
-                                                <img src="../../img/avatar.png" alt="">
+                                                <img src="../../img/ahmad.jpeg" alt="">
                                             </div>
-                                            <h3> Someone <br> <span> Ruba Banat</span></h3>
+                                            <h3> Ahmad </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -164,15 +212,12 @@
                                 <div class="testimonialBox">
                                     <img src="../../img/quote.png" class="quote">
                                     <div class="content1">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-                                            blanditiis ad laudantium tempora nulla, quisquam, fuga rerum dolorem cum
-                                            facere architecto non culpa similique! Sint iure quas fuga aliquid
-                                            voluptatum!</p>
+                                        <p>Your service was great and we will be recommending your company to our friends for future travel.</p>
                                         <div class="details1">
                                             <div class="imgBx">
-                                                <img src="../../img/avatar.png" alt="">
+                                                <img src="../../img/unnamed.jpg" alt="">
                                             </div>
-                                            <h3> Someone <br> <span>zaid</span></h3>
+                                            <h3> Ruba </h3>
                                         </div>
                                     </div>
                                 </div>
@@ -181,32 +226,52 @@
                                 <div class="testimonialBox">
                                     <img src="../../img/quote.png" class="quote">
                                     <div class="content1">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-                                            blanditiis ad laudantium tempora nulla, quisquam, fuga rerum dolorem cum
-                                            facere architecto non culpa similique! Sint iure quas fuga aliquid
-                                            voluptatum!</p>
+                                        <p>My wife arranged the booking with you, first time we tried your service and can report we were happy with everything. Yes we would book with you again!
+                                            Keep providing great holiday offers!</p>
                                         <div class="details1">
                                             <div class="imgBx">
-                                                <img src="../../img/avatar.png" alt="">
+                                                <img src="../../img/moe.jpg" alt="">
                                             </div>
-                                            <h3> Someone <br> <span>Mohammad</span></h3>
+                                            <h3> Mohammad </h3>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            <% arrayOfFeedbacks.forEach(value => { %>
+                                <div class="swiper-slide">
+                                    <div class="testimonialBox">
+                                        <img src="../../img/quote.png" class="quote">
+                                        <div class="content1">
+                                            <p><%= value.feedback  %> </p>
+                                            <div class="details1">
+                                                <div class="imgBx">
+                                                    <img src="../../img/avatar.png" alt="">
+                                                </div>
+                                                <h3> <%= value.name %> </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %> 
+                            
+
+
+
+
+
                             <div class="swiper-slide">
                                 <div class="testimonialBox">
                                     <img src="../../img/quote.png" class="quote">
                                     <div class="content1">
-                                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatum
-                                            blanditiis ad laudantium tempora nulla, quisquam, fuga rerum dolorem cum
-                                            facere architecto non culpa similique! Sint iure quas fuga aliquid
-                                            voluptatum!</p>
+                                        <p>Prompt and efficient service. Good communication. Great value for money package. Spoke with several consultants all who were able to assist.</p>
                                         <div class="details1">
                                             <div class="imgBx">
-                                                <img src="../../img/avatar.png" alt="">
+                                                <img src="../../img/ali.jpg" alt="">
                                             </div>
-                                            <h3> Someone <br> <span></span></h3>
+                                            <h3> Ali  <br> <span></span></h3>
                                         </div>
                                     </div>
 
@@ -232,9 +297,10 @@
                             modifier: 2,
                             slideShadows: true,
                         },
-                       loop: true,
-                        
+                        loop: true,
+
                     });
                 </script>
     </body>
+
     </html>

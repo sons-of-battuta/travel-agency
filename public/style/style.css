@@ -17,11 +17,12 @@ overflow-x: hidden;
 a {
     cursor: pointer;
 }
-div img {
+div .bigLogo {
     float: left;
     width: 280px;
     margin-right: 9%;
     transition: 0.6s;
+    cursor: pointer;
 }
 div.sticky{
     padding: 0px 10px;
@@ -183,7 +184,7 @@ footer{
     background-size: cover;
     background-position: center;
     text-align: center;  
-    margin-top: 10%; 
+    margin-top: 8%; 
     font-size: 15px;
     color: #fff;
     padding: 2px;
@@ -232,6 +233,7 @@ footer{
   h2 {
     margin-top: 40px;
     margin-bottom: 30px;
+    
 }
   .grid-container {
     display: grid;
@@ -346,6 +348,8 @@ footer{
       width: 150px;
       height: 40px;
       cursor: pointer;
+      font-weight: bolder;
+      font-size: 15px;
     }
   #search_input{
     position: absolute;
@@ -359,6 +363,8 @@ footer{
     text-align: center;
     color: rgb(0, 0, 0);
     font-size: 19px;
+    font-weight: bolder;
+    
   }
   #search_input::placeholder{
       color: rgba(0, 0, 0, 0.767);
@@ -375,6 +381,7 @@ footer{
     color: #000;
     font-size: 43px;
     font-weight: bolder;
+    text-shadow: 3px 2px #f1363fa3;
 }
 .popDes p{
     margin-top:1%;
@@ -394,11 +401,12 @@ footer{
     color: #000;
     font-size: 43px;
     font-weight: bolder;
+    text-shadow: 3px 2px #f1363fa3;
 }
 .aboutUs p{
     margin-top:1%;
     font-size: 20px;
-    margin-bottom: 3%;
+    /* margin-bottom: ; */
 }
 .aboutUs img {
     position: relative;
@@ -411,10 +419,11 @@ footer{
 }
 .aboutUs .vision{
     position: absolute;
-    width: 50%;
+    width: 45%;
     border: 2px dashed #58524e;
     border-radius: 10px;
     padding: 10px;
+    padding-bottom: 10px;
     margin: 10px;
     margin-left: 37%;
     margin-top: 3%;
@@ -429,11 +438,34 @@ footer{
     width: 100%;
     margin-top: 8%;
     text-align: center;
+    
+}
+.chooseUs .chooseContent{
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 6%;
+    /* position: absolute; */
+    /* width: 50%; */
+    /* border: 2px dashed #58524e; */
+    border-radius: 10px;
+    padding: 10px;
+    /* margin: 10px; */
+    /* margin-left: 37%; */
+    margin-top: 3%;
+    /* box-shadow: 5px 5px 10px rgb(158, 158, 158); */
+    /* background: rgba(252, 250, 243, 0.966); */
+    border: 2px dashed #58524e;
+    border-radius: 10px;
+    padding: 20px;
+    /* margin: 10px; */
+    box-shadow: 5px 5px 10px rgb(158, 158, 158);
+    background: rgba(252, 250, 243, 0.966);
 }
 .chooseUs h1 {
     color: #000;
     font-size: 43px;
     font-weight: bolder;
+    text-shadow: 3px 2px #f1363fa3;
 }
 .chooseUs p{
     margin-top:1%;
@@ -442,7 +474,7 @@ footer{
 .review{
     width: 100%;
     margin-top: 10%;
-    margin-bottom: 3%;
+    /* margin-bottom: 3%; */
     text-align: center;
     
 }
@@ -450,6 +482,7 @@ footer{
     color: #000;
     font-size: 43px;
     font-weight: bolder;
+    text-shadow: 3px 2px #f1363fa3;
 }
 .reviews{
     position: relative;
@@ -479,7 +512,7 @@ footer{
     border-radius: 10px;
     /* background-color: white; */
     height: 350px;
-    background: radial-gradient(at 0% 100%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(252, 250, 243, 0.966) 25%);
+    background: radial-gradient(at 0% 100%, #d2ae84c4 10px, #d5ad9ccc 40%, rgba(252, 250, 243, 0.966) 25%);
     
   }
 
@@ -548,4 +581,7 @@ footer{
   .swiper-container-3d .swiper-slide-shadow-right
   {
       background-image: none;
+  }
+  .choose{
+      text-align: left;
   }
