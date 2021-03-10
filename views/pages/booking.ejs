@@ -80,18 +80,18 @@
               <section class="popDes">
                 <h1> What do you think about our website? </h1>
 
-            </section>
+
 
                 <section class="titles">
                   <div class="planFormDiv">
 
-                    <form action="/sendFeedback" method="post">
+                    <form action="/sendFeedback?_method=put" method="post">
                       <label for="name">Name</label><br>
                       <input name="name" type="text" placeholder="Your Name" required><br>
                       <label for="phone">Phone Number</label><br>
                       <input name="phone" type="number" placeholder="Your Phone Number" required><br>
-                      <label for="description">Leave your message</label><br>
-                      <textarea name="description" placeholder="Your Feedback ..." required></textarea><br>
+                      <label for="description">What do you think about our website?</label><br>
+                      <textarea name="feedback" placeholder="Your Feedback ..." required></textarea><br>
                       <button type="submit">Submit</button>
 
                     </form>

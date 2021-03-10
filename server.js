@@ -29,17 +29,34 @@ const superagent = require("superagent");
 server.use(express.urlencoded({ extended: true }));
 
 
-// const methodOverride = require('method-override');
+const methodOverride = require('method-override');
 server.set("view engine", "ejs");
-// server.use(methodOverride('_method'));
+server.use(methodOverride('_method'));
 
 //this module for hashing 
 const md5 = require('md5');
 
 
 server.get('/', (req, res) => {
+  let sql2 = 'select fname, lname, feedback from user1;';
+    // let value = [phone];
+    let arrayOfFeedbacks =[];
+    client.query(sql2)
+    .then(result2=>{
+      for(let i=0; i<result2.rows.length; i++){
+       
+        let name = result2.rows[i].fname + ' ' + result2.rows[i].lname;
+        let feed = result2.rows[i].feedback;
+        arrayOfFeedbacks.push({name: name, feedback:feed});
+      }
+      res.render('./pages/index', {arrayOfFeedbacks:arrayOfFeedbacks});
+      // console.log('name:', name );
+      // console.log('feedback: ', feed);
 
-  res.render("./pages/index");
+
+    }).catch(error=> console.log('Error in getting feedback from user tabel', error.message));
+
+  // res.render("./pages/index");
 });
 // to render aboutus 
 server.get('/about', (req, res) => {
@@ -56,7 +73,8 @@ server.post('/checkUser', checkUser);
 server.get('/search', getImages);
 server.post('/sentences', getTranslation);
 server.get('/hotel_details/:hotel_id', getHotelDetails);
-server.get('/book-hotel/:hotel_id/', bookHotel)
+server.get('/book-hotel/:hotel_id/', bookHotel);
+server.put('/sendFeedback', updateFeedback);
 // server.get('/show-booked-hotels', getBookedHotels)
 
 //Hotels API
@@ -64,7 +82,6 @@ server.get('/book-hotel/:hotel_id/', bookHotel)
 
 let cityName = 'Dubai';
 let phone_num = 0;
-
 
 function getImages(req, res) {
   cityName = req.query.cityName;
@@ -85,11 +102,14 @@ function getImages(req, res) {
       }
 
       getHotels();
+      setTimeout(() => { console.log('waiting...'); }, 200);
+
       // res.send(arr);
       getWeather(cityName);
       getRestaurant(cityName);
+ 
+        setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 10000);
       
-      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 10000);
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
       // console.log('hotel: ', arrayOfHotels);
@@ -192,7 +212,8 @@ function checkUser(req, res) {
         if (md5(password) === passwordDB) {
           phone_num = phoneNumber;
           getBookedHotels();
-          setTimeout(() => {res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); ; }, 3000);
+          // setTimeout(() => {res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); ; }, 3000);
+          res.render('./pages/index');
 
           // res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels});
           // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
@@ -224,7 +245,7 @@ function getContact(req, res) {
 
 let arrayOfHotels = [];
 //get hotels details from API
-function getHotels(req, res) {
+function getHotels() {
   //array of objects for hotels
   //send sql to check if the city is already exists in the database. So we don't need to call the API
   let sql = `select city_name from hotels where city_name = $1;`;
@@ -580,4 +601,61 @@ function HotelObject(city, name, content, address, rate, neighborhood, airport, 
   this.hotel_images = hotelImages,
   this.room_images = roomImages,
   this.hotel_id = hotelId
+}
+
+
+
+function updateFeedback(req, res){
+  let { name, phone, feedback } = req.body;
+  let SQL = 'select phone from user1 where phone = $1';
+  let VALUE = [phone];
+  let arrayOfFeedbacks =[];
+  
+  client.query(SQL, VALUE)
+  .then(RESULT=>{
+    if(RESULT.rows.length>0){
+      //sql to update the feed back of the user about 
+      let sql = 'update user1 set feedback = $1 where phone = $2;';
+      let values = [feedback, phone];
+      // console.log('values; ', values);
+      client.query(sql, values)
+      .then(result=>{
+        //get the data from the user table and render it in the main page
+        let sql2 = 'select fname, lname, feedback from user1;';
+        // let value = [phone];
+        client.query(sql2)
+        .then(result2=>{
+          for(let i=0; i<result2.rows.length; i++){
+          
+            let name = result2.rows[i].fname + ' ' + result2.rows[i].lname;
+            let feed = result2.rows[i].feedback;
+            arrayOfFeedbacks.push({name: name, feedback:feed});
+          }
+          res.render('./pages/index', {arrayOfFeedbacks:arrayOfFeedbacks});
+          // console.log('name:', name );
+          // console.log('feedback: ', feed);
+
+
+        }).catch(error=> console.log('Error in getting feedback from user tabel', error.message));
+        
+      }).catch(error => console.log('Error in adding feedback', error.message));
+
+    }//end if
+    else{
+      let sql2 = 'select fname, lname, feedback from user1;';
+      // let value = [phone];
+      client.query(sql2)
+      .then(result2=>{
+        for(let i=0; i<result2.rows.length; i++){
+          let name = result2.rows[i].fname + ' ' + result2.rows[i].lname;
+          let feed = result2.rows[i].feedback;
+          arrayOfFeedbacks.push({name: name, feedback:feed});
+        }
+        res.render('./pages/index', {arrayOfFeedbacks:arrayOfFeedbacks});
+      }).catch(error=> console.log('Error in getting feed back in else: ', error.message));
+
+    }
+
+  }).catch(error => console.log('Error in DB check user for user when submit feed back: ', error.message));
+
 }
