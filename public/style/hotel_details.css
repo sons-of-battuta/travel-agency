@@ -238,3 +238,8 @@ h4 {
     margin-left: 212%;
     z-index: 20;
 }
+a{
+
+    text-decoration: none;
+    color: #000;
+}
