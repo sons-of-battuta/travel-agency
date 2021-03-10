@@ -245,6 +245,31 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            <% arrayOfFeedbacks.forEach(value => { %>
+                                <div class="swiper-slide">
+                                    <div class="testimonialBox">
+                                        <img src="../../img/quote.png" class="quote">
+                                        <div class="content1">
+                                            <p><%= value.feedback  %> </p>
+                                            <div class="details1">
+                                                <div class="imgBx">
+                                                    <img src="../../img/avatar.png" alt="">
+                                                </div>
+                                                <h3> <%= value.name %> </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %> 
+                            
+
+
+
+
+
                             <div class="swiper-slide">
                                 <div class="testimonialBox">
                                     <img src="../../img/quote.png" class="quote">
