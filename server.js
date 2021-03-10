@@ -409,7 +409,7 @@ server.get("*", (req, res) => {
   // let imgUrl =
   //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
   // res.render("pages/error", { err: imgUrl });
-  res.status(404).send("Page Not Found");
+  res.render('./pages/error.ejs')
 });
 
 
@@ -533,7 +533,7 @@ let arrOfbookedHotels =[];
 function getBookedHotels(req, res){
   console.log(phone_num);
   let sql = `select hotel_id from booked_hotels where phone = $1`;
-  let sql2 = `select hotel_name from hotels where hotel_id = $1`
+  let sql2 = `select hotel_name, hotel_images from hotels where hotel_id = $1`
   let values = [phone_num];
   //get the ids of booked hotels
   client.query(sql, values)
@@ -547,7 +547,7 @@ function getBookedHotels(req, res){
           
           // console.log('res = ', result2.rows);
           //getting only the hotel name
-          arrOfbookedHotels.push(result2.rows[0].hotel_name);
+          arrOfbookedHotels.push({name:result2.rows[0].hotel_name, image:result2.rows[0].hotel_images.split(',')[0]});
 
         }).catch(error => console.log('Error in getBookedHotels', error.message))
 
