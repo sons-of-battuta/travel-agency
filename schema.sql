@@ -47,3 +47,10 @@ phone varchar(13),
 description varchar(500)
 );
 
+-- booked hotels table
+create table booked_hotels(
+  id serial primary key,
+  hotel_id varchar(255),
+  phone varchar(10)
+);
+

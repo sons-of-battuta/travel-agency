@@ -1,4 +1,3 @@
-
 <%- include('./layout/head') %>
 
     <link rel="stylesheet" href="/style/modules.css">
@@ -38,7 +37,7 @@
                 <section class="formSection">
                     <h2>Where do you want to go ?</h2>
                     <form action="/search" method="GET">
-                        <input type="text" placeholder="Destination ... " id="search_input" name="cityName">
+                        <input type="text" placeholder="Destination ... " id="search_input" name="cityName" required>
                         <button id="search-button">Search</button>
                     </form>
                 </section>
@@ -132,12 +131,64 @@
                     </div>
                 </section>
                 <section class="chooseUs">
-                    <h1> Why Choose Us </h1>
-                    <p> you should plan trip with us</p>
+
+
+                    <div>
+                        <h1> Why Choose Us </h1>
+                        <p> you should plan trip with us</p>
+                    </div>
+                    <div class="chooseContent">
+                        <div>
+                            <h2 class="chooseMe">
+                               1- Experience and Trustworthiness.
+                            </h2>
+
+                            <p class="choose">
+                                Our company has been providing tour services since August 20, 2003 and we have gained a
+                                good
+                                reputation. More than 50 000 of tourist from all over the world have already travel with
+                                us
+                                and highly appreciated the level of service.
+                            </p>
+                            <h2 class="chooseMe">
+
+                               2- Friendly and Qualified Stuff.
+                            </h2>
+                            <p class="choose">
+                                All the members of our team are passionate about their work and always ready to help. We
+                                all
+                                enjoy travelling . Just get in touch with us and we will assist you with planning a
+                                trip.
+
+                            </p>
+                            <h2 class="chooseMe">
+                               3- Best Price, no Hidden Fees.
+
+                            </h2>
+                            <p class="choose">
+                                We are glad to offer our clients the best rates on our tours, transfers and other
+                                services.
+                                Due to direct contracts with all our suppliers, our prices are always relevant and
+                                affordable.
+
+                            </p>
+                            <h2 class="chooseMe">
+                               4- The High Level of Service.
+
+                            </h2>
+                            <p class="choose">
+
+                                Our clients’ satisfaction is our priority. That is why we work only with the best
+                                transport
+                                companies, qualified tour-guides, hotels and restaurants.
+                            </p>
+
+                        </div>
+                    </div>
                 </section>
                 <section class="review">
                     <div>
-                        <h1> Customers reviews </h1>
+                        <h1> Testimonials </h1>
                     </div>
                 </section>
                 <section class="reviews">
@@ -232,9 +283,10 @@
                             modifier: 2,
                             slideShadows: true,
                         },
-                       loop: true,
-                        
+                        loop: true,
+
                     });
                 </script>
     </body>
+
     </html>

@@ -2,64 +2,48 @@ body {
     background-size: cover;
     background-position: center;
 }
-.videoSection{
+
+.sectionBar {
     width: 100%;
 }
-.videoSection video{
+
+.sectionBar span {
     top: 0;
     left: 0;
-    width: 100%;
-    height: 500px;
     object-fit: cover;
 }
-.videoSection h1{
+
+.sectionBar h1 {
     margin-left: 510px;
     position: absolute;
     color: rgb(255, 255, 255);
     z-index: 5;
-    margin-top: -270px;
-    font-size: 50px;
-    font-family: 'Libre Baskerville', serif;
-    text-shadow: 5px 4px #181515ea;
-    text-align: center;
 }
-.titles {
+
+.form1 {
     padding: 0;
     margin: 0;
     background: white;
     width: 100%;
     margin-bottom: 5%;
-
 }
 
-
-button {
+select {
     color: #000;
     padding: 10px;
-    border-radius: 15px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: #ddbead;
-    width: 100px;
-    height: 40px;
     margin: 20px 20px 20px 80%;
 }
 
 .planFormDiv {
     margin: 25px 50px;
-    background: radial-gradient(at 0% 10%, #d2ae84c4 10px, #d5ad9ccc 50%, rgba(252, 250, 243, 0.966) 25%);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
     width: 40%;
     height: 560px;
     margin-left: 30%;
-    margin-top: 7%;
+    margin-top: 10%;
     padding: 30px;
-
 }
 
-input {
+.form2 {
     width: 40%;
     margin: 10px 20px;
     height: 35px;
@@ -69,7 +53,7 @@ input {
     font-size: 15px;
 }
 
-.planFormDiv label {
+.section2 {
     margin: 10px 20px;
     font-size: 20px;
     margin-top: 20%;
@@ -79,21 +63,18 @@ textarea {
     width: 75%;
     height: 250px;
     margin: 10px 0 20px 20px;
-    border: 2px solid #1110106e;
-    border-radius: 10px;
-    text-overflow: ellipsis;
     padding: 12px 20px;
 }
-.plans{
+
+.division {
     margin-top: 9%;
 }
-.plans h1{
+
+.division h1 {
     color: rgb(5, 3, 3);
     font-size: 43px;
     font-weight: bolder;
-    /* margin-top: 4%; */
     text-align: center;
     font-family: 'Libre Baskerville', serif;
     margin-bottom: 3%;
-    text-shadow: 2px 3px #f1363f80;
 }

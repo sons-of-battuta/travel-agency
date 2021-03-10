@@ -1,18 +1,17 @@
 <%- include('./layout/head') %>
 
   <body>
-   <%  console.log(arrayOfWeather); %> 
     <%- include('./layout/header') %>
 
       <section class="videoSection">
         <video src="../../img/around  world.mp4" muted autoplay loop></video>
         <h1>
-          <%=cityName %> Details
+          Know more about <br> <br> <%=cityName.toUpperCase() %> 
         </h1>
       </section>
 
 
-      <section style="background-color:  #177777a1;display: flex; flex-direction: row; justify-content: space-around;     padding: 20px;">
+      <section style="display: flex; flex-direction: row; justify-content: space-around;     padding: 20px;">
       <div style="    width: 155px;
       margin-right: 61px;"><p>Weather For The  Next 7 Days</p> 
         <h2 style="margin-top: 62px;">
