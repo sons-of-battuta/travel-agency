@@ -29,9 +29,9 @@ body{
   }
   .overlay  .log-sign a{
     text-decoration:none;
-    color:rgba(0, 0, 0, 0.856);
+    color:#fff;
     font-size: 45px;
-    text-shadow: 5px 4px #aaa4a49a;
+    text-shadow: 5px 4px #302e2e9a;
     height:70px;
     display:block;
     font-weight:bold;

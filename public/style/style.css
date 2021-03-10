@@ -17,11 +17,12 @@ overflow-x: hidden;
 a {
     cursor: pointer;
 }
-div img {
+div .bigLogo {
     float: left;
     width: 280px;
     margin-right: 9%;
     transition: 0.6s;
+    cursor: pointer;
 }
 div.sticky{
     padding: 0px 10px;
@@ -436,6 +437,7 @@ footer{
     width: 100%;
     margin-top: 8%;
     text-align: center;
+    
 }
 .chooseUs .chooseContent{
     width: 60%;
@@ -451,6 +453,12 @@ footer{
     margin-top: 3%;
     /* box-shadow: 5px 5px 10px rgb(158, 158, 158); */
     /* background: rgba(252, 250, 243, 0.966); */
+    border: 2px dashed #58524e;
+    border-radius: 10px;
+    padding: 20px;
+    /* margin: 10px; */
+    box-shadow: 5px 5px 10px rgb(158, 158, 158);
+    background: rgba(252, 250, 243, 0.966);
 }
 .chooseUs h1 {
     color: #000;

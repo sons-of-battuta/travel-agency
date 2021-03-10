@@ -12,19 +12,20 @@
                 <h1> Book your hotel</h1>
             </section>
 
-
+            
             <% let hotelImages=details.hotel_images.split(','); %>
-                <% let roomImages=details.room_images.split('#'); %>
-                    <% let hotelContentArr=details.content.split(','); %>
-
-
-
-                        <section>
-                            <h1 class="hotelName">
-                                <%= details.hotel_name %>
-                            </h1>
-                        </section>
-                        <section class="all">
+            <% let roomImages=details.room_images.split('#'); %>
+            <% let hotelContentArr=details.content.split(','); %>
+            
+            
+            
+            <section>
+                <h1 class="hotelName">
+                    <%= details.hotel_name %>
+                </h1>
+            </section>
+            <div  onclick="myFunction()"  class="post-tags"><a  rel="tag">Hotel Content</a></div>
+            <section class="all">
                             <div class="contentDiv">
                                 <h2 class="starRate">
                                     RATE: <%= details.star_rating %>
@@ -111,8 +112,9 @@
                                 <div class="auto-btn4"></div>
                                 <div class="auto-btn5"></div>
 
+                              
                             </div>
-                            <button onclick="myFunction()" class="show-hide">See hotel Content </button>
+                            <!-- <button onclick="myFunction()" class="show-hide">See hotel Content </button> -->
                         </section>
 
 

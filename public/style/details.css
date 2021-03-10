@@ -190,7 +190,7 @@ transition: 0.3s ease-in-out;
     margin-top: -20px;
     transition-delay:0.2s ;
 }
-button{
+.hotBut{
     background-color: #f1363fd5;
     color: white;
     border-radius: 8px;

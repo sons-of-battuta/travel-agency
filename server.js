@@ -213,7 +213,7 @@ function checkUser(req, res) {
           phone_num = phoneNumber;
           getBookedHotels();
           // setTimeout(() => {res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels}); ; }, 3000);
-          res.render('./pages/index');
+          res.render('./pages/index' , {arrayOfFeedbacks:arrayOfFeedbacks});
 
           // res.render('./pages/booking.ejs',{acc:phoneNumber,loggedIn: true, isBooked:true,arrOfbookedHotels:arrOfbookedHotels});
           // res.render('./pages/login-page',{message:"Wrong password",needToSignUp:'false'}
@@ -552,7 +552,7 @@ function bookHotel(req, res){
 
 let arrOfbookedHotels =[];
 function getBookedHotels(req, res){
-  arrOfbookedHotels=[];
+  arrOfbookedHotels =[];
   console.log(phone_num);
   let sql = `select hotel_id from booked_hotels where phone = $1`;
   let sql2 = `select hotel_name, hotel_images from hotels where hotel_id = $1`
@@ -605,11 +605,12 @@ function HotelObject(city, name, content, address, rate, neighborhood, airport, 
 
 
 
+let arrayOfFeedbacks =[];
 function updateFeedback(req, res){
+  arrayOfFeedbacks =[];
   let { name, phone, feedback } = req.body;
   let SQL = 'select phone from user1 where phone = $1';
   let VALUE = [phone];
-  let arrayOfFeedbacks =[];
   
   client.query(SQL, VALUE)
   .then(RESULT=>{
