@@ -40,7 +40,8 @@
   <!-- <button><a href="/show-booked-hotels">show booked hotels</a></button> -->
   <% console.log('booked hotels: ', arrOfbookedHotels) %> 
   <% arrOfbookedHotels.forEach(value => {%>
-    <p class="booked_hotel_name"><%= value %> </p>
+    <img src="<%= value.image %> " alt="">
+    <p class="booked_hotel_name"><%= value.name %> </p>
 
   <% }) %> 
 
