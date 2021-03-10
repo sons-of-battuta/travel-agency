@@ -1,5 +1,5 @@
 <%- include('./layout/head') %>
-<link rel="stylesheet" href="./style/contact.css">
+<link rel="stylesheet" href="/style/contact.css">
 <%- include('./layout/header') %>
 <p id="message"></p>
 <button id='btn-log'><a id ="log_button">login</a></button>
@@ -62,13 +62,13 @@
 <section class="titles">
   <div class="planFormDiv">
 
-      <form action="/sendFeedback" method="post">
+      <form action="/sendFeedback?_method=put" method="post">
           <label for="name">Name</label><br>
           <input name="name" type="text" placeholder="Your Name" required><br>
           <label for="phone">Phone Number</label><br>
           <input name="phone" type="number" placeholder="Your Phone Number" required><br>
           <label for="description">What do you think about our website?</label><br>
-          <textarea name="description" placeholder="Your Feedback ..." required></textarea><br>
+          <textarea name="feedback" placeholder="Your Feedback ..." required></textarea><br>
           <button type="submit">Submit</button>
 
       </form>
