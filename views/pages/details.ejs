@@ -1,7 +1,7 @@
 <%- include('./layout/head') %>
 
   <body>
-
+   <%  console.log(arrayOfWeather); %> 
     <%- include('./layout/header') %>
 
       <section class="videoSection">
@@ -11,12 +11,29 @@
         </h1>
       </section>
 
-      <section>
-        <a class="weatherwidget-io" href="https://forecast7.com/en/31d9535d93/<%= cityName %>/"
-          data-label_1="<%= cityName.toUpperCase() %>" data-font="Trebuchet MS" data-icons="Climacons Animated"
-          data-theme="original" data-basecolor="rgb(40 133 170)" data-cloudfill="#989898">
-          <%= cityName %>
-        </a>
+
+      <section style="background-color:  #177777a1;display: flex; flex-direction: row; justify-content: space-around;     padding: 20px;">
+      <div style="    width: 155px;
+      margin-right: 61px;"><p>Weather For The  Next 7 Days</p> 
+        <h2 style="margin-top: 62px;">
+          <%=cityName.toUpperCase()%>
+        </h2>
+        
+       </div> 
+          <% arrayOfWeather.forEach(value=>{%>
+            <div class="weatherIcons" style="display: flex; flex-direction: column; justify-content: space-around;  width: 200px;">
+               <p>
+              <%=value.time %>
+            </p>
+            <img style="width: fit-content;" src="https://www.weatherbit.io/static/img/icons/<%=value.icon %>.png" alt="">
+            <p>
+              <%=value.forecast %>
+          </p> 
+        </div> 
+           
+            <% }) %>
+       
+
       </section>
       <section class="CitySection">
         <h1>Take a Look at this beauty </h1>
@@ -116,6 +133,9 @@
       </section>
 
       </form>
+
+
+
       <%- include('./layout/footer') %>
   </body>
 
