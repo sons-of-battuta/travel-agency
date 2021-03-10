@@ -409,7 +409,7 @@ server.get("*", (req, res) => {
   // let imgUrl =
   //   "https://i2.wp.com/learn.onemonth.com/wp-content/uploads/2017/08/1-10.png?w=845&ssl=1";
   // res.render("pages/error", { err: imgUrl });
-  res.status(404).send("Page Not Found");
+  res.render('./pages/error.ejs')
 });
 
 
