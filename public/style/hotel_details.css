@@ -40,7 +40,7 @@ font-family: initial;
     grid-template-columns: 45% 55%;
     width: 60%;
     margin-top: 4%;
-    border: #000 solid 1px;
+    border: #d5ad9cde solid 1px;
     height: 402px;
     padding-left: 20px;
     margin-left: 20%;
@@ -216,11 +216,11 @@ h4 {
 }
 
 .secondContent{
-    width: 17%;
+    width: 18%;
     margin-top: 7%;
-    border: #000 solid 1px;
+    border: #d5ad9cde solid 1px;
     height: auto;
-    padding-left: 35px;
+    padding-left: 10px;
     margin-left: 70%;
     background: rgba(252, 250, 243, 0.837);
     border-radius: 5px;
