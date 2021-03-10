@@ -88,10 +88,11 @@ function getImages(req, res) {
       // res.send(arr);
       getWeather(cityName);
       getRestaurant(cityName);
-
-      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 6000);
+      
+      setTimeout(() => { res.render('./pages/details', { arrOfImages: arr.slice(0, 6), cityName: cityName, hotels: arrayOfHotels,arrayOfRestaurants:arrayOfRestaurants.slice(0, 4),arrayOfWeather:arrayOfWeather }) }, 10000);
       // setTimeout(() => { console.log(arrayOfWeather); }, 4000);
       // setTimeout(() => { res.render('./pages/details' ,{arrayOfRestaurants:arrayOfRestaurants.slice(0, 4)} ) }, 4000);
+      // console.log('hotel: ', arrayOfHotels);
 
       // console.log(arrayOfRestaurants);
       // console.log('Data inside getImages', hotels);
@@ -244,6 +245,7 @@ function getHotels(req, res) {
 
       //this code MUST be after the then 
       if (city.toLowerCase() === cityName.toLowerCase()) {
+        arrayOfHotels=[];
         console.log('city found in database');
         let sql = `select * from hotels where city_name = $1`;
         let values = [city];
@@ -275,6 +277,7 @@ function getHotels(req, res) {
           }).catch(error => console.log('Error in getting all the columns of the cityName', error.message));
       }
       else {
+        arrayOfHotels =[];
         console.log('getting data from hotel API');
         // let key = 'f79bd95336mshdd41051487931eap106f13jsn1d15bfaee97d';
         let key = process.env.HOTEL_KEY;
@@ -329,6 +332,12 @@ function getHotels(req, res) {
 
                           let arrOfRoomImages = result4.body.roomImages[0].images.map(value => value.baseUrl.replace('{size}', 'y')); //room images
                           arrOfRoomImages = arrOfRoomImages.join('#');
+
+
+                          arrayOfHotels.push(new HotelObject(cityName, hotelName, content, address, starRating, neighborhood, transportationName, transportationTime, price, arrOfHotelImages, arrOfRoomImages, arrOfId[i]));
+                          // console.log(arrayOfHotels);
+                          // setTimeout(() => { console.log('get #',i); }, 4000);
+
 
                           let sql4 = `insert into hotels(city_name, hotel_name, content, address, star_rating, neighborhood, airport, time_to_arrive ,price, hotel_images, room_images,hotel_id) values($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11,$12)`;
                           let values = [cityName, hotelName, content, address, starRating, neighborhood, transportationName, transportationTime, price, arrOfHotelImages, arrOfRoomImages, arrOfId[i]];
@@ -555,4 +564,19 @@ function getBookedHotels(req, res){
 
   })
   .catch(error => console.log('Error in getting hotels ids from table booked_hotel', error.message));
+}
+
+function HotelObject(city, name, content, address, rate, neighborhood, airport, time, price, hotelImages, roomImages, hotelId){
+  this.city_name = city,
+  this.hotel_name = name,
+  this.content = content,
+  this.address = address,
+  this.star_rating = rate,
+  this.neighborhood = neighborhood,
+  this.airport = airport,
+  this.time_to_arrive = time,
+  this.price = price,
+  this.hotel_images = hotelImages,
+  this.room_images = roomImages,
+  this.hotel_id = hotelId
 }
